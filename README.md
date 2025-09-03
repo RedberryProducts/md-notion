@@ -75,6 +75,7 @@ Thanks to following people and projects:
 
 -   [Revaz Gh. (Aka MaestroError)](https://github.com/maestroerror)
 -   [Saloon](https://github.com/saloonphp/saloon)
+-   [Saloon-sdk-generator](https://github.com/crescat-io/saloon-sdk-generator)
 -   [All Contributors](../../contributors)
 
 ## License

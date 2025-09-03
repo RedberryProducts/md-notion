@@ -1,0 +1,339 @@
+{
+	"info": {
+		"_postman_id": "f331fec2-42ce-4d47-876d-e5764bf72f79",
+		"name": "Notion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17472443"
+	},
+	"item": [
+		{
+			"name": "Page",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{vault:notion:token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Notion-Version",
+						"value": "2022-06-28",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.notion.com/v1/pages/:id",
+					"protocol": "https",
+					"host": [
+						"api",
+						"notion",
+						"com"
+					],
+					"path": [
+						"v1",
+						"pages",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "263d9316605a806f9e95e1377a46ff3e"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "block children",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{vault:notion:token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Notion-Version",
+						"value": "2022-06-28",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.notion.com/v1/blocks/:id/children?page_size=100",
+					"protocol": "https",
+					"host": [
+						"api",
+						"notion",
+						"com"
+					],
+					"path": [
+						"v1",
+						"blocks",
+						":id",
+						"children"
+					],
+					"query": [
+						{
+							"key": "page_size",
+							"value": "100"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "263d9316605a806f9e95e1377a46ff3e"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "database",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{vault:notion:token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Notion-Version",
+						"value": "2022-06-28",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.notion.com/v1/databases/:database_id",
+					"protocol": "https",
+					"host": [
+						"api",
+						"notion",
+						"com"
+					],
+					"path": [
+						"v1",
+						"databases",
+						":database_id"
+					],
+					"variable": [
+						{
+							"key": "database_id",
+							"value": "263d9316-605a-80e8-8f08-cc0acb533046"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "database items",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{vault:notion:token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Notion-Version",
+						"value": "2022-06-28",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.notion.com/v1/databases/:database_id/query",
+					"protocol": "https",
+					"host": [
+						"api",
+						"notion",
+						"com"
+					],
+					"path": [
+						"v1",
+						"databases",
+						":database_id",
+						"query"
+					],
+					"variable": [
+						{
+							"key": "database_id",
+							"value": "263d9316-605a-80e8-8f08-cc0acb533046"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add comment to page",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{vault:notion:token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Notion-Version",
+						"value": "2022-06-28",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"parent\": {\r\n      \"page_id\": \"263d9316605a806f9e95e1377a46ff3e\"\r\n    },\r\n    \"rich_text\": [\r\n      {\r\n        \"text\": {\r\n          \"content\": \"Hello world 2\"\r\n        }\r\n      }\r\n    ],\r\n    \"display_name\": {\r\n      \"type\": \"integration\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.notion.com/v1/comments",
+					"protocol": "https",
+					"host": [
+						"api",
+						"notion",
+						"com"
+					],
+					"path": [
+						"v1",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add comment to discussion",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{vault:notion:token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Notion-Version",
+						"value": "2022-06-28",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"discussion_id \": \"\",\r\n    \"rich_text\": [\r\n      {\r\n        \"text\": {\r\n          \"content\": \"Hello world\"\r\n        }\r\n      }\r\n    ],\r\n    \"display_name\": {\r\n      \"type\": \"integration\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.notion.com/v1/comments",
+					"protocol": "https",
+					"host": [
+						"api",
+						"notion",
+						"com"
+					],
+					"path": [
+						"v1",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List comments",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{vault:notion:token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Notion-Version",
+						"value": "2022-06-28",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.notion.com/v1/comments?block_id=263d9316605a806f9e95e1377a46ff3e",
+					"protocol": "https",
+					"host": [
+						"api",
+						"notion",
+						"com"
+					],
+					"path": [
+						"v1",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "block_id",
+							"value": "263d9316605a806f9e95e1377a46ff3e"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
