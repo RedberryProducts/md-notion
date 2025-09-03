@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace RedberryProducts\MdNotion\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class MdNotionCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'md-notion';
 
     public $description = 'My command';
 
