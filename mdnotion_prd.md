@@ -92,7 +92,7 @@ $markdown = $MdNotion->full();
 
 -   Create Laravel package structure under `src/`. ✔️
 -   Add `MdNotionServiceProvider`, `MdNotion` Facade, and core classes. ✔️
--   Integrate Saloon SDK for Notion API calls. ✔️
+-   Integrate Saloon SDK for Notion API calls (Use `version` and `token` from config file `md-notion.php`)
 
 ### Step 2: Block Handling System
 
@@ -162,11 +162,16 @@ src/
  ├── Services/
  │    ├── ContentManager.php
  │    ├── BlockRegistry.php
+ ├── Templates/
+ │    ├── Paragraph.blade.php
+ │    ├── Heading.blade.php
+ │    ├── ...
  ├── Facades/
  │    └── MdNotion.php
  ├── Providers/
  │    └── MdNotionServiceProvider.php
  ├── MdNotion.php (core class)
+ ├── MdNotionServiceProvider.php
  └── helpers.php
 ```
 
