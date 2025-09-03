@@ -2,7 +2,6 @@
 
 namespace RedberryProducts\MdNotion\SDK\Requests\Actions;
 
-use DateTime;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
@@ -11,20 +10,14 @@ use Saloon\Http\Request;
  */
 class Database extends Request
 {
-	protected Method $method = Method::GET;
+    protected Method $method = Method::GET;
 
+    public function resolveEndpoint(): string
+    {
+        return "/v1/databases/{$this->databaseId}";
+    }
 
-	public function resolveEndpoint(): string
-	{
-		return "/v1/databases/{$this->databaseId}";
-	}
-
-
-	/**
-	 * @param string $databaseId
-	 */
-	public function __construct(
-		protected string $databaseId,
-	) {
-	}
+    public function __construct(
+        protected string $databaseId,
+    ) {}
 }
