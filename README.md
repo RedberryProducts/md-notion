@@ -7,6 +7,20 @@
 
 Read your notion pages as Markdown in Laravel applications
 
+Example:
+
+```php
+use RedberryProducts\Facades\MdNotion;
+
+$pageId = '263d9316605a806f9e95e1377a46ff3e'
+$MdNotion = MdNotion::make($pageId);
+
+// Get content of current page as markdown string
+$markdown = $MdNotion->content()->get();
+```
+
+Don't forget to star the repo ⭐
+
 ## Installation
 
 You can install the package via composer:
