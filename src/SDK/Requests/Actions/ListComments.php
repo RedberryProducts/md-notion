@@ -2,7 +2,6 @@
 
 namespace RedberryProducts\MdNotion\SDK\Requests\Actions;
 
-use DateTime;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
@@ -11,26 +10,19 @@ use Saloon\Http\Request;
  */
 class ListComments extends Request
 {
-	protected Method $method = Method::GET;
+    protected Method $method = Method::GET;
 
+    public function resolveEndpoint(): string
+    {
+        return '/v1/comments';
+    }
 
-	public function resolveEndpoint(): string
-	{
-		return "/v1/comments";
-	}
+    public function __construct(
+        protected ?string $blockId = null,
+    ) {}
 
-
-	/**
-	 * @param null|string $blockId
-	 */
-	public function __construct(
-		protected ?string $blockId = null,
-	) {
-	}
-
-
-	public function defaultQuery(): array
-	{
-		return array_filter(['block_id' => $this->blockId]);
-	}
+    public function defaultQuery(): array
+    {
+        return array_filter(['block_id' => $this->blockId]);
+    }
 }

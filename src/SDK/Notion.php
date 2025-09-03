@@ -11,34 +11,32 @@ use Saloon\Http\Connector;
  */
 class Notion extends Connector
 {
+    public function __construct(
+        public readonly string $token,
+        public readonly string $version
+    ) {}
 
-	public function __construct(
-		public readonly string $token,
-		public readonly string $version
-	) {}
-
-	protected function defaultAuth(): TokenAuthenticator
+    protected function defaultAuth(): TokenAuthenticator
     {
         return new TokenAuthenticator($this->token);
     }
 
-	public function resolveBaseUrl(): string
-	{
-		return 'https://api.notion.com/';
-	}
+    public function resolveBaseUrl(): string
+    {
+        return 'https://api.notion.com/';
+    }
 
-	protected function defaultHeaders(): array
+    protected function defaultHeaders(): array
     {
         return [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
-			'Notion-Version' => $this->version
+            'Notion-Version' => $this->version,
         ];
     }
 
-
-	public function act(): Actions
-	{
-		return new Actions($this);
-	}
+    public function act(): Actions
+    {
+        return new Actions($this);
+    }
 }
