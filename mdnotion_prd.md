@@ -52,7 +52,7 @@ $markdown = $MdNotion->full();
 ### 1. Content Retrieval
 
 -   Wrapper around Notion API using **Saloon SDK**, under `src/SDK`.
--   Fetch page blocks using Notion’s `getBlockChildren` action (example at `index.php`).
+-   Fetch page blocks using Notion’s `getBlockChildren` action (example at `sdk-example.php`).
 -   Recursive block fetching for nested children.
 
 ### 2. Markdown Conversion
@@ -117,6 +117,7 @@ $markdown = $MdNotion->full();
 -   Use blade templates for adapters to render needed MD
 -   Make adapters easily replacable with custom adapters
 -   Make adapters easily extendable by adding new adapters based on notion block's "type"
+-   Some blocks have different subtypes, for example, image, file and video have `external` and `file` types. sp we should handle them all.
 
 ### Step 3: Content Manager
 

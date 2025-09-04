@@ -1153,20 +1153,20 @@
                 "caption": [],
                 "type": "file",
                 "file": {
-                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/0d31a281-d71e-4bb9-9031-a5256095b873/8e6b8ad3-7a3c-4ba5-aa14-b29b4151af28/v0.6.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466Z7OV4AAM%2F20250903%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250903T130444Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIHrLZLjx4qWHnbK3A4VE6OC5EjVj4JzuaPSwlhFE3OaWAiEAgVFmRV6Xd4xu7Yi8Nv2LQgns5JX82lBPJbfJ5Oobq1Yq%2FwMIRRAAGgw2Mzc0MjMxODM4MDUiDM%2BV1vJmcYtJAADENCrcA%2FF5jc%2BTLYdLx11naM8xVf4lcobxLZwa4Ha4VE60iqYMCCZtKYeFnaufAltk2VK0cyHKPSTju2RDqBRZ0OlJL38eJ3cr0kcE2K%2BccaII37E9pPVCjT4sUpyJ99FIaq%2BvSiZGbX6OSxkF0oekbiZQUP1IQI2G1XyTwykhSCvFpOfOLsls3UBfu94606Rsr7zCB0cSXBgxfG05bEqfURa7%2FGx683h40KUUDmMJw0NlpMQgoyhUc8JpEGuXw11rp4BjvXRgPrvejhXVv%2FjOUr9jWyjhyJ5up5yho3HSYNUhWQuowfzgpAGdVknM5YxOwaDnX4pQZxj5zOgbOoQaAfmD8Woy9q5yTOoc0fPIO0oSbgWMi6JLRMjLLJnLQvfu3diBlEuNLaUGQwyJjwWJz6qeYYVZ5Vv7ypuoZYZWIwzAALOFAIfHFMgVcGg9FzNAAmnhZ%2Btkcu%2F6KNcM%2BoNc8m93lNMkHx%2FsUjE1Y1NjN32YLMX9u4%2FQ1ucYJq3bUL0GSDM6WojGP%2FXJy3U9OakiR%2FB2YHMwgZqCUYHOr6vCQLwseSgZTbP5k1Jy39jMomuJ8KwpXmh9Fs7kHw0sRfqjkh8hoS8TBp98ZQMkHDDkIIUNzMv3O6d56D3Nb81E7tBzMIfZ4MUGOqUBEmEi4zkg3mO3thZa5FSrZ6Bw0%2FTP02ij6o7JEXFZWF7yFIkQUXo%2FPVdvKc24cAk7I4kkx%2BMr0Ud0W0GpFdMNVjnIzTG9X9HzQkQaJchB3eU6OdhzOjZYbd9BFTs0TgZqgMXy7WVbtCkT4%2FBdyU%2Bg%2Fg1x5xTNynCjmhuti0NYEcLrVLPnqRWM1i9lLSaAKFkb0iSPksz8wSzdGFud2mdeIouUWWke&X-Amz-Signature=3826c6d1fc4389d65cd8b47438ce5d0a52512176d99d49138703900db98be099&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-                    "expiry_time": "2025-09-03T14:04:44.914Z"
+                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/0d31a281-d71e-4bb9-9031-a5256095b873/8e6b8ad3-7a3c-4ba5-aa14-b29b4151af28/v0.6.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466YI4PO4PI%2F20250904%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250904T131820Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCcrX3ajcqart20HWbT%2Fij236T6xS0wgxtrJZ%2FN7Q4F6AIhAKJ6XzEVOQm%2Fz7Pj1bAg9%2BYkK%2FH2zj4aaLyx48rqGYTHKv8DCF0QABoMNjM3NDIzMTgzODA1IgyrbKJXKoZRjuthyeIq3APElrNPXTf3P8vpJ8db6DtLVnSuGvPNePLjk6InWKy53kfAZNjA5dXRGqXfWRkx2l2lr5m8VEQPFE7NUyhsMPEz1WMqX8gAXjgAlKAhqvjjccNSsKbVM1jYXAVJsbMvrKcPZ2WXVnTr1ZUUAjClZJ3Rain7NcLm9fsh%2F4f3DcUGdxWDemaj4WFXYTo9maSmr5qAUnvwH%2BfzRl3NLova52GLc%2Fb8rWfdhqdCq0idin01IpqEtZv2ROJ1lzCOVKU6EX%2BHaqjvqaptjABI1icFLVCWC4JKaauXLpGiSCBTCx80FAp%2FbUFSL8XEunvaR215HlOb90aN3WQoC2snwboGEgBPyOtRbXTzYPBS%2Fo9d2vXLSsSMgcMlmetVNbACu9MK9cgD3I47Of8kUIg4aTVNgmwU9APo7mhuHd1t4GoXDHw3%2BH5%2FyplNFqD%2FY9bAzqYoJErcdSvB3rlCfJlZZMIOq77VJ1hWU6quTuecKkUrAaY%2FhhkJ0k9Rp0bjmCwl0dcEuE8NKLDlbV7ekOkvwJFY%2BRzHi9DKGEj4SV4Wkpo0D61nTPvMqLGou9FxfKxzDdfqKuy%2F%2B1TfFRJzUI5PjcNNF9xcuPN4rqAJGNri22M1zBcF1Td8rCzbKokWjKNDgDC8%2FOXFBjqkAQcf%2BjmHPcumYclemThXasr7Oi%2BHsnWxwsxOUj65aD9rTK8GwhrAd6EbWgShUrd2dsv9EVaa1x8ArPmtGli2EYeZlQuxgAtCoRQM4%2B6qbgbJUhDAs71RpqyrmvDCxdh2aNnkwuWS8u7M3L%2BWsHFn8bYiEtV%2B7PconVlOq3x8S0kulLX1XHQjN0LiGxmmzViwr9pKF7kZnqeEY1LEzVZ1%2FIWpMTc5&X-Amz-Signature=b4c9f19f602691f56b03cd6e4320594eb65a43a19f45d14ca90c203b51fb770e&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                    "expiry_time": "2025-09-04T14:18:20.855Z"
                 }
             }
         },
         {
             "object": "block",
-            "id": "263d9316-605a-8001-8ff2-fe0d3dd98473",
+            "id": "264d9316-605a-809f-bda1-dd91f4d750b3",
             "parent": {
                 "type": "page_id",
                 "page_id": "263d9316-605a-806f-9e95-e1377a46ff3e"
             },
-            "created_time": "2025-09-03T12:49:00.000Z",
-            "last_edited_time": "2025-09-03T12:49:00.000Z",
+            "created_time": "2025-09-04T13:17:00.000Z",
+            "last_edited_time": "2025-09-04T13:17:00.000Z",
             "created_by": {
                 "object": "user",
                 "id": "dd320fcd-ab37-435c-9ea8-d8c76cbbb486"
@@ -1182,6 +1182,35 @@
             "paragraph": {
                 "rich_text": [],
                 "color": "default"
+            }
+        },
+        {
+            "object": "block",
+            "id": "264d9316-605a-8025-8300-e04e0b07a3e0",
+            "parent": {
+                "type": "page_id",
+                "page_id": "263d9316-605a-806f-9e95-e1377a46ff3e"
+            },
+            "created_time": "2025-09-04T13:17:00.000Z",
+            "last_edited_time": "2025-09-04T13:17:00.000Z",
+            "created_by": {
+                "object": "user",
+                "id": "dd320fcd-ab37-435c-9ea8-d8c76cbbb486"
+            },
+            "last_edited_by": {
+                "object": "user",
+                "id": "dd320fcd-ab37-435c-9ea8-d8c76cbbb486"
+            },
+            "has_children": false,
+            "archived": false,
+            "in_trash": false,
+            "type": "image",
+            "image": {
+                "caption": [],
+                "type": "external",
+                "external": {
+                    "url": "https://m.media-amazon.com/images/M/MV5BMTg4OTQzMDMxOV5BMl5BanBnXkFtZTgwNTM3NjY4MzE@._V1_.jpg"
+                }
             }
         },
         {
@@ -1290,11 +1319,34 @@
                 "caption": [],
                 "type": "file",
                 "file": {
-                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/0d31a281-d71e-4bb9-9031-a5256095b873/ec26ef4e-2f4b-4ce8-917b-154f8db47c55/google-gemini-icon-logo-png_seeklogo-623016.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466Z7OV4AAM%2F20250903%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250903T130444Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIHrLZLjx4qWHnbK3A4VE6OC5EjVj4JzuaPSwlhFE3OaWAiEAgVFmRV6Xd4xu7Yi8Nv2LQgns5JX82lBPJbfJ5Oobq1Yq%2FwMIRRAAGgw2Mzc0MjMxODM4MDUiDM%2BV1vJmcYtJAADENCrcA%2FF5jc%2BTLYdLx11naM8xVf4lcobxLZwa4Ha4VE60iqYMCCZtKYeFnaufAltk2VK0cyHKPSTju2RDqBRZ0OlJL38eJ3cr0kcE2K%2BccaII37E9pPVCjT4sUpyJ99FIaq%2BvSiZGbX6OSxkF0oekbiZQUP1IQI2G1XyTwykhSCvFpOfOLsls3UBfu94606Rsr7zCB0cSXBgxfG05bEqfURa7%2FGx683h40KUUDmMJw0NlpMQgoyhUc8JpEGuXw11rp4BjvXRgPrvejhXVv%2FjOUr9jWyjhyJ5up5yho3HSYNUhWQuowfzgpAGdVknM5YxOwaDnX4pQZxj5zOgbOoQaAfmD8Woy9q5yTOoc0fPIO0oSbgWMi6JLRMjLLJnLQvfu3diBlEuNLaUGQwyJjwWJz6qeYYVZ5Vv7ypuoZYZWIwzAALOFAIfHFMgVcGg9FzNAAmnhZ%2Btkcu%2F6KNcM%2BoNc8m93lNMkHx%2FsUjE1Y1NjN32YLMX9u4%2FQ1ucYJq3bUL0GSDM6WojGP%2FXJy3U9OakiR%2FB2YHMwgZqCUYHOr6vCQLwseSgZTbP5k1Jy39jMomuJ8KwpXmh9Fs7kHw0sRfqjkh8hoS8TBp98ZQMkHDDkIIUNzMv3O6d56D3Nb81E7tBzMIfZ4MUGOqUBEmEi4zkg3mO3thZa5FSrZ6Bw0%2FTP02ij6o7JEXFZWF7yFIkQUXo%2FPVdvKc24cAk7I4kkx%2BMr0Ud0W0GpFdMNVjnIzTG9X9HzQkQaJchB3eU6OdhzOjZYbd9BFTs0TgZqgMXy7WVbtCkT4%2FBdyU%2Bg%2Fg1x5xTNynCjmhuti0NYEcLrVLPnqRWM1i9lLSaAKFkb0iSPksz8wSzdGFud2mdeIouUWWke&X-Amz-Signature=4eeb186b63cadbfb768a6c02e8cf03cd6d06e6ab76659ac12281e550abce5cdf&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-                    "expiry_time": "2025-09-03T14:04:44.912Z"
+                    "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/0d31a281-d71e-4bb9-9031-a5256095b873/ec26ef4e-2f4b-4ce8-917b-154f8db47c55/google-gemini-icon-logo-png_seeklogo-623016.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466YI4PO4PI%2F20250904%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250904T131820Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCcrX3ajcqart20HWbT%2Fij236T6xS0wgxtrJZ%2FN7Q4F6AIhAKJ6XzEVOQm%2Fz7Pj1bAg9%2BYkK%2FH2zj4aaLyx48rqGYTHKv8DCF0QABoMNjM3NDIzMTgzODA1IgyrbKJXKoZRjuthyeIq3APElrNPXTf3P8vpJ8db6DtLVnSuGvPNePLjk6InWKy53kfAZNjA5dXRGqXfWRkx2l2lr5m8VEQPFE7NUyhsMPEz1WMqX8gAXjgAlKAhqvjjccNSsKbVM1jYXAVJsbMvrKcPZ2WXVnTr1ZUUAjClZJ3Rain7NcLm9fsh%2F4f3DcUGdxWDemaj4WFXYTo9maSmr5qAUnvwH%2BfzRl3NLova52GLc%2Fb8rWfdhqdCq0idin01IpqEtZv2ROJ1lzCOVKU6EX%2BHaqjvqaptjABI1icFLVCWC4JKaauXLpGiSCBTCx80FAp%2FbUFSL8XEunvaR215HlOb90aN3WQoC2snwboGEgBPyOtRbXTzYPBS%2Fo9d2vXLSsSMgcMlmetVNbACu9MK9cgD3I47Of8kUIg4aTVNgmwU9APo7mhuHd1t4GoXDHw3%2BH5%2FyplNFqD%2FY9bAzqYoJErcdSvB3rlCfJlZZMIOq77VJ1hWU6quTuecKkUrAaY%2FhhkJ0k9Rp0bjmCwl0dcEuE8NKLDlbV7ekOkvwJFY%2BRzHi9DKGEj4SV4Wkpo0D61nTPvMqLGou9FxfKxzDdfqKuy%2F%2B1TfFRJzUI5PjcNNF9xcuPN4rqAJGNri22M1zBcF1Td8rCzbKokWjKNDgDC8%2FOXFBjqkAQcf%2BjmHPcumYclemThXasr7Oi%2BHsnWxwsxOUj65aD9rTK8GwhrAd6EbWgShUrd2dsv9EVaa1x8ArPmtGli2EYeZlQuxgAtCoRQM4%2B6qbgbJUhDAs71RpqyrmvDCxdh2aNnkwuWS8u7M3L%2BWsHFn8bYiEtV%2B7PconVlOq3x8S0kulLX1XHQjN0LiGxmmzViwr9pKF7kZnqeEY1LEzVZ1%2FIWpMTc5&X-Amz-Signature=45644bf07060b755a0381ee9d994506738fd1393c2c9fb881761b2321361499a&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                    "expiry_time": "2025-09-04T14:18:20.853Z"
                 },
                 "name": "google-gemini-icon-logo-png_seeklogo-623016.png"
             }
+        },
+        {
+            "object": "block",
+            "id": "264d9316-605a-803a-ad76-cc480e5146c9",
+            "parent": {
+                "type": "page_id",
+                "page_id": "263d9316-605a-806f-9e95-e1377a46ff3e"
+            },
+            "created_time": "2025-09-04T13:18:00.000Z",
+            "last_edited_time": "2025-09-04T13:18:00.000Z",
+            "created_by": {
+                "object": "user",
+                "id": "dd320fcd-ab37-435c-9ea8-d8c76cbbb486"
+            },
+            "last_edited_by": {
+                "object": "user",
+                "id": "dd320fcd-ab37-435c-9ea8-d8c76cbbb486"
+            },
+            "has_children": false,
+            "archived": false,
+            "in_trash": false,
+            "type": "unsupported",
+            "unsupported": {}
         },
         {
             "object": "block",
@@ -1350,13 +1402,13 @@
         },
         {
             "object": "block",
-            "id": "263d9316-605a-80e9-ae6b-ed3944a21b3f",
+            "id": "263d9316-605a-8037-9f03-cdbe0cecc96d",
             "parent": {
                 "type": "page_id",
                 "page_id": "263d9316-605a-806f-9e95-e1377a46ff3e"
             },
-            "created_time": "2025-09-03T12:50:00.000Z",
-            "last_edited_time": "2025-09-03T12:50:00.000Z",
+            "created_time": "2025-09-03T15:26:00.000Z",
+            "last_edited_time": "2025-09-03T15:26:00.000Z",
             "created_by": {
                 "object": "user",
                 "id": "dd320fcd-ab37-435c-9ea8-d8c76cbbb486"
@@ -1373,6 +1425,29 @@
                 "rich_text": [],
                 "color": "default"
             }
+        },
+        {
+            "object": "block",
+            "id": "263d9316-605a-8057-b12e-f880bc565fcb",
+            "parent": {
+                "type": "page_id",
+                "page_id": "263d9316-605a-806f-9e95-e1377a46ff3e"
+            },
+            "created_time": "2025-09-03T15:27:00.000Z",
+            "last_edited_time": "2025-09-03T15:27:00.000Z",
+            "created_by": {
+                "object": "user",
+                "id": "dd320fcd-ab37-435c-9ea8-d8c76cbbb486"
+            },
+            "last_edited_by": {
+                "object": "user",
+                "id": "dd320fcd-ab37-435c-9ea8-d8c76cbbb486"
+            },
+            "has_children": true,
+            "archived": false,
+            "in_trash": false,
+            "type": "column_list",
+            "column_list": {}
         },
         {
             "object": "block",
@@ -1456,5 +1531,5 @@
     "type": "block",
     "block": {},
     "developer_survey": "https://notionup.typeform.com/to/bllBsoI4?utm_source=postman",
-    "request_id": "5cbfe975-bcd7-4d51-b546-4e9b9adec0f0"
+    "request_id": "89f9d7c0-546f-4349-94cb-daeba62f6136"
 }
