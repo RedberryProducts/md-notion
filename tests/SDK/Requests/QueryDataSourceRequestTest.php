@@ -10,7 +10,7 @@ beforeEach(function () {
     $this->mockClient = new MockClient([
         QueryDataSource::class => MockResponse::fixture('notion/queryDataSource'),
     ]);
-    
+
     $this->notion->withMockClient($this->mockClient);
 });
 
@@ -25,16 +25,16 @@ test('it correctly builds the request', function () {
 
 test('it can query a data source', function () {
     $dataSourceId = '263d9316-605a-80a3-a132-000bfb8600d6';
-    
+
     $response = $this->notion->act()->queryDataSource($dataSourceId);
-    
+
     expect($response->ok())->toBeTrue();
-    
+
     $this->mockClient->assertSent(function ($request) use ($dataSourceId) {
-        return $request instanceof QueryDataSource 
+        return $request instanceof QueryDataSource
             && $request->resolveEndpoint() === "/v1/data_sources/{$dataSourceId}/query";
-        });
-    
+    });
+
     $data = $response->json();
     expect($data)->toBeArray();
     expect($data)->toHaveKey('results');
