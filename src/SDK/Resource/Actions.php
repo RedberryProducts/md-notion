@@ -9,6 +9,7 @@ use RedberryProducts\MdNotion\SDK\Requests\Actions\Database;
 use RedberryProducts\MdNotion\SDK\Requests\Actions\DatabaseItems;
 use RedberryProducts\MdNotion\SDK\Requests\Actions\ListComments;
 use RedberryProducts\MdNotion\SDK\Requests\Actions\Page;
+use RedberryProducts\MdNotion\SDK\Requests\Actions\QueryDataSource;
 use RedberryProducts\MdNotion\SDK\Resource;
 use Saloon\Http\Response;
 
@@ -29,23 +30,18 @@ class Actions extends Resource
         return $this->connector->send(new Database($databaseId));
     }
 
-    public function getDatabaseItems(string $databaseId): Response
+    public function addCommentToPage(mixed $parent, mixed $richText): Response
     {
-        return $this->connector->send(new DatabaseItems($databaseId));
-    }
-
-    public function addCommentToPage(mixed $parent, mixed $richText, mixed $displayName): Response
-    {
-        return $this->connector->send(new AddCommentToPage($parent, $richText, $displayName));
-    }
-
-    public function addCommentToDiscussion(mixed $discussionId, mixed $richText, mixed $displayName): Response
-    {
-        return $this->connector->send(new AddCommentToDiscussion($discussionId, $richText, $displayName));
+        return $this->connector->send(new AddCommentToPage($parent, $richText));
     }
 
     public function listComments(?string $blockId): Response
     {
         return $this->connector->send(new ListComments($blockId));
+    }
+    
+    public function queryDataSource(string $dataSourceId, ?array $filter = null): Response
+    {
+        return $this->connector->send(new QueryDataSource($dataSourceId, $filter));
     }
 }

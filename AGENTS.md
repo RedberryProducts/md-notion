@@ -14,10 +14,10 @@ When working with the MdNotion project, follow these guidelines to ensure accura
 ## 3. Saloon SDK Documentation
 
 -   For Saloon SDK integration, check the following documentation files:
-    -   `saloon-dtos-docs.md`
-    -   `saloon-requests-docs.md`
-    -   `saloon-responses-docs.md`
-    -   `saloon-testing-docs.md`
+    -   `saloon-dtos-docs.md`: Saloon DTOs
+    -   `saloon-requests-docs.md`: Sending Requests
+    -   `saloon-responses-docs.md`: Responses documentation
+    -   `saloon-testing-docs.md`: SDK Testing docs
 
 ## 4. Configuration
 

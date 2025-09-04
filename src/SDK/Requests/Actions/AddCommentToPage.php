@@ -24,11 +24,10 @@ class AddCommentToPage extends Request implements HasBody
     public function __construct(
         protected mixed $parent = null,
         protected mixed $richText = null,
-        protected mixed $displayName = null,
     ) {}
 
     public function defaultBody(): array
     {
-        return array_filter(['parent' => $this->parent, 'rich_text' => $this->richText, 'display_name' => $this->displayName]);
+        return array_filter(['parent' => $this->parent, 'rich_text' => $this->richText, 'display_name' => ['type' => 'integration']]);
     }
 }
