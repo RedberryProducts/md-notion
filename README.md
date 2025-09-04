@@ -49,6 +49,12 @@ return [
 ];
 ```
 
+Optionally:
+
+```php
+php artisan vendor:publish --tag=":md-notion-views"
+```
+
 ## Usage
 
 ```php

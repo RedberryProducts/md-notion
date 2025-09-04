@@ -16,7 +16,8 @@ class MdNotionServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('md-notion')
-            ->hasConfigFile();
+            ->hasConfigFile()
+            ->hasViews();
         // ->hasCommand(MdNotionCommand::class);
     }
 }

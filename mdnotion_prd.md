@@ -117,7 +117,7 @@ $markdown = $MdNotion->full();
 -   Use blade templates for adapters to render needed MD
 -   Make adapters easily replacable with custom adapters
 -   Make adapters easily extendable by adding new adapters based on notion block's "type"
--   Some blocks have different subtypes, for example, image, file and video have `external` and `file` types. sp we should handle them all.
+-   Some blocks have different subtypes, for example, image, file and video have `external` and `file` types. so we should handle them all.
 
 ### Step 3: Content Manager
 
