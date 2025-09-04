@@ -8,15 +8,11 @@ abstract class BaseBlockAdapter implements BlockAdapterInterface
 {
     /**
      * The Notion block type this adapter handles
-     *
-     * @var string
      */
     protected string $type;
 
     /**
      * The blade template path for rendering markdown
-     *
-     * @var string
      */
     protected string $template;
 
@@ -31,22 +27,18 @@ abstract class BaseBlockAdapter implements BlockAdapterInterface
 
     /**
      * Get the Notion block type this adapter handles
-     *
-     * @return string
      */
     abstract public function getType(): string;
 
     /**
      * Get the blade template path for rendering markdown
-     *
-     * @return string
      */
     abstract public function getTemplate(): string;
 
     /**
      * Convert a Notion block to Markdown format
      *
-     * @param array $block The Notion block data
+     * @param  array  $block  The Notion block data
      * @return string The markdown representation
      */
     public function toMarkdown(array $block): string
@@ -56,15 +48,14 @@ abstract class BaseBlockAdapter implements BlockAdapterInterface
         }
 
         $data = $this->prepareData($block);
-        
+
         return trim(View::make($this->template, $data)->render());
     }
 
     /**
      * Prepare data for the template
      *
-     * @param array $block The Notion block data
-     * @return array
+     * @param  array  $block  The Notion block data
      */
     protected function prepareData(array $block): array
     {
@@ -77,9 +68,8 @@ abstract class BaseBlockAdapter implements BlockAdapterInterface
     /**
      * Process text annotations and convert to markdown
      *
-     * @param array $annotations Text annotations from Notion
-     * @param string $text The text content
-     * @return string
+     * @param  array  $annotations  Text annotations from Notion
+     * @param  string  $text  The text content
      */
     protected function processAnnotations(array $annotations, string $text): string
     {
@@ -98,44 +88,43 @@ abstract class BaseBlockAdapter implements BlockAdapterInterface
         if ($annotations['underline']) {
             $text = "<u>{$text}</u>";
         }
-        
+
         return $text;
     }
 
     /**
      * Process rich text blocks from Notion
      *
-     * @param \RedberryProducts\MdNotion\DTOs\RichTextDTO[] $richText Array of rich text DTOs
-     * @return string
+     * @param  \RedberryProducts\MdNotion\DTOs\RichTextDTO[]  $richText  Array of rich text DTOs
      */
     protected function processRichText(array $richText): string
     {
         $result = '';
-        
+
         foreach ($richText as $textBlock) {
             $text = trim($textBlock->plainText);
 
             if ($textBlock->href) {
                 $text = "[$text]({$textBlock->href})";
             }
-            
+
             $text = $this->processAnnotations($textBlock->annotations, $text);
-            $result .= " " . $text;
+            $result .= ' '.$text;
         }
-        
+
         return $result;
     }
 
     /**
      * Get the content from a block's text property
      *
-     * @param array $block The Notion block
-     * @return string
+     * @param  array  $block  The Notion block
      */
     protected function getBlockContent(array $block): string
     {
         $blockType = $block['type'];
-        return isset($block[$blockType]['rich_text']) 
+
+        return isset($block[$blockType]['rich_text'])
             ? $this->processRichText($block[$blockType]['rich_text'])
             : '';
     }

@@ -45,7 +45,7 @@ class RichTextDTO
     /**
      * Create a collection of RichTextDTO from an array of rich text
      *
-     * @param array $richTextArray Array of rich text from Notion API
+     * @param  array  $richTextArray  Array of rich text from Notion API
      * @return RichTextDTO[]
      */
     public static function collection(array $richTextArray): array

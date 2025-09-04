@@ -27,7 +27,7 @@ abstract class BlockDTO
         $this->id = $block['id'];
         $this->type = $block['type'];
         $this->hasChildren = $block['has_children'] ?? false;
-        
+
         $this->fromArray($block[$this->type]);
     }
 

@@ -14,7 +14,7 @@ test('paragraph adapter converts block to markdown', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Hello ',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => true,
@@ -22,16 +22,16 @@ test('paragraph adapter converts block to markdown', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Hello ',
-                    'href' => null
+                    'href' => null,
                 ],
                 [
                     'type' => 'text',
                     'text' => [
                         'content' => 'world',
-                        'link' => ['url' => 'https://example.com']
+                        'link' => ['url' => 'https://example.com'],
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -39,17 +39,17 @@ test('paragraph adapter converts block to markdown', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'world',
-                    'href' => 'https://example.com'
-                ]
+                    'href' => 'https://example.com',
+                ],
             ],
-            'color' => 'default'
-        ]
+            'color' => 'default',
+        ],
     ];
 
-    $adapter = new ParagraphAdapter();
+    $adapter = new ParagraphAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('**Hello** [world](https://example.com)');
