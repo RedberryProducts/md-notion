@@ -4,7 +4,6 @@ namespace RedberryProducts\MdNotion\SDK\Requests\Actions;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
-use Saloon\Traits\Body\HasJsonBody;
 
 /**
  * Query a data source

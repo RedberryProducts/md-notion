@@ -2,11 +2,9 @@
 
 namespace RedberryProducts\MdNotion\SDK\Resource;
 
-use RedberryProducts\MdNotion\SDK\Requests\Actions\AddCommentToDiscussion;
 use RedberryProducts\MdNotion\SDK\Requests\Actions\AddCommentToPage;
 use RedberryProducts\MdNotion\SDK\Requests\Actions\BlockChildren;
 use RedberryProducts\MdNotion\SDK\Requests\Actions\Database;
-use RedberryProducts\MdNotion\SDK\Requests\Actions\DatabaseItems;
 use RedberryProducts\MdNotion\SDK\Requests\Actions\ListComments;
 use RedberryProducts\MdNotion\SDK\Requests\Actions\Page;
 use RedberryProducts\MdNotion\SDK\Requests\Actions\QueryDataSource;
@@ -39,7 +37,7 @@ class Actions extends Resource
     {
         return $this->connector->send(new ListComments($blockId));
     }
-    
+
     public function queryDataSource(string $dataSourceId, ?array $filter = null): Response
     {
         return $this->connector->send(new QueryDataSource($dataSourceId, $filter));
