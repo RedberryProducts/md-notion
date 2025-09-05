@@ -6,8 +6,7 @@ class ColumnDTO
 {
     public function __construct(
         public float $widthRatio
-    ) {
-    }
+    ) {}
 
     public static function from(array $block): self
     {

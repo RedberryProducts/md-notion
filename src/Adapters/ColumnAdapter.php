@@ -19,21 +19,21 @@ class ColumnAdapter extends BaseBlockAdapter
     protected function prepareData(array $block): array
     {
         $dto = ColumnDTO::from($block);
-        
+
         // Get column contents from SDK
         $response = $this->getSdk()->act()->getBlockChildren($block['id'], null);
         $contentBlocks = $response->json();
-        
+
         // Process each child block using BlockAdapterFactory
         $contents = [];
         foreach ($contentBlocks['results'] ?? [] as $childBlock) {
             // Create adapter based on block type
             $type = $childBlock['type'];
-            $adapterClass = '\\RedberryProducts\\MdNotion\\Adapters\\' . ucfirst($type) . 'Adapter';
+            $adapterClass = '\\RedberryProducts\\MdNotion\\Adapters\\'.ucfirst($type).'Adapter';
             if (class_exists($adapterClass)) {
-                $adapter = new $adapterClass();
+                $adapter = new $adapterClass;
             } else {
-                $adapter = new ParagraphAdapter(); // Fallback to paragraph
+                $adapter = new ParagraphAdapter; // Fallback to paragraph
             }
             $adapter->setSdk($this->sdk);
             $contents[] = trim($adapter->toMarkdown($childBlock));

@@ -11,6 +11,6 @@ class ColumnListDTO
 
     public static function from(array $block): self
     {
-        return new self();
+        return new self;
     }
 }

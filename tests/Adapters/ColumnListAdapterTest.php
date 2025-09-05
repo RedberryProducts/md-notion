@@ -12,15 +12,15 @@ it('converts column list block to markdown', function () {
             [
                 'type' => 'column',
                 'column' => ['width_ratio' => 0.5],
-                'id' => 'column-1'
+                'id' => 'column-1',
             ],
             // Second column with its content
             [
                 'type' => 'column',
                 'column' => ['width_ratio' => 0.5],
-                'id' => 'column-2'
-            ]
-        ]
+                'id' => 'column-2',
+            ],
+        ],
     ];
 
     // Mock response for column children
@@ -37,7 +37,7 @@ it('converts column list block to markdown', function () {
                             'type' => 'text',
                             'text' => [
                                 'content' => 'Column content',
-                                'link' => null
+                                'link' => null,
                             ],
                             'annotations' => [
                                 'bold' => false,
@@ -45,23 +45,23 @@ it('converts column list block to markdown', function () {
                                 'strikethrough' => false,
                                 'underline' => false,
                                 'code' => false,
-                                'color' => 'default'
+                                'color' => 'default',
                             ],
                             'plain_text' => 'Column content',
-                            'href' => null
-                        ]
+                            'href' => null,
+                        ],
                     ],
-                    'color' => 'default'
-                ]
-            ]
-        ]
+                    'color' => 'default',
+                ],
+            ],
+        ],
     ];
 
     // Create mock responses
     $mockColumnListResponse = Mockery::mock(\Saloon\Http\Response::class);
     $mockColumnListResponse->shouldReceive('json')
         ->andReturn($mockColumnResponse);
-        
+
     $mockColumnChildrenResp = Mockery::mock(\Saloon\Http\Response::class);
     $mockColumnChildrenResp->shouldReceive('json')
         ->andReturn($mockColumnChildrenResponse);
@@ -78,17 +78,17 @@ it('converts column list block to markdown', function () {
         ->andReturn($mockColumnChildrenResp);
 
     // Create the adapter
-    $adapter = new ColumnListAdapter();
+    $adapter = new ColumnListAdapter;
     $adapter->setSdk($mockSdk);
 
     // Load sample column list block
-    $block = json_decode(file_get_contents(dirname(__DIR__, 2) . '/BlockJsonExamples/ColumnListJson.json'), true);
+    $block = json_decode(file_get_contents(dirname(__DIR__, 2).'/BlockJsonExamples/ColumnListJson.json'), true);
 
     // Convert to markdown
     $markdown = $adapter->toMarkdown($block);
 
     // Expected markdown structure
-    $expected = <<<MD
+    $expected = <<<'MD'
 **Column 1**
 
 Column content
@@ -104,10 +104,10 @@ MD;
 });
 
 it('creates column list DTO from block data', function () {
-    $block = json_decode(file_get_contents(dirname(__DIR__, 2) . '/BlockJsonExamples/ColumnListJson.json'), true);
-    
+    $block = json_decode(file_get_contents(dirname(__DIR__, 2).'/BlockJsonExamples/ColumnListJson.json'), true);
+
     $dto = ColumnListDTO::from($block);
-    
+
     expect($dto)->toBeInstanceOf(ColumnListDTO::class);
 });
 
