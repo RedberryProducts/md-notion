@@ -3,6 +3,7 @@
 namespace RedberryProducts\MdNotion\Adapters;
 
 use Illuminate\Support\Facades\View;
+use RedberryProducts\MdNotion\SDK\Notion;
 
 abstract class BaseBlockAdapter implements BlockAdapterInterface
 {
@@ -15,6 +16,11 @@ abstract class BaseBlockAdapter implements BlockAdapterInterface
      * The blade template path for rendering markdown
      */
     protected string $template;
+
+    /**
+     * The Notion SDK instance
+     */
+    protected ?Notion $sdk = null;
 
     /**
      * Create a new block adapter instance
@@ -127,5 +133,58 @@ abstract class BaseBlockAdapter implements BlockAdapterInterface
         return isset($block[$blockType]['rich_text'])
             ? $this->processRichText($block[$blockType]['rich_text'])
             : '';
+    }
+
+    /**
+     * Process icon blocks from Notion
+     *
+     * @param  array  $icon  The icon data from Notion
+     */
+    protected function processIcon(array $icon): string
+    {
+        return match($icon['type']) {
+            'emoji' => $icon['emoji'],
+            'external' => $this->processExternalIcon($icon['external']['url']),
+            'file' => sprintf('[🔗](%s)', $icon['file']['url']),
+            default => '💡',
+        };
+    }
+
+    /**
+     * Process external icon URL to extract icon name
+     *
+     * @param  string  $url  The external icon URL
+     */
+    private function processExternalIcon(string $url): string
+    {
+        if (preg_match('/\/([^\/]+)_[^\/]+\.svg$/', $url, $matches)) {
+            $iconName = ucfirst($matches[1]);
+            return sprintf('[%s](%s)', $iconName, $url);
+        }
+
+        return '[Icon](' . $url . ')';
+    }
+
+    /**
+     * Set the Notion SDK instance
+     */
+    public function setSdk(Notion $sdk): self
+    {
+        $this->sdk = $sdk;
+        return $this;
+    }
+
+    /**
+     * Get the Notion SDK instance
+     *
+     * @throws \RuntimeException if SDK is not set
+     */
+    protected function getSdk(): Notion
+    {
+        if ($this->sdk === null) {
+            throw new \RuntimeException('Notion SDK not set. Please set SDK using setSdk() method.');
+        }
+
+        return $this->sdk;
     }
 }

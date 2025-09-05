@@ -1,0 +1,1 @@
+🎥 [{{ $caption ?: 'Watch Video' }}]({{ $url }})
