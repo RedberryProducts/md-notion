@@ -12,7 +12,7 @@ test('table row adapter converts basic row to markdown', function () {
                         'type' => 'text',
                         'text' => [
                             'content' => 'Title',
-                            'link' => null
+                            'link' => null,
                         ],
                         'annotations' => [
                             'bold' => false,
@@ -20,18 +20,18 @@ test('table row adapter converts basic row to markdown', function () {
                             'strikethrough' => false,
                             'underline' => false,
                             'code' => false,
-                            'color' => 'default'
+                            'color' => 'default',
                         ],
                         'plain_text' => 'Title',
-                        'href' => null
-                    ]
+                        'href' => null,
+                    ],
                 ],
                 [
                     [
                         'type' => 'text',
                         'text' => [
                             'content' => 'type',
-                            'link' => null
+                            'link' => null,
                         ],
                         'annotations' => [
                             'bold' => false,
@@ -39,18 +39,18 @@ test('table row adapter converts basic row to markdown', function () {
                             'strikethrough' => false,
                             'underline' => false,
                             'code' => false,
-                            'color' => 'default'
+                            'color' => 'default',
                         ],
                         'plain_text' => 'type',
-                        'href' => null
-                    ]
+                        'href' => null,
+                    ],
                 ],
                 [
                     [
                         'type' => 'text',
                         'text' => [
                             'content' => 'date',
-                            'link' => null
+                            'link' => null,
                         ],
                         'annotations' => [
                             'bold' => false,
@@ -58,17 +58,17 @@ test('table row adapter converts basic row to markdown', function () {
                             'strikethrough' => false,
                             'underline' => false,
                             'code' => false,
-                            'color' => 'default'
+                            'color' => 'default',
                         ],
                         'plain_text' => 'date',
-                        'href' => null
-                    ]
-                ]
-            ]
-        ]
+                        'href' => null,
+                    ],
+                ],
+            ],
+        ],
     ];
 
-    $adapter = new TableRowAdapter();
+    $adapter = new TableRowAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('|Title|type|date|');
@@ -84,7 +84,7 @@ test('table row adapter handles formatted text', function () {
                         'type' => 'text',
                         'text' => [
                             'content' => 'Bold',
-                            'link' => null
+                            'link' => null,
                         ],
                         'annotations' => [
                             'bold' => true,
@@ -92,18 +92,18 @@ test('table row adapter handles formatted text', function () {
                             'strikethrough' => false,
                             'underline' => false,
                             'code' => false,
-                            'color' => 'default'
+                            'color' => 'default',
                         ],
                         'plain_text' => 'Bold',
-                        'href' => null
-                    ]
+                        'href' => null,
+                    ],
                 ],
                 [
                     [
                         'type' => 'text',
                         'text' => [
                             'content' => 'italic',
-                            'link' => null
+                            'link' => null,
                         ],
                         'annotations' => [
                             'bold' => false,
@@ -111,17 +111,17 @@ test('table row adapter handles formatted text', function () {
                             'strikethrough' => false,
                             'underline' => false,
                             'code' => false,
-                            'color' => 'default'
+                            'color' => 'default',
                         ],
                         'plain_text' => 'italic',
-                        'href' => null
-                    ]
-                ]
-            ]
-        ]
+                        'href' => null,
+                    ],
+                ],
+            ],
+        ],
     ];
 
-    $adapter = new TableRowAdapter();
+    $adapter = new TableRowAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('|**Bold**|_italic_|');

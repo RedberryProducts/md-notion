@@ -2,9 +2,8 @@
 
 namespace RedberryProducts\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\ToggleDTO;
 use RedberryProducts\MdNotion\DTOs\RichTextDTO;
-use RedberryProducts\MdNotion\Adapters\ParagraphAdapter;
+use RedberryProducts\MdNotion\DTOs\ToggleDTO;
 
 class ToggleAdapter extends BaseBlockAdapter
 {
@@ -21,24 +20,24 @@ class ToggleAdapter extends BaseBlockAdapter
     protected function prepareData(array $block): array
     {
         $dto = ToggleDTO::from($block);
-        
+
         // Get the title from rich text
         $title = trim($this->processRichText(RichTextDTO::collection($dto->richText)));
-        
+
         // Get toggle contents from SDK
         $response = $this->getSdk()->act()->getBlockChildren($block['id'], null);
         $contentBlocks = $response->json();
-        
+
         // Process each child block using corresponding adapters
         $contents = [];
         foreach ($contentBlocks['results'] as $childBlock) {
             // Create adapter based on block type
             $type = $childBlock['type'];
-            $adapterClass = '\\RedberryProducts\\MdNotion\\Adapters\\' . ucfirst($type) . 'Adapter';
+            $adapterClass = '\\RedberryProducts\\MdNotion\\Adapters\\'.ucfirst($type).'Adapter';
             if (class_exists($adapterClass)) {
-                $adapter = new $adapterClass();
+                $adapter = new $adapterClass;
             } else {
-                $adapter = new ParagraphAdapter(); // Fallback to paragraph
+                $adapter = new ParagraphAdapter; // Fallback to paragraph
             }
             $adapter->setSdk($this->sdk);
             $contents[] = trim($adapter->toMarkdown($childBlock));

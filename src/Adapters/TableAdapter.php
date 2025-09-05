@@ -19,22 +19,22 @@ class TableAdapter extends BaseBlockAdapter
     protected function prepareData(array $block): array
     {
         $dto = TableDTO::from($block);
-        
+
         // Get table rows from SDK
         $rowBlocks = $this->getSdk()->act()->getBlockChildren($block['id'], null)->json();
-        
+
         // Process each row
-        $rowAdapter = new TableRowAdapter();
+        $rowAdapter = new TableRowAdapter;
         $rowAdapter->setSdk($this->sdk);
-        
+
         $rows = [];
-        
+
         foreach ($rowBlocks['results'] as $i => $rowBlock) {
             $rowMd = $rowAdapter->toMarkdown($rowBlock);
-            
+
             if ($dto->hasColumnHeader && $i === 0) {
                 $rows[] = $rowMd;
-                $rows[] = str_repeat('|---', $dto->tableWidth) . '|';
+                $rows[] = str_repeat('|---', $dto->tableWidth).'|';
             } else {
                 $rows[] = $rowMd;
             }

@@ -2,8 +2,8 @@
 
 namespace RedberryProducts\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\TableRowDTO;
 use RedberryProducts\MdNotion\DTOs\RichTextDTO;
+use RedberryProducts\MdNotion\DTOs\TableRowDTO;
 
 class TableRowAdapter extends BaseBlockAdapter
 {
@@ -20,7 +20,7 @@ class TableRowAdapter extends BaseBlockAdapter
     protected function prepareData(array $block): array
     {
         $dto = TableRowDTO::from($block);
-        
+
         $cells = [];
         foreach ($dto->cells as $cell) {
             $cells[] = trim($this->processRichText(RichTextDTO::collection($cell)));

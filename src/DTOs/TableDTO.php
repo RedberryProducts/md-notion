@@ -8,12 +8,12 @@ class TableDTO
         public int $tableWidth,
         public bool $hasColumnHeader,
         public bool $hasRowHeader
-    ) {
-    }
+    ) {}
 
     public static function from(array $block): self
     {
         $table = $block['table'];
+
         return new self(
             tableWidth: $table['table_width'],
             hasColumnHeader: $table['has_column_header'],

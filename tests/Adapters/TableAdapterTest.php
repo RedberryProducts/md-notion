@@ -1,8 +1,8 @@
 <?php
 
+use Mockery;
 use RedberryProducts\MdNotion\Adapters\TableAdapter;
 use RedberryProducts\MdNotion\SDK\Notion;
-use Mockery;
 
 test('table adapter converts basic table to markdown', function () {
     $block = [
@@ -11,8 +11,8 @@ test('table adapter converts basic table to markdown', function () {
         'table' => [
             'table_width' => 3,
             'has_column_header' => true,
-            'has_row_header' => false
-        ]
+            'has_row_header' => false,
+        ],
     ];
 
     $rowsResponse = [
@@ -26,27 +26,27 @@ test('table adapter converts basic table to markdown', function () {
                                 'type' => 'text',
                                 'text' => ['content' => 'Title'],
                                 'annotations' => ['bold' => false],
-                                'plain_text' => 'Title'
-                            ]
+                                'plain_text' => 'Title',
+                            ],
                         ],
                         [
                             [
                                 'type' => 'text',
                                 'text' => ['content' => 'type'],
                                 'annotations' => ['bold' => false],
-                                'plain_text' => 'type'
-                            ]
+                                'plain_text' => 'type',
+                            ],
                         ],
                         [
                             [
                                 'type' => 'text',
                                 'text' => ['content' => 'date'],
                                 'annotations' => ['bold' => false],
-                                'plain_text' => 'date'
-                            ]
-                        ]
-                    ]
-                ]
+                                'plain_text' => 'date',
+                            ],
+                        ],
+                    ],
+                ],
             ],
             [
                 'type' => 'table_row',
@@ -57,29 +57,29 @@ test('table adapter converts basic table to markdown', function () {
                                 'type' => 'text',
                                 'text' => ['content' => 'Title 1'],
                                 'annotations' => ['bold' => false],
-                                'plain_text' => 'Title 1'
-                            ]
+                                'plain_text' => 'Title 1',
+                            ],
                         ],
                         [
                             [
                                 'type' => 'text',
                                 'text' => ['content' => 'K'],
                                 'annotations' => ['bold' => false],
-                                'plain_text' => 'K'
-                            ]
+                                'plain_text' => 'K',
+                            ],
                         ],
                         [
                             [
                                 'type' => 'text',
                                 'text' => ['content' => '03.09.2025'],
                                 'annotations' => ['bold' => false],
-                                'plain_text' => '03.09.2025'
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ]
+                                'plain_text' => '03.09.2025',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ];
 
     $sdk = Mockery::mock(Notion::class);
@@ -88,9 +88,9 @@ test('table adapter converts basic table to markdown', function () {
         ->once()
         ->andReturn($rowsResponse);
 
-    $adapter = new TableAdapter();
+    $adapter = new TableAdapter;
     $adapter->setSdk($sdk);
-    
+
     $markdown = $adapter->toMarkdown($block);
 
     $expected = "|Title|type|date|\n|---|---|---|\n|Title 1|K|03.09.2025|";
@@ -104,8 +104,8 @@ test('table adapter handles table without headers', function () {
         'table' => [
             'table_width' => 2,
             'has_column_header' => false,
-            'has_row_header' => false
-        ]
+            'has_row_header' => false,
+        ],
     ];
 
     $rowsResponse = [
@@ -119,21 +119,21 @@ test('table adapter handles table without headers', function () {
                                 'type' => 'text',
                                 'text' => ['content' => 'Cell 1'],
                                 'annotations' => ['bold' => false],
-                                'plain_text' => 'Cell 1'
-                            ]
+                                'plain_text' => 'Cell 1',
+                            ],
                         ],
                         [
                             [
                                 'type' => 'text',
                                 'text' => ['content' => 'Cell 2'],
                                 'annotations' => ['bold' => false],
-                                'plain_text' => 'Cell 2'
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ]
+                                'plain_text' => 'Cell 2',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ];
 
     $sdk = Mockery::mock(Notion::class);
@@ -142,9 +142,9 @@ test('table adapter handles table without headers', function () {
         ->once()
         ->andReturn($rowsResponse);
 
-    $adapter = new TableAdapter();
+    $adapter = new TableAdapter;
     $adapter->setSdk($sdk);
-    
+
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('|Cell 1|Cell 2|');
