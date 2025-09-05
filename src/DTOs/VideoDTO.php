@@ -9,12 +9,12 @@ class VideoDTO
         public array $file,
         public array $external,
         public array $caption
-    ) {
-    }
+    ) {}
 
     public static function from(array $block): self
     {
         $video = $block['video'];
+
         return new self(
             type: $video['type'],
             file: $video['type'] === 'file' ? $video['file'] : [],

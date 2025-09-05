@@ -9,14 +9,13 @@ class HeadingDTO
         public bool $isToggleable,
         public string $color,
         public string $level
-    ) {
-    }
+    ) {}
 
     public static function from(array $block): self
     {
         $type = $block['type']; // heading_1, heading_2, or heading_3
         $heading = $block[$type];
-        
+
         return new self(
             richText: $heading['rich_text'],
             isToggleable: $heading['is_toggleable'],

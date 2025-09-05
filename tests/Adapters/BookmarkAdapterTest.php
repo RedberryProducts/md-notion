@@ -10,11 +10,11 @@ test('bookmark adapter converts block to markdown', function () {
         'has_children' => false,
         'bookmark' => [
             'caption' => [],
-            'url' => 'https://docs.n8n.io/integrations/builtin/credentials/notion/#using-api-integration-token'
-        ]
+            'url' => 'https://docs.n8n.io/integrations/builtin/credentials/notion/#using-api-integration-token',
+        ],
     ];
 
-    $adapter = new BookmarkAdapter();
+    $adapter = new BookmarkAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('[docs.n8n.io  - Bookmark ](https://docs.n8n.io/integrations/builtin/credentials/notion/#using-api-integration-token)');
@@ -32,7 +32,7 @@ test('bookmark adapter handles captions', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Check docs here',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -40,17 +40,17 @@ test('bookmark adapter handles captions', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Check docs here',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
-            'url' => 'https://docs.n8n.io/integrations/builtin/credentials/notion/#using-api-integration-token'
-        ]
+            'url' => 'https://docs.n8n.io/integrations/builtin/credentials/notion/#using-api-integration-token',
+        ],
     ];
 
-    $adapter = new BookmarkAdapter();
+    $adapter = new BookmarkAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('[docs.n8n.io  -  Check docs here ](https://docs.n8n.io/integrations/builtin/credentials/notion/#using-api-integration-token)');

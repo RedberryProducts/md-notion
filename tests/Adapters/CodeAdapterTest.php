@@ -14,7 +14,7 @@ test('code adapter converts code block to markdown', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Got the Code block here with PHP',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -22,18 +22,18 @@ test('code adapter converts code block to markdown', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Got the Code block here with PHP',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'language' => 'php',
-            'caption' => []
-        ]
+            'caption' => [],
+        ],
     ];
 
-    $adapter = new CodeAdapter();
+    $adapter = new CodeAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     $nl = PHP_EOL;
@@ -53,7 +53,7 @@ test('code adapter handles code block with caption', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => '<?php\n\necho "Hello World!";',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -61,11 +61,11 @@ test('code adapter handles code block with caption', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => '<?php\n\necho "Hello World!";',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'language' => 'php',
             'caption' => [
@@ -73,7 +73,7 @@ test('code adapter handles code block with caption', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Simple PHP example',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -81,16 +81,16 @@ test('code adapter handles code block with caption', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Simple PHP example',
-                    'href' => null
-                ]
-            ]
-        ]
+                    'href' => null,
+                ],
+            ],
+        ],
     ];
 
-    $adapter = new CodeAdapter();
+    $adapter = new CodeAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     $nl = PHP_EOL;
@@ -110,7 +110,7 @@ test('code adapter handles code block with formatted caption', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'const greeting = "Hello";',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -118,11 +118,11 @@ test('code adapter handles code block with formatted caption', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'const greeting = "Hello";',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'language' => 'javascript',
             'caption' => [
@@ -130,7 +130,7 @@ test('code adapter handles code block with formatted caption', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Using ',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -138,16 +138,16 @@ test('code adapter handles code block with formatted caption', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Using ',
-                    'href' => null
+                    'href' => null,
                 ],
                 [
                     'type' => 'text',
                     'text' => [
                         'content' => 'const',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => true,
@@ -155,16 +155,16 @@ test('code adapter handles code block with formatted caption', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => true,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'const',
-                    'href' => null
+                    'href' => null,
                 ],
                 [
                     'type' => 'text',
                     'text' => [
                         'content' => ' for constants',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -172,16 +172,16 @@ test('code adapter handles code block with formatted caption', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => ' for constants',
-                    'href' => null
-                ]
-            ]
-        ]
+                    'href' => null,
+                ],
+            ],
+        ],
     ];
 
-    $adapter = new CodeAdapter();
+    $adapter = new CodeAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     $nl = PHP_EOL;

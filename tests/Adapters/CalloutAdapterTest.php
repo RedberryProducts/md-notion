@@ -14,7 +14,7 @@ test('callout adapter converts emoji block to markdown', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Call out with icon',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -22,21 +22,21 @@ test('callout adapter converts emoji block to markdown', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Call out with icon',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'icon' => [
                 'type' => 'emoji',
-                'emoji' => '2️⃣'
+                'emoji' => '2️⃣',
             ],
-            'color' => 'gray_background'
-        ]
+            'color' => 'gray_background',
+        ],
     ];
 
-    $adapter = new CalloutAdapter();
+    $adapter = new CalloutAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('> 2️⃣ Call out with icon');
@@ -54,7 +54,7 @@ test('callout adapter handles external icon', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Call out with external icon',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -62,28 +62,27 @@ test('callout adapter handles external icon', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Call out with external icon',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'icon' => [
                 'type' => 'external',
                 'external' => [
-                    'url' => 'https://www.notion.so/icons/apple_gray.svg'
-                ]
+                    'url' => 'https://www.notion.so/icons/apple_gray.svg',
+                ],
             ],
-            'color' => 'gray_background'
-        ]
+            'color' => 'gray_background',
+        ],
     ];
 
-    $adapter = new CalloutAdapter();
+    $adapter = new CalloutAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('> [Apple](https://www.notion.so/icons/apple_gray.svg) Call out with external icon');
 });
-
 
 test('callout adapter handles file icon', function () {
     $block = [
@@ -97,7 +96,7 @@ test('callout adapter handles file icon', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Call out with file icon',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -105,24 +104,24 @@ test('callout adapter handles file icon', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Call out with file icon',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'icon' => [
                 'type' => 'file',
                 'file' => [
                     'url' => 'https://example.com/image.png',
-                    'expiry_time' => '2025-09-05T12:54:30.470Z'
-                ]
+                    'expiry_time' => '2025-09-05T12:54:30.470Z',
+                ],
             ],
-            'color' => 'gray_background'
-        ]
+            'color' => 'gray_background',
+        ],
     ];
 
-    $adapter = new CalloutAdapter();
+    $adapter = new CalloutAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('> [🔗](https://example.com/image.png) Call out with file icon');
@@ -140,7 +139,7 @@ test('callout adapter handles formatted text', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Bold ',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => true,
@@ -148,16 +147,16 @@ test('callout adapter handles formatted text', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Bold ',
-                    'href' => null
+                    'href' => null,
                 ],
                 [
                     'type' => 'text',
                     'text' => [
                         'content' => 'and italic',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -165,23 +164,22 @@ test('callout adapter handles formatted text', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'and italic',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'icon' => [
                 'type' => 'emoji',
-                'emoji' => '💡'
+                'emoji' => '💡',
             ],
-            'color' => 'gray_background'
-        ]
+            'color' => 'gray_background',
+        ],
     ];
 
-    $adapter = new CalloutAdapter();
+    $adapter = new CalloutAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('> 💡 **Bold** _and italic_');
 });
-

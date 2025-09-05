@@ -2,8 +2,8 @@
 
 namespace RedberryProducts\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\VideoDTO;
 use RedberryProducts\MdNotion\DTOs\RichTextDTO;
+use RedberryProducts\MdNotion\DTOs\VideoDTO;
 
 class VideoAdapter extends BaseBlockAdapter
 {
@@ -21,7 +21,7 @@ class VideoAdapter extends BaseBlockAdapter
     {
         $dto = VideoDTO::from($block);
 
-        $url = $dto->type === 'file' 
+        $url = $dto->type === 'file'
             ? $dto->file['url']
             : $dto->external['url'];
 
