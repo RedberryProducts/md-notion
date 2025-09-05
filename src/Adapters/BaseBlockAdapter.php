@@ -79,19 +79,19 @@ abstract class BaseBlockAdapter implements BlockAdapterInterface
      */
     protected function processAnnotations(array $annotations, string $text): string
     {
-        if ($annotations['code']) {
+        if (!empty($annotations['code'])) {
             $text = "`{$text}`";
         }
-        if ($annotations['bold']) {
+        if (!empty($annotations['bold'])) {
             $text = "**{$text}**";
         }
-        if ($annotations['italic']) {
+        if (!empty($annotations['italic'])) {
             $text = "_{$text}_";
         }
-        if ($annotations['strikethrough']) {
+        if (!empty($annotations['strikethrough'])) {
             $text = "~~{$text}~~";
         }
-        if ($annotations['underline']) {
+        if (!empty($annotations['underline'])) {
             $text = "<u>{$text}</u>";
         }
 

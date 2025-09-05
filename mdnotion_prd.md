@@ -96,23 +96,24 @@ $markdown = $MdNotion->full();
 
 ### Step 2: Block Handling System
 
--   Create `BlockAdapterInterface`:
+-   Create `BlockAdapterInterface`: ✔️
     ```php
     interface BlockAdapterInterface {
         public function toMarkdown(array $block): string;
     }
     ```
--   Implement `BaseBlockAdapter` for shared logic (text annotations, links).
--   Implement adapters for core blocks:
-    -   `ParagraphAdapter`
-    -   `HeadingAdapter`
-    -   `ListAdapter`
-    -   `QuoteAdapter`
-    -   `CodeAdapter`
-    -   `ImageAdapter`
+    ✔️
+-   Implement `BaseBlockAdapter` for shared logic (text annotations, links). ✔️
+-   Implement adapters for core blocks: ✔️
+    -   `ParagraphAdapter`✔️
+    -   `HeadingAdapter`✔️
+    -   `ListAdapter`✔️
+    -   `QuoteAdapter`✔️
+    -   `CodeAdapter`✔️
+    -   `ImageAdapter`✔️
     -   `ToggleAdapter`
     -   `TableAdapter`
-    -   `CalloutAdapter`
+    -   `CalloutAdapter`✔️
     -   etc.
 -   Use blade templates for adapters to render needed MD
 -   Make adapters easily replacable with custom adapters

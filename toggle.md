@@ -1,0 +1,9 @@
+<details>
+<summary>Toggle title here</summary>
+
+Toggle value
+
+> [Apple](https://www.notion.so/icons/apple_gray.svg) Callout
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/0d31a281-d71e-4bb9-9031-a5256095b873/a78549ab-2608-4c6f-bbb1-bbaaec4489fa/MetiAI_-_PromptMonetization2.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4666GR4XGE6%2F20250905%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250905T160223Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEA8aCXVzLXdlc3QtMiJHMEUCIDxpMg%2BoVv2vKB%2BH2q5iyWKs8%2ByAHT2xUPyN%2BszjSelkAiEAz%2FF7N0meIYh4Y5%2F9EZYuX4i32awLwyf9vJOQjl9CKr8q%2FwMIeBAAGgw2Mzc0MjMxODM4MDUiDN7rnLH1OZUTLB5hJSrcA6hwMyC3yOcZZMIe53BlVoTlY2LPXDTxuyYdaHIUzmf%2FNJEATJ5Jvtq%2FAhiAtdblk2k52S%2Fh2SEsCC5N%2BUw3EJ6ncu4MHbjYuig5wyCgLboB4RwrpiuAiReNRAPmDMJl5Jc0evMpveOhPl3TXrYY4do1Nb5%2F2l%2Bd%2BScGKOuwrYHOzKHm%2B4HIgHyk8CROnfsrGW7%2BMjxWlQvbJua4FdnvQ5TuJKCv9tknqx8id8tObRl9xUn5ml%2BbHnTh1er98B94zMZ0HBKC2VhtrFgFikUZRCFAzzSX0mvijPvvpOTnE%2F2UcTcNdPLwzW1Kz53l2OwQVSy1R9d70c%2FSLExsEcEDKk9nZ5Cm0HRUV7mkvMNLMSawkiKFoPZFrZzml8P7%2BDlbY8nZtC43K3eM7iJSy4hSFRZGe4mrGv222vPbNjyVeWtz1FwZo%2FZ08nZwibfH3DM5iWV8SXQUk7zluZ8%2FOUkfwkSJ7%2FDG5O3iTH%2FSFtKDDdEr%2F5Wtw6jXNYZ7Kt2NhBdzIpa%2Fm%2BsqYD4ElxhydTuLYCFEwp7T%2Bjxt6CkKOnyjJYcnaOuDgNDewDFbML0hkI%2BoHGBpghF37baIThrhkF9sH5KiAFRRSPf87rGsR%2Fd6gD5pXD2CA09cG8XrEZ7HMKP768UGOqUBTGeO6iH%2FTXl3pqTai1GCRZVEtRGg%2BMFBZfRb5ebGMqwasXVEDoLjQer1aOL58q367wi5UAAjpK2Q3mo%2BbQczz5AVZ9d7ODoD1DBf69qOVQ6LBc0B%2FvKULXK7Yplg%2B7pN2yBEp%2BraQlNcFcQGxd7Cd4ldWqLxgcxUEl2pCCkh9hX4VKzh6cA0dxb%2FCrf%2FIQ47yNgMVse5eJ%2BI3OnxmMIzHhXawp%2FH&amp;X-Amz-Signature=c6d47383aaeb3225aaab62777818e1560017379464fc2aa34909bb29630cecd3&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject)
+</details>
