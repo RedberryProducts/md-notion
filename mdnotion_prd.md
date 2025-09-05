@@ -111,11 +111,11 @@ $markdown = $MdNotion->full();
     -   `QuoteAdapter`✔️
     -   `CodeAdapter`✔️
     -   `ImageAdapter`✔️
-    -   `ToggleAdapter`
-    -   `TableAdapter`
+    -   `ToggleAdapter`✔️
+    -   `TableAdapter`✔️
     -   `CalloutAdapter`✔️
     -   etc.
--   Use blade templates for adapters to render needed MD
+-   Use blade templates for adapters to render needed MD ✔️
 -   Make adapters easily replacable with custom adapters
 -   Make adapters easily extendable by adding new adapters based on notion block's "type"
 -   Some blocks have different subtypes, for example, image, file and video have `external` and `file` types. so we should handle them all.
