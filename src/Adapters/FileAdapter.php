@@ -20,7 +20,7 @@ class FileAdapter extends BaseBlockAdapter
     {
         $dto = FileDTO::from($block);
 
-        $url = $dto->type === 'file' 
+        $url = $dto->type === 'file'
             ? $dto->file['url']
             : $dto->external['url'];
 

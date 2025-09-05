@@ -39,7 +39,7 @@ class FileDTO extends BlockDTO
     {
         $this->type = $data['type'];
         $this->caption = RichTextDTO::collection($data['caption'] ?? []);
-        
+
         if ($this->type === 'file') {
             $this->file = $data['file'];
             $this->name = $data['name'] ?? basename($this->file['url']);

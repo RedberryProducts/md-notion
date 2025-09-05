@@ -13,12 +13,12 @@ test('image adapter converts file type image block to markdown', function () {
             'type' => 'file',
             'file' => [
                 'url' => 'https://example.com/image.png',
-                'expiry_time' => '2025-09-03T14:04:44.914Z'
-            ]
-        ]
+                'expiry_time' => '2025-09-03T14:04:44.914Z',
+            ],
+        ],
     ];
 
-    $adapter = new ImageAdapter();
+    $adapter = new ImageAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('![](https://example.com/image.png)');
@@ -34,12 +34,12 @@ test('image adapter converts external type image block to markdown', function ()
             'caption' => [],
             'type' => 'external',
             'external' => [
-                'url' => 'https://example.com/image-external.png'
-            ]
-        ]
+                'url' => 'https://example.com/image-external.png',
+            ],
+        ],
     ];
 
-    $adapter = new ImageAdapter();
+    $adapter = new ImageAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('![](https://example.com/image-external.png)');
@@ -57,7 +57,7 @@ test('image adapter handles block with caption', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'An example image',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -65,21 +65,21 @@ test('image adapter handles block with caption', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'An example image',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'type' => 'file',
             'file' => [
                 'url' => 'https://example.com/image-with-caption.png',
-                'expiry_time' => '2025-09-03T14:04:44.914Z'
-            ]
-        ]
+                'expiry_time' => '2025-09-03T14:04:44.914Z',
+            ],
+        ],
     ];
 
-    $adapter = new ImageAdapter();
+    $adapter = new ImageAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('![An example image](https://example.com/image-with-caption.png)');
@@ -97,7 +97,7 @@ test('image adapter handles block with formatted caption', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'A ',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -105,16 +105,16 @@ test('image adapter handles block with formatted caption', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'A ',
-                    'href' => null
+                    'href' => null,
                 ],
                 [
                     'type' => 'text',
                     'text' => [
                         'content' => 'formatted',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => true,
@@ -122,16 +122,16 @@ test('image adapter handles block with formatted caption', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'formatted',
-                    'href' => null
+                    'href' => null,
                 ],
                 [
                     'type' => 'text',
                     'text' => [
                         'content' => ' caption',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -139,20 +139,20 @@ test('image adapter handles block with formatted caption', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => ' caption',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'type' => 'external',
             'external' => [
-                'url' => 'https://example.com/image-formatted-caption.png'
-            ]
-        ]
+                'url' => 'https://example.com/image-formatted-caption.png',
+            ],
+        ],
     ];
 
-    $adapter = new ImageAdapter();
+    $adapter = new ImageAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('![A **formatted** caption](https://example.com/image-formatted-caption.png)');

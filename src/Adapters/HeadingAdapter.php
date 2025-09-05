@@ -9,7 +9,7 @@ class HeadingAdapter extends BaseBlockAdapter
 {
     public function getType(): string
     {
-        return 'heading_' . $this->level;
+        return 'heading_'.$this->level;
     }
 
     public function getTemplate(): string

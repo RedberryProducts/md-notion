@@ -14,7 +14,7 @@ test('heading_1 adapter converts basic block to markdown', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Heading 1',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -22,15 +22,15 @@ test('heading_1 adapter converts basic block to markdown', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Heading 1',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'is_toggleable' => false,
-            'color' => 'default'
-        ]
+            'color' => 'default',
+        ],
     ];
 
     $adapter = new HeadingAdapter(1);
@@ -51,7 +51,7 @@ test('heading_2 adapter converts basic block to markdown', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Heading 2',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -59,15 +59,15 @@ test('heading_2 adapter converts basic block to markdown', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Heading 2',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'is_toggleable' => false,
-            'color' => 'default'
-        ]
+            'color' => 'default',
+        ],
     ];
 
     $adapter = new HeadingAdapter(2);
@@ -88,7 +88,7 @@ test('heading_3 adapter converts basic block to markdown', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'And Heading 3',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -96,15 +96,15 @@ test('heading_3 adapter converts basic block to markdown', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'And Heading 3',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'is_toggleable' => false,
-            'color' => 'default'
-        ]
+            'color' => 'default',
+        ],
     ];
 
     $adapter = new HeadingAdapter(3);
@@ -125,7 +125,7 @@ test('heading adapter handles formatted text', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Formatted ',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => true,
@@ -133,16 +133,16 @@ test('heading adapter handles formatted text', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Formatted ',
-                    'href' => null
+                    'href' => null,
                 ],
                 [
                     'type' => 'text',
                     'text' => [
                         'content' => 'Heading',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -150,15 +150,15 @@ test('heading adapter handles formatted text', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Heading',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'is_toggleable' => false,
-            'color' => 'default'
-        ]
+            'color' => 'default',
+        ],
     ];
 
     $adapter = new HeadingAdapter(1);

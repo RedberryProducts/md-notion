@@ -14,7 +14,7 @@ test('quote adapter converts basic block to markdown', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Quote Text',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -22,17 +22,17 @@ test('quote adapter converts basic block to markdown', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Quote Text',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
-            'color' => 'default'
-        ]
+            'color' => 'default',
+        ],
     ];
 
-    $adapter = new QuoteAdapter();
+    $adapter = new QuoteAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('> Quote Text');
@@ -50,7 +50,7 @@ test('quote adapter handles formatted text', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Important ',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => true,
@@ -58,16 +58,16 @@ test('quote adapter handles formatted text', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Important ',
-                    'href' => null
+                    'href' => null,
                 ],
                 [
                     'type' => 'text',
                     'text' => [
                         'content' => 'quote',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -75,17 +75,17 @@ test('quote adapter handles formatted text', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'quote',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
-            'color' => 'default'
-        ]
+            'color' => 'default',
+        ],
     ];
 
-    $adapter = new QuoteAdapter();
+    $adapter = new QuoteAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('> **Important** _quote_');
@@ -103,7 +103,7 @@ test('quote adapter handles multi-line text', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => "First line\nSecond line",
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -111,18 +111,18 @@ test('quote adapter handles multi-line text', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => "First line\nSecond line",
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
-            'color' => 'default'
-        ]
+            'color' => 'default',
+        ],
     ];
 
-    $adapter = new QuoteAdapter();
+    $adapter = new QuoteAdapter;
     $markdown = $adapter->toMarkdown($block);
 
-    expect($markdown)->toBe('> First line' . PHP_EOL . '> Second line');
+    expect($markdown)->toBe('> First line'.PHP_EOL.'> Second line');
 });

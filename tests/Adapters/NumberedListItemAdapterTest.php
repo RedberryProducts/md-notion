@@ -14,7 +14,7 @@ test('numbered list item adapter converts basic block to markdown', function () 
                     'type' => 'text',
                     'text' => [
                         'content' => 'Numbered list',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -22,17 +22,17 @@ test('numbered list item adapter converts basic block to markdown', function () 
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Numbered list',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
-            'color' => 'default'
-        ]
+            'color' => 'default',
+        ],
     ];
 
-    $adapter = new NumberedListItemAdapter();
+    $adapter = new NumberedListItemAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('1. Numbered list');
@@ -50,7 +50,7 @@ test('numbered list item adapter handles formatted text', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Formatted ',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => true,
@@ -58,16 +58,16 @@ test('numbered list item adapter handles formatted text', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Formatted ',
-                    'href' => null
+                    'href' => null,
                 ],
                 [
                     'type' => 'text',
                     'text' => [
                         'content' => 'list item',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -75,17 +75,17 @@ test('numbered list item adapter handles formatted text', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'list item',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
-            'color' => 'default'
-        ]
+            'color' => 'default',
+        ],
     ];
 
-    $adapter = new NumberedListItemAdapter();
+    $adapter = new NumberedListItemAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('1. **Formatted** _list item_');

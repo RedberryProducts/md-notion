@@ -14,7 +14,7 @@ test('bulleted list item adapter converts block to markdown', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'list 1',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -22,17 +22,17 @@ test('bulleted list item adapter converts block to markdown', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'list 1',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
-            'color' => 'default'
-        ]
+            'color' => 'default',
+        ],
     ];
 
-    $adapter = new BulletedListItemAdapter();
+    $adapter = new BulletedListItemAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('- list 1');
@@ -50,7 +50,7 @@ test('bulleted list item adapter handles formatted text', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'bold ',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => true,
@@ -58,16 +58,16 @@ test('bulleted list item adapter handles formatted text', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'bold ',
-                    'href' => null
+                    'href' => null,
                 ],
                 [
                     'type' => 'text',
                     'text' => [
                         'content' => 'and ',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -75,16 +75,16 @@ test('bulleted list item adapter handles formatted text', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'and ',
-                    'href' => null
+                    'href' => null,
                 ],
                 [
                     'type' => 'text',
                     'text' => [
                         'content' => 'italic',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -92,17 +92,17 @@ test('bulleted list item adapter handles formatted text', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'italic',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
-            'color' => 'default'
-        ]
+            'color' => 'default',
+        ],
     ];
 
-    $adapter = new BulletedListItemAdapter();
+    $adapter = new BulletedListItemAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('- **bold** and _italic_');

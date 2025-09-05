@@ -14,7 +14,7 @@ test('todo adapter converts unchecked block to markdown', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'To do 1',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -22,18 +22,18 @@ test('todo adapter converts unchecked block to markdown', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'To do 1',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'checked' => false,
-            'color' => 'default'
-        ]
+            'color' => 'default',
+        ],
     ];
 
-    $adapter = new TodoAdapter();
+    $adapter = new TodoAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('- [ ] To do 1');
@@ -51,7 +51,7 @@ test('todo adapter converts checked block to markdown', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Completed task',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -59,18 +59,18 @@ test('todo adapter converts checked block to markdown', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Completed task',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'checked' => true,
-            'color' => 'default'
-        ]
+            'color' => 'default',
+        ],
     ];
 
-    $adapter = new TodoAdapter();
+    $adapter = new TodoAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('- [x] Completed task');
@@ -88,7 +88,7 @@ test('todo adapter handles formatted text', function () {
                     'type' => 'text',
                     'text' => [
                         'content' => 'Formatted ',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => true,
@@ -96,16 +96,16 @@ test('todo adapter handles formatted text', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'Formatted ',
-                    'href' => null
+                    'href' => null,
                 ],
                 [
                     'type' => 'text',
                     'text' => [
                         'content' => 'todo item',
-                        'link' => null
+                        'link' => null,
                     ],
                     'annotations' => [
                         'bold' => false,
@@ -113,18 +113,18 @@ test('todo adapter handles formatted text', function () {
                         'strikethrough' => false,
                         'underline' => false,
                         'code' => false,
-                        'color' => 'default'
+                        'color' => 'default',
                     ],
                     'plain_text' => 'todo item',
-                    'href' => null
-                ]
+                    'href' => null,
+                ],
             ],
             'checked' => true,
-            'color' => 'default'
-        ]
+            'color' => 'default',
+        ],
     ];
 
-    $adapter = new TodoAdapter();
+    $adapter = new TodoAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('- [x] **Formatted** _todo item_');

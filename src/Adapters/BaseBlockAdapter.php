@@ -142,7 +142,7 @@ abstract class BaseBlockAdapter implements BlockAdapterInterface
      */
     protected function processIcon(array $icon): string
     {
-        return match($icon['type']) {
+        return match ($icon['type']) {
             'emoji' => $icon['emoji'],
             'external' => $this->processExternalIcon($icon['external']['url']),
             'file' => sprintf('[🔗](%s)', $icon['file']['url']),
@@ -159,10 +159,11 @@ abstract class BaseBlockAdapter implements BlockAdapterInterface
     {
         if (preg_match('/\/([^\/]+)_[^\/]+\.svg$/', $url, $matches)) {
             $iconName = ucfirst($matches[1]);
+
             return sprintf('[%s](%s)', $iconName, $url);
         }
 
-        return '[Icon](' . $url . ')';
+        return '[Icon]('.$url.')';
     }
 
     /**
@@ -171,6 +172,7 @@ abstract class BaseBlockAdapter implements BlockAdapterInterface
     public function setSdk(Notion $sdk): self
     {
         $this->sdk = $sdk;
+
         return $this;
     }
 

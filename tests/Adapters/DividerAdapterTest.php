@@ -8,10 +8,10 @@ test('divider adapter converts block to markdown', function () {
         'id' => '263d9316-605a-805b-a90d-f9fd5767d159',
         'type' => 'divider',
         'has_children' => false,
-        'divider' => []
+        'divider' => [],
     ];
 
-    $adapter = new DividerAdapter();
+    $adapter = new DividerAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('---');
@@ -23,10 +23,10 @@ test('divider adapter handles empty divider object', function () {
         'id' => '263d9316-605a-805b-a90d-f9fd5767d159',
         'type' => 'divider',
         'has_children' => false,
-        'divider' => []
+        'divider' => [],
     ];
 
-    $adapter = new DividerAdapter();
+    $adapter = new DividerAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('---');

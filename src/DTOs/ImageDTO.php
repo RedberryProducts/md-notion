@@ -9,12 +9,12 @@ class ImageDTO
         public array $file,
         public array $external,
         public array $caption
-    ) {
-    }
+    ) {}
 
     public static function from(array $block): self
     {
         $image = $block['image'];
+
         return new self(
             type: $image['type'],
             file: $image['type'] === 'file' ? $image['file'] : [],
