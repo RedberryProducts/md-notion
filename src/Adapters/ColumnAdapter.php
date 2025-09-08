@@ -19,11 +19,11 @@ class ColumnAdapter extends BaseBlockAdapter
     protected function prepareData(array $block): array
     {
         $dto = ColumnDTO::from($block);
-        
+
         // Get column contents from SDK
         $response = $this->getSdk()->act()->getBlockChildren($block['id'], null);
         $contentBlocks = $response->json();
-        
+
         // Process each child block using BlockAdapterFactory
         $contents = [];
         foreach ($contentBlocks['results'] ?? [] as $childBlock) {
@@ -35,7 +35,7 @@ class ColumnAdapter extends BaseBlockAdapter
             $adapterClass = '\\RedberryProducts\\MdNotion\\Adapters\\' . $className . 'Adapter';
             
             if (class_exists($adapterClass)) {
-                $adapter = new $adapterClass();
+                $adapter = new $adapterClass;
             } else {
                 $adapter = new \RedberryProducts\MdNotion\Adapters\ParagraphAdapter(); // Fallback to paragraph
             }
