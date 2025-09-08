@@ -18,6 +18,7 @@ test('table adapter converts basic table to markdown', function () {
     $rowsResponse = [
         'results' => [
             [
+                'id' => 'table_row-123',
                 'type' => 'table_row',
                 'table_row' => [
                     'cells' => [
@@ -49,6 +50,7 @@ test('table adapter converts basic table to markdown', function () {
                 ],
             ],
             [
+                'id' => 'table_row-123',
                 'type' => 'table_row',
                 'table_row' => [
                     'cells' => [
@@ -82,18 +84,23 @@ test('table adapter converts basic table to markdown', function () {
         ],
     ];
 
-    $sdk = Mockery::mock(Notion::class);
-    $sdk->shouldReceive('getBlockChildren')
-        ->with('table-123')
-        ->once()
+    // Create mock response object
+    $mockResponseObj = Mockery::mock(\Saloon\Http\Response::class);
+    $mockResponseObj->shouldReceive('json')
         ->andReturn($rowsResponse);
+
+    $sdk = Mockery::mock(Notion::class);
+    $sdk->shouldReceive('act->getBlockChildren')
+        ->with('table-123', null)
+        ->once()
+        ->andReturn($mockResponseObj);
 
     $adapter = new TableAdapter;
     $adapter->setSdk($sdk);
 
     $markdown = $adapter->toMarkdown($block);
 
-    $expected = "|Title|type|date|\n|---|---|---|\n|Title 1|K|03.09.2025|";
+    $expected = "| Title | type | date |\n| --- | --- | --- |\n| Title 1 | K | 03.09.2025 |";
     expect($markdown)->toBe($expected);
 });
 
@@ -111,6 +118,7 @@ test('table adapter handles table without headers', function () {
     $rowsResponse = [
         'results' => [
             [
+                'id' => 'table_row-123',
                 'type' => 'table_row',
                 'table_row' => [
                     'cells' => [
@@ -136,16 +144,21 @@ test('table adapter handles table without headers', function () {
         ],
     ];
 
-    $sdk = Mockery::mock(Notion::class);
-    $sdk->shouldReceive('getBlockChildren')
-        ->with('table-123')
-        ->once()
+    // Create mock response object
+    $mockResponseObj = Mockery::mock(\Saloon\Http\Response::class);
+    $mockResponseObj->shouldReceive('json')
         ->andReturn($rowsResponse);
+
+    $sdk = Mockery::mock(Notion::class);
+    $sdk->shouldReceive('act->getBlockChildren')
+        ->with('table-123', null)
+        ->once()
+        ->andReturn($mockResponseObj);
 
     $adapter = new TableAdapter;
     $adapter->setSdk($sdk);
 
     $markdown = $adapter->toMarkdown($block);
 
-    expect($markdown)->toBe('|Cell 1|Cell 2|');
+    expect($markdown)->toBe("| Cell 1 | Cell 2 |\n| --- | --- |");
 });

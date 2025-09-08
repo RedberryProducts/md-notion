@@ -19,10 +19,10 @@ class ToggleAdapter extends BaseBlockAdapter
 
     protected function prepareData(array $block): array
     {
-        $dto = ToggleDTO::from($block);
+        $dto = new ToggleDTO($block);
 
         // Get the title from rich text
-        $title = trim($this->processRichText(RichTextDTO::collection($dto->richText)));
+        $title = trim($this->processRichText($dto->richText));
 
         // Get toggle contents from SDK
         $response = $this->getSdk()->act()->getBlockChildren($block['id'], null);

@@ -22,7 +22,7 @@ class TodoAdapter extends BaseBlockAdapter
         $dto = TodoDTO::from($block);
 
         return [
-            'content' => trim($this->processRichText(RichTextDTO::collection($dto->richText))),
+            'content' => trim($this->processRichText($dto->richText)),
             'checked' => $dto->checked,
             'block' => $dto,
         ];

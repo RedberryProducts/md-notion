@@ -2,24 +2,35 @@
 
 namespace RedberryProducts\MdNotion\DTOs;
 
-class ImageDTO
+class ImageDTO extends BlockDTO
 {
-    public function __construct(
-        public string $type,
-        public array $file,
-        public array $external,
-        public array $caption
-    ) {}
+    /**
+     * The type of image (file or external)
+     */
+    public string $imageType;
 
-    public static function from(array $block): self
+    /**
+     * File data if type is file
+     */
+    public array $file;
+
+    /**
+     * External data if type is external
+     */
+    public array $external;
+
+    /**
+     * The caption of the image
+     *
+     * @var RichTextDTO[]
+     */
+    public array $caption;
+
+    protected function fromArray(array $data): void
     {
-        $image = $block['image'];
-
-        return new self(
-            type: $image['type'],
-            file: $image['type'] === 'file' ? $image['file'] : [],
-            external: $image['type'] === 'external' ? $image['external'] : [],
-            caption: $image['caption'] ?? []
-        );
+        $this->imageType = $data['type'];
+        $this->file = $data['type'] === 'file' ? $data['file'] : [];
+        $this->external = $data['type'] === 'external' ? $data['external'] : [];
+        $this->caption = RichTextDTO::collection($data['caption'] ?? []);
     }
 }

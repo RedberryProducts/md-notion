@@ -4,6 +4,7 @@ use RedberryProducts\MdNotion\Adapters\TableRowAdapter;
 
 test('table row adapter converts basic row to markdown', function () {
     $block = [
+        'id' => 'table_row-123',
         'type' => 'table_row',
         'table_row' => [
             'cells' => [
@@ -71,11 +72,12 @@ test('table row adapter converts basic row to markdown', function () {
     $adapter = new TableRowAdapter;
     $markdown = $adapter->toMarkdown($block);
 
-    expect($markdown)->toBe('|Title|type|date|');
+    expect($markdown)->toBe('| Title | type | date |');
 });
 
 test('table row adapter handles formatted text', function () {
     $block = [
+        'id' => 'table_row-123',
         'type' => 'table_row',
         'table_row' => [
             'cells' => [
@@ -124,5 +126,5 @@ test('table row adapter handles formatted text', function () {
     $adapter = new TableRowAdapter;
     $markdown = $adapter->toMarkdown($block);
 
-    expect($markdown)->toBe('|**Bold**|_italic_|');
+    expect($markdown)->toBe('| **Bold** | _italic_ |');
 });

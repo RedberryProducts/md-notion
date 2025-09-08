@@ -2,20 +2,23 @@
 
 namespace RedberryProducts\MdNotion\DTOs;
 
-class NumberedListItemDTO
+class NumberedListItemDTO extends BlockDTO
 {
-    public function __construct(
-        public array $richText,
-        public string $color
-    ) {}
+    /**
+     * The rich text content of the numbered list item
+     *
+     * @var RichTextDTO[]
+     */
+    public array $richText;
 
-    public static function from(array $block): self
+    /**
+     * The color of the numbered list item
+     */
+    public string $color;
+
+    protected function fromArray(array $data): void
     {
-        $content = $block['numbered_list_item'];
-
-        return new self(
-            richText: $content['rich_text'],
-            color: $content['color']
-        );
+        $this->richText = RichTextDTO::collection($data['rich_text']);
+        $this->color = $data['color'];
     }
 }

@@ -29,11 +29,15 @@ class ColumnAdapter extends BaseBlockAdapter
         foreach ($contentBlocks['results'] ?? [] as $childBlock) {
             // Create adapter based on block type
             $type = $childBlock['type'];
-            $adapterClass = '\\RedberryProducts\\MdNotion\\Adapters\\' . ucfirst($type) . 'Adapter';
+            
+            // Convert snake_case to PascalCase for class name
+            $className = str_replace('_', '', ucwords($type, '_'));
+            $adapterClass = '\\RedberryProducts\\MdNotion\\Adapters\\' . $className . 'Adapter';
+            
             if (class_exists($adapterClass)) {
                 $adapter = new $adapterClass();
             } else {
-                $adapter = new ParagraphAdapter(); // Fallback to paragraph
+                $adapter = new \RedberryProducts\MdNotion\Adapters\ParagraphAdapter(); // Fallback to paragraph
             }
             $adapter->setSdk($this->sdk);
             $contents[] = trim($adapter->toMarkdown($childBlock));

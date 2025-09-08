@@ -32,9 +32,10 @@ class TableAdapter extends BaseBlockAdapter
         foreach ($rowBlocks['results'] as $i => $rowBlock) {
             $rowMd = $rowAdapter->toMarkdown($rowBlock);
 
-            if ($dto->hasColumnHeader && $i === 0) {
+            if ($i === 0) {
                 $rows[] = $rowMd;
-                $rows[] = str_repeat('|---', $dto->tableWidth).'|';
+                $separatorCells = array_fill(0, $dto->tableWidth, '---');
+                $rows[] = '| ' . implode(' | ', $separatorCells) . ' |';
             } else {
                 $rows[] = $rowMd;
             }

@@ -2,22 +2,29 @@
 
 namespace RedberryProducts\MdNotion\DTOs;
 
-class TodoDTO
+class TodoDTO extends BlockDTO
 {
-    public function __construct(
-        public array $richText,
-        public bool $checked,
-        public string $color
-    ) {}
+    /**
+     * The rich text content of the todo
+     *
+     * @var RichTextDTO[]
+     */
+    public array $richText;
 
-    public static function from(array $block): self
+    /**
+     * Whether the todo is checked
+     */
+    public bool $checked;
+
+    /**
+     * The color of the todo
+     */
+    public string $color;
+
+    protected function fromArray(array $data): void
     {
-        $content = $block['to_do'];
-
-        return new self(
-            richText: $content['rich_text'],
-            checked: $content['checked'],
-            color: $content['color']
-        );
+        $this->richText = RichTextDTO::collection($data['rich_text']);
+        $this->checked = $data['checked'];
+        $this->color = $data['color'];
     }
 }

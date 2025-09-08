@@ -2,16 +2,17 @@
 
 namespace RedberryProducts\MdNotion\DTOs;
 
-class TableRowDTO
+class TableRowDTO extends BlockDTO
 {
-    public function __construct(
-        public array $cells
-    ) {}
+    /**
+     * The cells of the table row
+     *
+     * @var array[]
+     */
+    public array $cells;
 
-    public static function from(array $block): self
+    protected function fromArray(array $data): void
     {
-        return new self(
-            cells: $block['table_row']['cells']
-        );
+        $this->cells = $data['cells'];
     }
 }

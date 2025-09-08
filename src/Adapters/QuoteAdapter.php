@@ -22,7 +22,7 @@ class QuoteAdapter extends BaseBlockAdapter
         $dto = QuoteDTO::from($block);
 
         return [
-            'content' => trim($this->processRichText(RichTextDTO::collection($dto->richText))),
+            'content' => trim($this->processRichText($dto->richText)),
             'block' => $dto,
         ];
     }

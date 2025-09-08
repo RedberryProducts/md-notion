@@ -2,24 +2,35 @@
 
 namespace RedberryProducts\MdNotion\DTOs;
 
-class VideoDTO
+class VideoDTO extends BlockDTO
 {
-    public function __construct(
-        public string $type,
-        public array $file,
-        public array $external,
-        public array $caption
-    ) {}
+    /**
+     * The type of video (file or external)
+     */
+    public string $videoType;
 
-    public static function from(array $block): self
+    /**
+     * File data if type is file
+     */
+    public array $file;
+
+    /**
+     * External data if type is external
+     */
+    public array $external;
+
+    /**
+     * The caption of the video
+     *
+     * @var RichTextDTO[]
+     */
+    public array $caption;
+
+    protected function fromArray(array $data): void
     {
-        $video = $block['video'];
-
-        return new self(
-            type: $video['type'],
-            file: $video['type'] === 'file' ? $video['file'] : [],
-            external: $video['type'] === 'external' ? $video['external'] : [],
-            caption: $video['caption'] ?? []
-        );
+        $this->videoType = $data['type'];
+        $this->file = $data['type'] === 'file' ? $data['file'] : [];
+        $this->external = $data['type'] === 'external' ? $data['external'] : [];
+        $this->caption = RichTextDTO::collection($data['caption'] ?? []);
     }
 }

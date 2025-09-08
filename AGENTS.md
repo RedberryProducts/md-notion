@@ -36,6 +36,7 @@ When working with the MdNotion project, follow these guidelines to ensure accura
 
 -   Unit and integration tests are in `tests/`.
 -   Use example JSON files for block adapter tests.
+-   Run `composer test` after each significant change, like: adding the feature, updating function/method signature and etc.
 
 ## 7. Extensibility
 

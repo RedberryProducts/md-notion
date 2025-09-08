@@ -2,22 +2,27 @@
 
 namespace RedberryProducts\MdNotion\DTOs;
 
-class TableDTO
+class TableDTO extends BlockDTO
 {
-    public function __construct(
-        public int $tableWidth,
-        public bool $hasColumnHeader,
-        public bool $hasRowHeader
-    ) {}
+    /**
+     * The width of the table
+     */
+    public int $tableWidth;
 
-    public static function from(array $block): self
+    /**
+     * Whether the table has column headers
+     */
+    public bool $hasColumnHeader;
+
+    /**
+     * Whether the table has row headers
+     */
+    public bool $hasRowHeader;
+
+    protected function fromArray(array $data): void
     {
-        $table = $block['table'];
-
-        return new self(
-            tableWidth: $table['table_width'],
-            hasColumnHeader: $table['has_column_header'],
-            hasRowHeader: $table['has_row_header']
-        );
+        $this->tableWidth = $data['table_width'];
+        $this->hasColumnHeader = $data['has_column_header'];
+        $this->hasRowHeader = $data['has_row_header'];
     }
 }

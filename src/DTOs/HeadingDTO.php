@@ -2,25 +2,35 @@
 
 namespace RedberryProducts\MdNotion\DTOs;
 
-class HeadingDTO
+class HeadingDTO extends BlockDTO
 {
-    public function __construct(
-        public array $richText,
-        public bool $isToggleable,
-        public string $color,
-        public string $level
-    ) {}
+    /**
+     * The rich text content of the heading
+     *
+     * @var RichTextDTO[]
+     */
+    public array $richText;
 
-    public static function from(array $block): self
+    /**
+     * Whether the heading is toggleable
+     */
+    public bool $isToggleable;
+
+    /**
+     * The color of the heading
+     */
+    public string $color;
+
+    /**
+     * The level of the heading (1, 2, or 3)
+     */
+    public string $level;
+
+    protected function fromArray(array $data): void
     {
-        $type = $block['type']; // heading_1, heading_2, or heading_3
-        $heading = $block[$type];
-
-        return new self(
-            richText: $heading['rich_text'],
-            isToggleable: $heading['is_toggleable'],
-            color: $heading['color'],
-            level: substr($type, -1) // extracts 1, 2, or 3 from heading_X
-        );
+        $this->richText = RichTextDTO::collection($data['rich_text']);
+        $this->isToggleable = $data['is_toggleable'];
+        $this->color = $data['color'];
+        $this->level = substr($this->type, -1); // extracts 1, 2, or 3 from heading_X
     }
 }

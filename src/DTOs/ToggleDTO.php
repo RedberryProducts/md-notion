@@ -2,20 +2,23 @@
 
 namespace RedberryProducts\MdNotion\DTOs;
 
-class ToggleDTO
+class ToggleDTO extends BlockDTO
 {
-    public function __construct(
-        public array $richText,
-        public string $color
-    ) {}
+    /**
+     * The rich text content of the toggle
+     *
+     * @var RichTextDTO[]
+     */
+    public array $richText;
 
-    public static function from(array $block): self
+    /**
+     * The color of the toggle
+     */
+    public string $color;
+
+    protected function fromArray(array $data): void
     {
-        $toggle = $block['toggle'];
-
-        return new self(
-            richText: $toggle['rich_text'],
-            color: $toggle['color']
-        );
+        $this->richText = RichTextDTO::collection($data['rich_text']);
+        $this->color = $data['color'];
     }
 }

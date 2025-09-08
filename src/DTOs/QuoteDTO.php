@@ -2,20 +2,23 @@
 
 namespace RedberryProducts\MdNotion\DTOs;
 
-class QuoteDTO
+class QuoteDTO extends BlockDTO
 {
-    public function __construct(
-        public array $richText,
-        public string $color
-    ) {}
+    /**
+     * The rich text content of the quote
+     *
+     * @var RichTextDTO[]
+     */
+    public array $richText;
 
-    public static function from(array $block): self
+    /**
+     * The color of the quote
+     */
+    public string $color;
+
+    protected function fromArray(array $data): void
     {
-        $content = $block['quote'];
-
-        return new self(
-            richText: $content['rich_text'],
-            color: $content['color']
-        );
+        $this->richText = RichTextDTO::collection($data['rich_text']);
+        $this->color = $data['color'];
     }
 }

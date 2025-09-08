@@ -21,13 +21,13 @@ class ImageAdapter extends BaseBlockAdapter
     {
         $dto = ImageDTO::from($block);
 
-        $url = $dto->type === 'file'
+        $url = $dto->imageType === 'file'
             ? $dto->file['url']
             : $dto->external['url'];
 
         return [
             'url' => $url,
-            'caption' => trim($this->processRichText(RichTextDTO::collection($dto->caption))),
+            'caption' => trim($this->processRichText($dto->caption)),
             'block' => $dto,
         ];
     }

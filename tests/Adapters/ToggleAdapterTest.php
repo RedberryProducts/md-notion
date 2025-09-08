@@ -2,6 +2,7 @@
 
 use RedberryProducts\MdNotion\Adapters\ToggleAdapter;
 use RedberryProducts\MdNotion\DTOs\ToggleDTO;
+use RedberryProducts\MdNotion\DTOs\RichTextDTO;
 use RedberryProducts\MdNotion\SDK\Notion;
 
 it('converts toggle block to markdown', function () {
@@ -47,10 +48,11 @@ it('converts toggle block to markdown', function () {
 it('creates toggle DTO from block data', function () {
     $block = json_decode(file_get_contents(dirname(__DIR__, 2).'/BlockJsonExamples/ToggleJson.json'), true);
 
-    $dto = ToggleDTO::from($block);
+    $dto = new ToggleDTO($block);
 
     expect($dto)->toBeInstanceOf(ToggleDTO::class)
         ->and($dto->richText)->toBeArray()
-        ->and($dto->richText[0]['plain_text'])->toBe('Toggle title here ')
+        ->and($dto->richText[0])->toBeInstanceOf(RichTextDTO::class)
+        ->and($dto->richText[0]->plainText)->toBe('Toggle title here ')
         ->and($dto->color)->toBe('default');
 });

@@ -20,9 +20,9 @@ return [
      */
     'adapters' => [
         'paragraph' => \RedberryProducts\MdNotion\Adapters\ParagraphAdapter::class,
-        'heading_1' => fn () => new \RedberryProducts\MdNotion\Adapters\HeadingAdapter(1),
-        'heading_2' => fn () => new \RedberryProducts\MdNotion\Adapters\HeadingAdapter(2),
-        'heading_3' => fn () => new \RedberryProducts\MdNotion\Adapters\HeadingAdapter(3),
+        'heading_1' => \RedberryProducts\MdNotion\Adapters\HeadingAdapter::class,
+        'heading_2' => \RedberryProducts\MdNotion\Adapters\HeadingAdapter::class,
+        'heading_3' => \RedberryProducts\MdNotion\Adapters\HeadingAdapter::class,
         'bulleted_list_item' => \RedberryProducts\MdNotion\Adapters\BulletedListItemAdapter::class,
         'numbered_list_item' => \RedberryProducts\MdNotion\Adapters\NumberedListItemAdapter::class,
         'to_do' => \RedberryProducts\MdNotion\Adapters\ToDoAdapter::class,
@@ -39,7 +39,7 @@ return [
         'column' => \RedberryProducts\MdNotion\Adapters\ColumnAdapter::class,
         'table' => \RedberryProducts\MdNotion\Adapters\TableAdapter::class,
         'table_row' => \RedberryProducts\MdNotion\Adapters\TableRowAdapter::class,
-        'child_page' => \RedberryProducts\MdNotion\Adapters\ChildPageAdapter::class,
-        'child_database' => \RedberryProducts\MdNotion\Adapters\ChildDatabaseAdapter::class,
+        // 'child_page' => \RedberryProducts\MdNotion\Adapters\ChildPageAdapter::class,
+        // 'child_database' => \RedberryProducts\MdNotion\Adapters\ChildDatabaseAdapter::class,
     ],
 ];

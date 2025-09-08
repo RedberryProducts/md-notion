@@ -116,6 +116,9 @@ $markdown = $MdNotion->full();
     -   `CalloutAdapter`✔️
     -   etc.
 -   Use blade templates for adapters to render needed MD ✔️
+-   Refactor DTOs to use BlockDTO as parent in every DTO ✔️
+-   Fix issues from tests ✔️
+-   Fix Heading Adapter to remove level from contructor ✔️
 -   Make adapters easily replacable with custom adapters
 -   Make adapters easily extendable by adding new adapters based on notion block's "type"
 -   Some blocks have different subtypes, for example, image, file and video have `external` and `file` types. so we should handle them all.

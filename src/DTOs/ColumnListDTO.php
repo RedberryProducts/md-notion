@@ -2,15 +2,10 @@
 
 namespace RedberryProducts\MdNotion\DTOs;
 
-class ColumnListDTO
+class ColumnListDTO extends BlockDTO
 {
-    public function __construct()
+    protected function fromArray(array $data): void
     {
         // Column list doesn't have any properties in the JSON
-    }
-
-    public static function from(array $block): self
-    {
-        return new self();
     }
 }

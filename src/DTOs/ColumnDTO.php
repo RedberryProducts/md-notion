@@ -2,17 +2,15 @@
 
 namespace RedberryProducts\MdNotion\DTOs;
 
-class ColumnDTO
+class ColumnDTO extends BlockDTO
 {
-    public function __construct(
-        public float $widthRatio
-    ) {
-    }
+    /**
+     * The width ratio of the column
+     */
+    public float $widthRatio;
 
-    public static function from(array $block): self
+    protected function fromArray(array $data): void
     {
-        return new self(
-            widthRatio: $block['column']['width_ratio']
-        );
+        $this->widthRatio = $data['width_ratio'];
     }
 }

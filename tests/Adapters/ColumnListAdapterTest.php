@@ -70,11 +70,17 @@ it('converts column list block to markdown', function () {
     $mockSdk = Mockery::mock(Notion::class);
     $mockSdk->shouldReceive('act->getBlockChildren')
         ->once()
-        ->with('263d9316-605a-80c1-9e63-d58d46d765bb', null)
+        ->with('263d9316-605a-8057-b12e-f880bc565fcb', null)
         ->andReturn($mockColumnListResponse);
 
     $mockSdk->shouldReceive('act->getBlockChildren')
-        ->twice() // Once for each column
+        ->with('column-1', null)
+        ->once()
+        ->andReturn($mockColumnChildrenResp);
+        
+    $mockSdk->shouldReceive('act->getBlockChildren')
+        ->with('column-2', null)
+        ->once()
         ->andReturn($mockColumnChildrenResp);
 
     // Create the adapter
