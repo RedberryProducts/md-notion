@@ -33,7 +33,7 @@ test('heading_1 adapter converts basic block to markdown', function () {
         ],
     ];
 
-    $adapter = new HeadingAdapter();
+    $adapter = new HeadingAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('# Heading 1');
@@ -70,7 +70,7 @@ test('heading_2 adapter converts basic block to markdown', function () {
         ],
     ];
 
-    $adapter = new HeadingAdapter();
+    $adapter = new HeadingAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('## Heading 2');
@@ -107,7 +107,7 @@ test('heading_3 adapter converts basic block to markdown', function () {
         ],
     ];
 
-    $adapter = new HeadingAdapter();
+    $adapter = new HeadingAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('### And Heading 3');
@@ -161,7 +161,7 @@ test('heading adapter handles formatted text', function () {
         ],
     ];
 
-    $adapter = new HeadingAdapter();
+    $adapter = new HeadingAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('# **Formatted** _Heading_');

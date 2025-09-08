@@ -35,7 +35,7 @@ class TableAdapter extends BaseBlockAdapter
             if ($i === 0) {
                 $rows[] = $rowMd;
                 $separatorCells = array_fill(0, $dto->tableWidth, '---');
-                $rows[] = '| ' . implode(' | ', $separatorCells) . ' |';
+                $rows[] = '| '.implode(' | ', $separatorCells).' |';
             } else {
                 $rows[] = $rowMd;
             }

@@ -2,7 +2,6 @@
 
 namespace RedberryProducts\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\RichTextDTO;
 use RedberryProducts\MdNotion\DTOs\TodoDTO;
 
 class TodoAdapter extends BaseBlockAdapter

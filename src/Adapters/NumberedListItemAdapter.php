@@ -3,7 +3,6 @@
 namespace RedberryProducts\MdNotion\Adapters;
 
 use RedberryProducts\MdNotion\DTOs\NumberedListItemDTO;
-use RedberryProducts\MdNotion\DTOs\RichTextDTO;
 
 class NumberedListItemAdapter extends BaseBlockAdapter
 {

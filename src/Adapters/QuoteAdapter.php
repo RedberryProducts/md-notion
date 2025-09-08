@@ -3,7 +3,6 @@
 namespace RedberryProducts\MdNotion\Adapters;
 
 use RedberryProducts\MdNotion\DTOs\QuoteDTO;
-use RedberryProducts\MdNotion\DTOs\RichTextDTO;
 
 class QuoteAdapter extends BaseBlockAdapter
 {

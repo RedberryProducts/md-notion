@@ -1,8 +1,8 @@
 <?php
 
 use RedberryProducts\MdNotion\Adapters\ToggleAdapter;
-use RedberryProducts\MdNotion\DTOs\ToggleDTO;
 use RedberryProducts\MdNotion\DTOs\RichTextDTO;
+use RedberryProducts\MdNotion\DTOs\ToggleDTO;
 use RedberryProducts\MdNotion\SDK\Notion;
 
 it('converts toggle block to markdown', function () {

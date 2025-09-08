@@ -3,7 +3,6 @@
 namespace RedberryProducts\MdNotion\Adapters;
 
 use RedberryProducts\MdNotion\DTOs\ImageDTO;
-use RedberryProducts\MdNotion\DTOs\RichTextDTO;
 
 class ImageAdapter extends BaseBlockAdapter
 {

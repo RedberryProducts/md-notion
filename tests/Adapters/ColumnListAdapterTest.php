@@ -77,7 +77,7 @@ it('converts column list block to markdown', function () {
         ->with('column-1', null)
         ->once()
         ->andReturn($mockColumnChildrenResp);
-        
+
     $mockSdk->shouldReceive('act->getBlockChildren')
         ->with('column-2', null)
         ->once()
