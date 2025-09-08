@@ -30,7 +30,7 @@ class RichTextDTO
     public function __construct(array $richText)
     {
         $this->plainText = $richText['plain_text'];
-        $this->annotations = $richText['annotations'];
+        $this->annotations = $richText['annotations'] ?? [];
         $this->type = $richText['type'];
         $this->href = $richText['href'] ?? null;
 

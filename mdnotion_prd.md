@@ -119,21 +119,28 @@ $markdown = $MdNotion->full();
 -   Refactor DTOs to use BlockDTO as parent in every DTO ✔️
 -   Fix issues from tests ✔️
 -   Fix Heading Adapter to remove level from contructor ✔️
--   Make adapters easily replacable with custom adapters
--   Make adapters easily extendable by adding new adapters based on notion block's "type"
--   Some blocks have different subtypes, for example, image, file and video have `external` and `file` types. so we should handle them all.
+-   Page and Database objects ✔️
+-   Make adapters easily replacable with custom adapters ✔️
+-   Make adapters easily extendable by adding new adapters based on notion block's "type" ✔️
+-   Some blocks have different subtypes, for example, image, file and video have `external` and `file` types. so we should handle them all. ✔️
 
 ### Step 3: Content Manager
 
 -   Class `ContentManager`:
     -   Fetches blocks from Notion.
     -   Resolves block type to adapter via registry.
-    -   Recursively processes children.
+    -   Recursively processes children. ✔️
+    -   Returns page object with child pages, child databases and Markdown content
 -   Registry pattern: `BlockRegistry::resolve($blockType)` returns adapter.
+-   Add child pages reading to Page object via ContentManager
+-   Add child databeses reading to Page object
+-   Add DB items reading to Database object: Create DatabaseTable class which resolves sources query into Markdown table and return markdown content as well for each child page (DB item)
 
 ### Step 4: Features Implementation
 
--   `pages()` – fetches pages.
+Wrap it all in MdNotion class:
+
+-   `pages()` – fetches block children, returns only pages.
 -   `content()->get()` – returns Markdown for current page.
 -   `content()->withPages()` – recursively fetches child pages.
 -   `content()->withDatabases()` – fetches databases.
@@ -141,8 +148,8 @@ $markdown = $MdNotion->full();
 
 ### Step 5: Testing & QA
 
--   Use example JSON (`page-block-children-api.json`) build and to test adapters.
--   Unit tests for each adapter to confirm correct Markdown output.
+-   Use example JSON (`page-block-children-api.json`) build and to test adapters. ✔️
+-   Unit tests for each adapter to confirm correct Markdown output. ✔️
 -   Integration tests for recursive fetch & full content.
 
 ### Step 6: Documentation
