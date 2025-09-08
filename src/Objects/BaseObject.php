@@ -3,21 +3,23 @@
 namespace RedberryProducts\MdNotion\Objects;
 
 use RedberryProducts\MdNotion\Traits\HasChildPages;
-use RedberryProducts\MdNotion\Traits\HasParent;
-use RedberryProducts\MdNotion\Traits\HasMeta;
 use RedberryProducts\MdNotion\Traits\HasIcon;
+use RedberryProducts\MdNotion\Traits\HasMeta;
+use RedberryProducts\MdNotion\Traits\HasParent;
 use RedberryProducts\MdNotion\Traits\HasTitle;
 
 abstract class BaseObject
 {
-    use HasChildPages, HasParent, HasMeta, HasIcon, HasTitle;
+    use HasChildPages, HasIcon, HasMeta, HasParent, HasTitle;
 
     // Required fields
     public string $id;
 
     // Optional fields
     public ?string $url = null;
+
     public ?string $publicUrl = null;
+
     public array $properties = [];
 
     /**
@@ -25,10 +27,10 @@ abstract class BaseObject
      */
     public function __construct(array $data = [])
     {
-        if (!empty($data)) {
+        if (! empty($data)) {
             $this->fill($data);
         }
-        
+
         $this->initializeChildCollections();
     }
 
@@ -49,7 +51,7 @@ abstract class BaseObject
         $this->url = $data['url'] ?? $this->url;
         $this->publicUrl = $data['public_url'] ?? $this->publicUrl;
         $this->properties = $data['properties'] ?? $this->properties;
-        
+
         // Fill data from traits
         $this->fillTitleData($data);
         $this->fillParentData($data);
@@ -69,6 +71,7 @@ abstract class BaseObject
     public function setId(string $id): static
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -81,12 +84,13 @@ abstract class BaseObject
     public function setUrl(?string $url): static
     {
         $this->url = $url;
+
         return $this;
     }
 
     public function hasUrl(): bool
     {
-        return !empty($this->url);
+        return ! empty($this->url);
     }
 
     // Public URL accessors
@@ -98,12 +102,13 @@ abstract class BaseObject
     public function setPublicUrl(?string $publicUrl): static
     {
         $this->publicUrl = $publicUrl;
+
         return $this;
     }
 
     public function hasPublicUrl(): bool
     {
-        return !empty($this->publicUrl);
+        return ! empty($this->publicUrl);
     }
 
     // Properties accessors
@@ -115,12 +120,13 @@ abstract class BaseObject
     public function setProperties(array $properties): static
     {
         $this->properties = $properties;
+
         return $this;
     }
 
     public function hasProperties(): bool
     {
-        return !empty($this->properties);
+        return ! empty($this->properties);
     }
 
     public function getProperty(string $key): mixed
@@ -131,6 +137,7 @@ abstract class BaseObject
     public function setProperty(string $key, mixed $value): static
     {
         $this->properties[$key] = $value;
+
         return $this;
     }
 
@@ -156,8 +163,8 @@ abstract class BaseObject
 
     /**
      * Render title with icon as markdown heading
-     * 
-     * @param int $level The heading level (1-3)
+     *
+     * @param  int  $level  The heading level (1-3)
      * @return string The rendered markdown title
      */
     public function renderTitle(int $level = 1): string
@@ -168,16 +175,16 @@ abstract class BaseObject
         }
 
         // Generate heading prefix
-        $prefix = str_repeat('#', $level) . ' ';
+        $prefix = str_repeat('#', $level).' ';
 
         // Combine icon and title
         $iconMarkdown = '';
         if ($this->hasIcon()) {
-            $iconMarkdown = $this->processIcon() . ' ';
+            $iconMarkdown = $this->processIcon().' ';
         }
 
         $title = $this->getTitle();
-        
-        return $prefix . $iconMarkdown . $title;
+
+        return $prefix.$iconMarkdown.$title;
     }
 }

@@ -24,24 +24,25 @@ trait HasIcon
     public function setIcon(?array $icon): self
     {
         $this->icon = $icon;
+
         return $this;
     }
 
     public function hasIcon(): bool
     {
-        return !empty($this->icon);
+        return ! empty($this->icon);
     }
 
     /**
      * Process icon blocks from Notion and return markdown representation
      *
-     * @param array|null $icon The icon data from Notion
+     * @param  array|null  $icon  The icon data from Notion
      * @return string The markdown representation of the icon
      */
     public function processIcon(?array $icon = null): string
     {
         $iconData = $icon ?? $this->icon;
-        
+
         if (empty($iconData)) {
             return '';
         }
@@ -57,17 +58,18 @@ trait HasIcon
     /**
      * Process external icon URL to extract icon name
      *
-     * @param string $url The external icon URL
+     * @param  string  $url  The external icon URL
      * @return string The markdown representation of the external icon
      */
     private function processExternalIcon(string $url): string
     {
         if (preg_match('/\/([^\/]+)_[^\/]+\.svg$/', $url, $matches)) {
             $iconName = ucfirst($matches[1]);
+
             return sprintf('[%s](%s)', $iconName, $url);
         }
 
-        return '[Icon](' . $url . ')';
+        return '[Icon]('.$url.')';
     }
 
     /**

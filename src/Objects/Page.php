@@ -8,7 +8,9 @@ class Page extends BaseObject
 {
     // Page-specific fields
     public bool $has_children;
+
     public ?string $content = null;
+
     public ?Collection $childDatabases = null;
 
     /**
@@ -26,7 +28,7 @@ class Page extends BaseObject
     public function fill(array $data): static
     {
         parent::fill($data);
-        
+
         $this->has_children = $data['has_children'] ?? $this->has_children ?? false;
         $this->content = $data['content'] ?? $this->content;
 
@@ -49,6 +51,7 @@ class Page extends BaseObject
     public function setHasChildren(bool $has_children): self
     {
         $this->has_children = $has_children;
+
         return $this;
     }
 
@@ -61,12 +64,13 @@ class Page extends BaseObject
     public function setContent(?string $content): self
     {
         $this->content = $content;
+
         return $this;
     }
 
     public function hasContent(): bool
     {
-        return !empty($this->content);
+        return ! empty($this->content);
     }
 
     // Child databases accessors (Page-specific)
@@ -78,6 +82,7 @@ class Page extends BaseObject
     public function setChildDatabases(Collection $childDatabases): self
     {
         $this->childDatabases = $childDatabases;
+
         return $this;
     }
 
@@ -87,6 +92,7 @@ class Page extends BaseObject
             $this->childDatabases = collect();
         }
         $this->childDatabases->push($database);
+
         return $this;
     }
 
@@ -105,7 +111,7 @@ class Page extends BaseObject
             [
                 'has_children' => $this->has_children,
                 'content' => $this->content,
-                'childDatabases' => $this->childDatabases?->map(fn($db) => $db->toArray())->toArray(),
+                'childDatabases' => $this->childDatabases?->map(fn ($db) => $db->toArray())->toArray(),
             ]
         );
     }

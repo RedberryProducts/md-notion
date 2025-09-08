@@ -1,7 +1,7 @@
 <?php
 
-use RedberryProducts\MdNotion\Objects\Page;
 use RedberryProducts\MdNotion\Objects\Database;
+use RedberryProducts\MdNotion\Objects\Page;
 
 test('page object can handle icon data', function () {
     $pageData = [
@@ -17,8 +17,8 @@ test('page object can handle icon data', function () {
         'in_trash' => false,
         'icon' => [
             'type' => 'emoji',
-            'emoji' => '📄'
-        ]
+            'emoji' => '📄',
+        ],
     ];
 
     $page = Page::from($pageData);
@@ -45,9 +45,9 @@ test('database object can handle icon data', function () {
         'icon' => [
             'type' => 'external',
             'external' => [
-                'url' => 'https://example.com/icons/database_icon.svg'
-            ]
-        ]
+                'url' => 'https://example.com/icons/database_icon.svg',
+            ],
+        ],
     ];
 
     $database = Database::from($databaseData);
@@ -61,7 +61,7 @@ test('database object can handle icon data', function () {
 });
 
 test('icon processing handles different icon types', function () {
-    $page = new Page();
+    $page = new Page;
 
     // Test emoji icon
     $emojiIcon = ['type' => 'emoji', 'emoji' => '🚀'];

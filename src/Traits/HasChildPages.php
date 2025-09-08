@@ -39,6 +39,7 @@ trait HasChildPages
     public function setChildPages(Collection $childPages): self
     {
         $this->childPages = $childPages;
+
         return $this;
     }
 
@@ -48,6 +49,7 @@ trait HasChildPages
             $this->childPages = collect();
         }
         $this->childPages->push($page);
+
         return $this;
     }
 
@@ -62,7 +64,7 @@ trait HasChildPages
     protected function getChildArrayData(): array
     {
         return [
-            'childPages' => $this->childPages?->map(fn($page) => $page->toArray())->toArray(),
+            'childPages' => $this->childPages?->map(fn ($page) => $page->toArray())->toArray(),
         ];
     }
 }

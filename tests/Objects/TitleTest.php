@@ -1,7 +1,7 @@
 <?php
 
-use RedberryProducts\MdNotion\Objects\Page;
 use RedberryProducts\MdNotion\Objects\Database;
+use RedberryProducts\MdNotion\Objects\Page;
 
 test('page object can handle rich text title format', function () {
     $data = [
@@ -11,7 +11,7 @@ test('page object can handle rich text title format', function () {
                 'type' => 'text',
                 'text' => [
                     'content' => 'Test database',
-                    'link' => null
+                    'link' => null,
                 ],
                 'annotations' => [
                     'bold' => false,
@@ -19,12 +19,12 @@ test('page object can handle rich text title format', function () {
                     'strikethrough' => false,
                     'underline' => false,
                     'code' => false,
-                    'color' => 'default'
+                    'color' => 'default',
                 ],
                 'plain_text' => 'Test database',
-                'href' => null
-            ]
-        ]
+                'href' => null,
+            ],
+        ],
     ];
 
     $page = Page::from($data);
@@ -37,8 +37,8 @@ test('page object can handle child page title format', function () {
     $data = [
         'id' => 'page-456',
         'child_page' => [
-            'title' => 'Advanced To-Do'
-        ]
+            'title' => 'Advanced To-Do',
+        ],
     ];
 
     $page = Page::from($data);
@@ -51,8 +51,8 @@ test('database object can handle child database title format', function () {
     $data = [
         'id' => 'db-789',
         'child_database' => [
-            'title' => 'Test database'
-        ]
+            'title' => 'Test database',
+        ],
     ];
 
     $database = Database::from($data);
@@ -64,7 +64,7 @@ test('database object can handle child database title format', function () {
 test('page object can handle simple string title', function () {
     $data = [
         'id' => 'page-simple',
-        'title' => 'Simple Title'
+        'title' => 'Simple Title',
     ];
 
     $page = Page::from($data);
@@ -81,7 +81,7 @@ test('title processing handles multiple rich text blocks', function () {
                 'type' => 'text',
                 'text' => [
                     'content' => 'Multi ',
-                    'link' => null
+                    'link' => null,
                 ],
                 'annotations' => [
                     'bold' => false,
@@ -89,16 +89,16 @@ test('title processing handles multiple rich text blocks', function () {
                     'strikethrough' => false,
                     'underline' => false,
                     'code' => false,
-                    'color' => 'default'
+                    'color' => 'default',
                 ],
                 'plain_text' => 'Multi ',
-                'href' => null
+                'href' => null,
             ],
             [
                 'type' => 'text',
                 'text' => [
                     'content' => 'Part Title',
-                    'link' => null
+                    'link' => null,
                 ],
                 'annotations' => [
                     'bold' => true,
@@ -106,12 +106,12 @@ test('title processing handles multiple rich text blocks', function () {
                     'strikethrough' => false,
                     'underline' => false,
                     'code' => false,
-                    'color' => 'default'
+                    'color' => 'default',
                 ],
                 'plain_text' => 'Part Title',
-                'href' => null
-            ]
-        ]
+                'href' => null,
+            ],
+        ],
     ];
 
     $page = Page::from($data);
@@ -121,7 +121,7 @@ test('title processing handles multiple rich text blocks', function () {
 
 test('title processing handles empty or missing title gracefully', function () {
     $data = [
-        'id' => 'page-empty'
+        'id' => 'page-empty',
     ];
 
     $page = Page::from($data);
@@ -130,11 +130,11 @@ test('title processing handles empty or missing title gracefully', function () {
 });
 
 test('title processing prefers existing title when data is empty', function () {
-    $page = new Page();
+    $page = new Page;
     $page->setTitle('Existing Title');
-    
+
     $page->fill([
-        'id' => 'page-preserve'
+        'id' => 'page-preserve',
     ]);
 
     expect($page->getTitle())->toBe('Existing Title');

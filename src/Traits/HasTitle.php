@@ -13,8 +13,8 @@ trait HasTitle
 
     /**
      * Process and extract title from various title structures
-     * 
-     * @param mixed $titleData The title data from Notion API
+     *
+     * @param  mixed  $titleData  The title data from Notion API
      * @return string The processed title
      */
     protected function processTitle(mixed $titleData): string
@@ -27,6 +27,7 @@ trait HasTitle
             // Handle rich text title format (array of rich text objects)
             if (isset($titleData[0]['type'])) {
                 $richTextObjects = RichTextDTO::collection($titleData);
+
                 return $this->processRichTextTitle($richTextObjects);
             }
 
@@ -41,8 +42,8 @@ trait HasTitle
 
     /**
      * Process rich text array to extract plain title
-     * 
-     * @param RichTextDTO[] $richText Array of rich text DTOs
+     *
+     * @param  RichTextDTO[]  $richText  Array of rich text DTOs
      * @return string The combined plain text title
      */
     protected function processRichTextTitle(array $richText): string
@@ -58,9 +59,8 @@ trait HasTitle
 
     /**
      * Fill title data from the provided data array
-     * 
-     * @param array $data The data array from Notion API
-     * @return void
+     *
+     * @param  array  $data  The data array from Notion API
      */
     protected function fillTitleData(array $data): void
     {
@@ -81,15 +81,13 @@ trait HasTitle
         // Only update title if we found one in the new data
         if ($title !== '') {
             $this->title = $title;
-        } elseif (!isset($this->title)) {
+        } elseif (! isset($this->title)) {
             $this->title = '';
         }
     }
 
     /**
      * Get title array data for serialization
-     * 
-     * @return array
      */
     protected function getTitleArrayData(): array
     {
@@ -107,6 +105,7 @@ trait HasTitle
     public function setTitle(string $title): static
     {
         $this->title = $title;
+
         return $this;
     }
 }

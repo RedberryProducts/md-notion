@@ -24,6 +24,7 @@ trait HasParent
     public function setParent(array $parent): self
     {
         $this->parent = $parent;
+
         return $this;
     }
 
@@ -41,8 +42,8 @@ trait HasParent
     public function getParentId(): ?string
     {
         $type = $this->getParentType();
-        
-        if (!$type) {
+
+        if (! $type) {
             return null;
         }
 
@@ -54,7 +55,7 @@ trait HasParent
      */
     public function hasParent(): bool
     {
-        return !empty($this->parent);
+        return ! empty($this->parent);
     }
 
     /**

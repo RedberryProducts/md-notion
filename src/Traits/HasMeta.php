@@ -6,10 +6,15 @@ trait HasMeta
 {
     // Required fields
     public string $created_time;
+
     public string $last_edited_time;
+
     public array $created_by;
+
     public array $last_edited_by;
+
     public bool $archived;
+
     public bool $in_trash;
 
     /**
@@ -34,6 +39,7 @@ trait HasMeta
     public function setCreatedTime(string $created_time): self
     {
         $this->created_time = $created_time;
+
         return $this;
     }
 
@@ -46,6 +52,7 @@ trait HasMeta
     public function setLastEditedTime(string $last_edited_time): self
     {
         $this->last_edited_time = $last_edited_time;
+
         return $this;
     }
 
@@ -58,6 +65,7 @@ trait HasMeta
     public function setCreatedBy(array $created_by): self
     {
         $this->created_by = $created_by;
+
         return $this;
     }
 
@@ -70,6 +78,7 @@ trait HasMeta
     public function setLastEditedBy(array $last_edited_by): self
     {
         $this->last_edited_by = $last_edited_by;
+
         return $this;
     }
 
@@ -82,9 +91,9 @@ trait HasMeta
     public function setArchived(bool $archived): self
     {
         $this->archived = $archived;
+
         return $this;
     }
-
 
     // In trash boolean accessors
     public function isTrashed(): bool
@@ -100,6 +109,7 @@ trait HasMeta
     public function setInTrash(bool $in_trash): self
     {
         $this->in_trash = $in_trash;
+
         return $this;
     }
 
