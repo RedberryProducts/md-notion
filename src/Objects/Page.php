@@ -102,6 +102,48 @@ class Page extends BaseObject
     }
 
     /**
+     * Fetch child pages using ContentManager
+     *
+     * @param \RedberryProducts\MdNotion\Services\ContentManager $contentManager
+     * @return static
+     */
+    public function fetchChildPages(\RedberryProducts\MdNotion\Services\ContentManager $contentManager): static
+    {
+        $childPages = $contentManager->fetchChildPages($this->id);
+        $this->setChildPages($childPages);
+        
+        return $this;
+    }
+
+    /**
+     * Fetch child databases using ContentManager
+     *
+     * @param \RedberryProducts\MdNotion\Services\ContentManager $contentManager
+     * @return static
+     */
+    public function fetchChildDatabases(\RedberryProducts\MdNotion\Services\ContentManager $contentManager): static
+    {
+        $childDatabases = $contentManager->fetchChildDatabases($this->id);
+        $this->setChildDatabases($childDatabases);
+        
+        return $this;
+    }
+
+    /**
+     * Fetch page content using ContentManager
+     *
+     * @param \RedberryProducts\MdNotion\Services\ContentManager $contentManager
+     * @return static
+     */
+    public function fetchContent(\RedberryProducts\MdNotion\Services\ContentManager $contentManager): static
+    {
+        $pageWithContent = $contentManager->fetchPageContent($this->id);
+        $this->setContent($pageWithContent->getContent());
+        
+        return $this;
+    }
+
+    /**
      * Convert the page to an array
      */
     public function toArray(): array
