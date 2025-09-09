@@ -40,12 +40,11 @@ class Database extends BaseObject
     public function readItemsContent(\RedberryProducts\MdNotion\Services\PageReader $pageReader): static
     {
         if ($this->hasChildPages()) {
-            $this->getChildPages()->each(function (Page $page) use ($pageReader) {
-                $pageWithContent = $pageReader->read($page->getId());
-                $page->setContent($pageWithContent->getContent());
-                $page->setChildPages($pageWithContent->getChildPages());
-                $page->setChildDatabases($pageWithContent->getChildDatabases());
-            });
+            $this->setChildPages(
+                $this->getChildPages()->map(function (Page $page) use ($pageReader) {
+                    return $pageReader->read($page->getId());
+                })
+            );
         }
 
         return $this;

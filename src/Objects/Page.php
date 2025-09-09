@@ -110,12 +110,11 @@ class Page extends BaseObject
     public function readChildPagesContent(\RedberryProducts\MdNotion\Services\PageReader $pageReader): static
     {
         if ($this->hasChildPages()) {
-            $this->getChildPages()->each(function (Page $page) use ($pageReader) {
-                $pageWithContent = $pageReader->read($page->getId());
-                $page->setContent($pageWithContent->getContent());
-                $page->setChildPages($pageWithContent->getChildPages());
-                $page->setChildDatabases($pageWithContent->getChildDatabases());
-            });
+            $this->setChildPages(
+                $this->getChildPages()->map(function (Page $page) use ($pageReader) {
+                    return $pageReader->read($page->getId());
+                })
+            );
         }
 
         return $this;
@@ -130,11 +129,11 @@ class Page extends BaseObject
     public function readChildDatabasesContent(\RedberryProducts\MdNotion\Services\DatabaseReader $databaseReader): static
     {
         if ($this->hasChildDatabases()) {
-            $this->getChildDatabases()->each(function (Database $database) use ($databaseReader) {
-                $databaseWithContent = $databaseReader->read($database->getId());
-                $database->setTableContent($databaseWithContent->getTableContent());
-                $database->setChildPages($databaseWithContent->getChildPages());
-            });
+            $this->setChildDatabases(
+                $this->getChildDatabases()->map(function (Database $database) use ($databaseReader) {
+                    return $databaseReader->read($database->getId());
+                })
+            );
         }
 
         return $this;
