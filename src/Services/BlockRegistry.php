@@ -14,7 +14,7 @@ class BlockRegistry
     /**
      * Resolve a block type to its corresponding adapter
      *
-     * @param string $blockType The Notion block type
+     * @param  string  $blockType  The Notion block type
      * @return BlockAdapterInterface The adapter instance
      */
     public function resolve(string $blockType): BlockAdapterInterface

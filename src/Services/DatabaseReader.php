@@ -17,7 +17,7 @@ class DatabaseReader
     /**
      * Read database content and build complete Database object
      *
-     * @param string $databaseId The Notion database ID
+     * @param  string  $databaseId  The Notion database ID
      * @return Database The database object with all content and items
      */
     public function read(string $databaseId): Database
@@ -39,7 +39,7 @@ class DatabaseReader
                     $tableContent = $this->databaseTable->convertQueryToMarkdownTable($queryData);
                     // Optionally, add data source name as a note above the table
                     $name = $dataSource['name'] ?? '---';
-                    $newTableContent = $database->getTableContent() . "\n\n_source {$name}_\n\n" . $tableContent;
+                    $newTableContent = $database->getTableContent()."\n\n_source {$name}_\n\n".$tableContent;
                     $database->setTableContent($newTableContent);
                 }
             }

@@ -2,8 +2,6 @@
 
 namespace RedberryProducts\MdNotion\Objects;
 
-use Illuminate\Support\Collection;
-
 class Database extends BaseObject
 {
     /**
@@ -33,9 +31,6 @@ class Database extends BaseObject
 
     /**
      * Read items content using PageReader service
-     *
-     * @param \RedberryProducts\MdNotion\Services\PageReader $pageReader
-     * @return static
      */
     public function readItemsContent(\RedberryProducts\MdNotion\Services\PageReader $pageReader): static
     {
@@ -64,7 +59,7 @@ class Database extends BaseObject
     public function setTableContent(?string $tableContent): static
     {
         $this->tableContent = $tableContent;
-        
+
         return $this;
     }
 
@@ -73,7 +68,7 @@ class Database extends BaseObject
      */
     public function hasTableContent(): bool
     {
-        return !empty($this->tableContent);
+        return ! empty($this->tableContent);
     }
 
     /**

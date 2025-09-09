@@ -2,7 +2,6 @@
 
 namespace RedberryProducts\MdNotion\Services;
 
-use Illuminate\Support\Collection;
 use RedberryProducts\MdNotion\Objects\Database;
 use RedberryProducts\MdNotion\Objects\Page;
 use RedberryProducts\MdNotion\SDK\Notion;
@@ -17,7 +16,7 @@ class PageReader
     /**
      * Read page content and build complete Page object
      *
-     * @param string $pageId The Notion page ID
+     * @param  string  $pageId  The Notion page ID
      * @return Page The page object with all content and children
      */
     public function read(string $pageId): Page
@@ -66,7 +65,7 @@ class PageReader
     /**
      * Process a single block and convert to markdown
      *
-     * @param array $block The block data
+     * @param  array  $block  The block data
      * @return string The markdown representation
      */
     private function processBlock(array $block): string
@@ -75,6 +74,7 @@ class PageReader
 
         try {
             $adapter = $this->registry->resolve($blockType);
+
             return $adapter->toMarkdown($block);
         } catch (\InvalidArgumentException $e) {
             // If no adapter found, return a comment indicating unsupported block

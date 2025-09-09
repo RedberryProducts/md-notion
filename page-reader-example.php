@@ -12,12 +12,12 @@ use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
-use RedberryProducts\MdNotion\SDK\Notion;
-use RedberryProducts\MdNotion\Services\PageReader;
-use RedberryProducts\MdNotion\Services\DatabaseReader;
-use RedberryProducts\MdNotion\Services\BlockRegistry;
-use RedberryProducts\MdNotion\Services\DatabaseTable;
 use RedberryProducts\MdNotion\Adapters\BlockAdapterFactory;
+use RedberryProducts\MdNotion\SDK\Notion;
+use RedberryProducts\MdNotion\Services\BlockRegistry;
+use RedberryProducts\MdNotion\Services\DatabaseReader;
+use RedberryProducts\MdNotion\Services\DatabaseTable;
+use RedberryProducts\MdNotion\Services\PageReader;
 
 // Set up Laravel container
 $container = new Container;
@@ -81,67 +81,67 @@ echo "Fetching page content with PageReader...\n";
 try {
     // Read page with all content and children in one call
     $page = $pageReader->read($pageId);
-    
+
     echo "Page fetched successfully!\n";
-    echo "Page title: " . $page->getTitle() . "\n";
-    echo "Has child pages: " . ($page->hasChildPages() ? 'Yes (' . $page->getChildPages()->count() . ')' : 'No') . "\n";
-    echo "Has child databases: " . ($page->hasChildDatabases() ? 'Yes (' . $page->getChildDatabases()->count() . ')' : 'No') . "\n";
-    echo "Content length: " . strlen($page->getContent() ?? '') . " characters\n\n";
-    
+    echo 'Page title: '.$page->getTitle()."\n";
+    echo 'Has child pages: '.($page->hasChildPages() ? 'Yes ('.$page->getChildPages()->count().')' : 'No')."\n";
+    echo 'Has child databases: '.($page->hasChildDatabases() ? 'Yes ('.$page->getChildDatabases()->count().')' : 'No')."\n";
+    echo 'Content length: '.strlen($page->getContent() ?? '')." characters\n\n";
+
     // Read content for child databases if any
     if ($page->hasChildDatabases()) {
         echo "Reading child databases content...\n";
         $page->readChildDatabasesContent($databaseReader);
         echo "Child databases content loaded.\n\n";
     }
-    
+
     // Read content for child pages if any
     if ($page->hasChildPages()) {
         echo "Reading child pages content...\n";
         $page->readChildPagesContent($pageReader);
         echo "Child pages content loaded.\n\n";
     }
-    
+
     // Build complete markdown content
     $markdown = '';
-    
+
     // Add main page title and content
-    $markdown .= $page->renderTitle(1) . "\n\n";
+    $markdown .= $page->renderTitle(1)."\n\n";
     if ($page->hasContent()) {
-        $markdown .= $page->getContent() . "\n\n";
+        $markdown .= $page->getContent()."\n\n";
     }
-    
+
     // Add child databases content
     if ($page->hasChildDatabases()) {
         $markdown .= "## Databases\n\n";
         foreach ($page->getChildDatabases() as $database) {
-            $markdown .= $database->renderTitle(3) . "\n\n";
+            $markdown .= $database->renderTitle(3)."\n\n";
             if ($database->hasTableContent()) {
-                $markdown .= $database->getTableContent() . "\n\n";
+                $markdown .= $database->getTableContent()."\n\n";
             }
         }
     }
-    
+
     // Add child pages content
     if ($page->hasChildPages()) {
         $markdown .= "## Child Pages\n\n";
         foreach ($page->getChildPages() as $childPage) {
-            $markdown .= $childPage->renderTitle(3) . "\n\n";
+            $markdown .= $childPage->renderTitle(3)."\n\n";
             if ($childPage->hasContent()) {
-                $markdown .= $childPage->getContent() . "\n\n";
+                $markdown .= $childPage->getContent()."\n\n";
             }
         }
     }
-    
+
     // Save to file
-    $filename = __DIR__ . '/notion-page.md';
+    $filename = __DIR__.'/notion-page.md';
     file_put_contents($filename, $markdown);
-    
+
     echo "Complete page content exported to: notion-page.md\n";
-    echo "Total markdown length: " . strlen($markdown) . " characters\n";
-    
+    echo 'Total markdown length: '.strlen($markdown)." characters\n";
+
 } catch (Exception $e) {
-    echo "Error: " . $e->getMessage() . "\n";
+    echo 'Error: '.$e->getMessage()."\n";
     echo "Make sure you have:\n";
     echo "1. A valid notion-token.php file with your Notion integration token\n";
     echo "2. A valid page ID (currently using: $pageId)\n";

@@ -103,9 +103,6 @@ class Page extends BaseObject
 
     /**
      * Read child pages content using PageReader service
-     *
-     * @param \RedberryProducts\MdNotion\Services\PageReader $pageReader
-     * @return static
      */
     public function readChildPagesContent(\RedberryProducts\MdNotion\Services\PageReader $pageReader): static
     {
@@ -122,9 +119,6 @@ class Page extends BaseObject
 
     /**
      * Read child databases content using DatabaseReader service
-     *
-     * @param \RedberryProducts\MdNotion\Services\DatabaseReader $databaseReader
-     * @return static
      */
     public function readChildDatabasesContent(\RedberryProducts\MdNotion\Services\DatabaseReader $databaseReader): static
     {
@@ -141,19 +135,16 @@ class Page extends BaseObject
 
     /**
      * Read all child pages content recursively using PageReader service
-     * 
+     *
      * WARNING: This method makes recursive API calls and may result in many requests.
      * It may slow down your application or hit Notion API limits.
-     *
-     * @param \RedberryProducts\MdNotion\Services\PageReader $pageReader
-     * @return static
      */
     public function readAllPagesContent(\RedberryProducts\MdNotion\Services\PageReader $pageReader): static
     {
         if ($this->hasChildPages()) {
             // First, read the content of immediate child pages
             $this->readChildPagesContent($pageReader);
-            
+
             // Then recursively read content of nested child pages
             $this->getChildPages()->each(function (Page $page) use ($pageReader) {
                 $page->readAllPagesContent($pageReader);
