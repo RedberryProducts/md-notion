@@ -2,64 +2,57 @@
 
 use RedberryProducts\MdNotion\Objects\Page;
 use RedberryProducts\MdNotion\Objects\Database;
-use RedberryProducts\MdNotion\Services\ContentManager;
-use RedberryProducts\MdNotion\Services\DatabaseTable;
+use RedberryProducts\MdNotion\Services\PageReader;
+use RedberryProducts\MdNotion\Services\DatabaseReader;
 
-test('page object can use content manager methods', function () {
+test('page object can use page reader methods', function () {
     $page = new Page(['id' => 'test-page-id']);
-    $contentManager = Mockery::mock(ContentManager::class);
+    $pageReader = Mockery::mock(PageReader::class);
     
-    // Mock content manager methods
-    $contentManager->shouldReceive('fetchChildPages')
-        ->with('test-page-id')
-        ->andReturn(collect([
-            new Page(['id' => 'child-1']),
-            new Page(['id' => 'child-2'])
-        ]));
+    // Mock page reader methods
+    $pageReader->shouldReceive('read')
+        ->with('child-1')
+        ->andReturn(new Page(['id' => 'child-1', 'content' => 'Child content 1']));
+        
+    $pageReader->shouldReceive('read')
+        ->with('child-2')
+        ->andReturn(new Page(['id' => 'child-2', 'content' => 'Child content 2']));
     
-    $contentManager->shouldReceive('fetchChildDatabases')
-        ->with('test-page-id')
-        ->andReturn(collect([
-            new Database(['id' => 'db-1'])
-        ]));
+    // Set up child pages first
+    $page->setChildPages(collect([
+        new Page(['id' => 'child-1']),
+        new Page(['id' => 'child-2'])
+    ]));
     
-    $contentManager->shouldReceive('fetchPageContent')
-        ->with('test-page-id')
-        ->andReturn(new Page(['id' => 'test-page-id', 'content' => 'Test content']));
-    
-    // Test the methods
-    $page->fetchChildPages($contentManager);
+    // Test the readChildPagesContent method
+    $page->readChildPagesContent($pageReader);
     expect($page->getChildPages())->toHaveCount(2);
-    
-    $page->fetchChildDatabases($contentManager);
-    expect($page->getChildDatabases())->toHaveCount(1);
-    
-    $page->fetchContent($contentManager);
-    expect($page->getContent())->toBe('Test content');
+    expect($page->getChildPages()->first()->getContent())->toBe('Child content 1');
 });
 
-test('database object can use database table methods', function () {
+test('database object can use database reader and page reader methods', function () {
     $database = new Database(['id' => 'test-db-id']);
-    $databaseTable = Mockery::mock(DatabaseTable::class);
+    $pageReader = Mockery::mock(PageReader::class);
     
-    // Mock database table methods
-    $databaseTable->shouldReceive('fetchDatabaseAsMarkdownTable')
-        ->with('test-db-id')
-        ->andReturn('| Name | Status |\n| --- | --- |\n| Item 1 | Active |');
+    // Mock page reader methods for database items
+    $pageReader->shouldReceive('read')
+        ->with('item-1')
+        ->andReturn(new Page(['id' => 'item-1', 'content' => 'Item 1 content']));
+        
+    $pageReader->shouldReceive('read')
+        ->with('item-2')
+        ->andReturn(new Page(['id' => 'item-2', 'content' => 'Item 2 content']));
     
-    $databaseTable->shouldReceive('fetchDatabaseItems')
-        ->with('test-db-id')
-        ->andReturn(collect([
-            new Page(['id' => 'item-1']),
-            new Page(['id' => 'item-2'])
-        ]));
+    // Set up child pages (database items) first
+    $database->setChildPages(collect([
+        new Page(['id' => 'item-1']),
+        new Page(['id' => 'item-2'])
+    ]));
     
-    // Test the methods
-    $database->fetchAsTable($databaseTable);
-    expect($database->getTableContent())->toContain('| Name | Status |');
-    
-    $database->fetchItems($databaseTable);
-    expect($database->getItems())->toHaveCount(2);
+    // Test the readItemsContent method
+    $database->readItemsContent($pageReader);
+    expect($database->getChildPages())->toHaveCount(2);
+    expect($database->getChildPages()->first()->getContent())->toBe('Item 1 content');
 });
 
 test('page object serializes correctly with child content', function () {
@@ -87,14 +80,14 @@ test('page object serializes correctly with child content', function () {
     expect($array['childDatabases'])->toHaveCount(1);
 });
 
-test('database object serializes correctly with items and table content', function () {
+test('database object serializes correctly with table content and child pages', function () {
     $database = new Database([
         'id' => 'test-db',
         'title' => [['plain_text' => 'Test Database']]
     ]);
     
     $database->setTableContent('| Name | Status |\n| --- | --- |');
-    $database->setItems(collect([
+    $database->setChildPages(collect([
         new Page(['id' => 'item-1'])
     ]));
     
@@ -102,7 +95,7 @@ test('database object serializes correctly with items and table content', functi
     
     expect($array['id'])->toBe('test-db');
     expect($array['tableContent'])->toContain('| Name | Status |');
-    expect($array['items'])->toHaveCount(1);
+    expect($array['childPages'])->toHaveCount(1);
 });
 
 afterEach(function () {

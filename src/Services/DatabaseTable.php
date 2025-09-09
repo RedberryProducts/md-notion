@@ -68,6 +68,29 @@ class DatabaseTable
     }
 
     /**
+     * Convert query response data to markdown table
+     *
+     * @param array $queryData The query response data
+     * @return string The markdown table representation
+     */
+    public function convertQueryToMarkdownTable(array $queryData): string
+    {
+        $results = $queryData['results'] ?? [];
+
+        if (empty($results)) {
+            return "<!-- Empty database -->\n\n";
+        }
+
+        // We need to get database properties from somewhere - for now, extract from results
+        $properties = $this->extractPropertiesFromResults($results);
+
+        // Build markdown table
+        $markdown = $this->buildMarkdownTable($results, $properties);
+
+        return $markdown;
+    }
+
+    /**
      * Build markdown table from database results
      *
      * @param array $results Database query results
@@ -191,5 +214,33 @@ class DatabaseTable
             $text .= $item['plain_text'] ?? '';
         }
         return $text;
+    }
+
+    /**
+     * Extract properties schema from query results
+     *
+     * @param array $results Database query results
+     * @return array Properties schema
+     */
+    private function extractPropertiesFromResults(array $results): array
+    {
+        if (empty($results)) {
+            return [];
+        }
+
+        $properties = [];
+        $firstResult = $results[0];
+        $resultProperties = $firstResult['properties'] ?? [];
+
+        foreach ($resultProperties as $key => $property) {
+            // Extract property type and create a basic schema
+            $type = array_keys($property)[0] ?? 'unknown';
+            $properties[$key] = [
+                'name' => $key,
+                'type' => $type
+            ];
+        }
+
+        return $properties;
     }
 }

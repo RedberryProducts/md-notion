@@ -12,17 +12,11 @@ class Database extends BaseObject
     public ?string $tableContent = null;
 
     /**
-     * Database items as Page objects
-     */
-    public ?Collection $items = null;
-
-    /**
      * Create a new Database instance
      */
     public function __construct(array $data = [])
     {
         parent::__construct($data);
-        $this->items = $this->items ?? collect();
     }
 
     /**
@@ -34,39 +28,26 @@ class Database extends BaseObject
 
         $this->tableContent = $data['tableContent'] ?? $this->tableContent;
 
-        // Handle database items
-        if (isset($data['items'])) {
-            $this->items = collect($data['items'])->map(function ($item) {
-                return is_array($item) ? Page::from($item) : $item;
+        return $this;
+    }
+
+    /**
+     * Read items content using PageReader service
+     *
+     * @param \RedberryProducts\MdNotion\Services\PageReader $pageReader
+     * @return static
+     */
+    public function readItemsContent(\RedberryProducts\MdNotion\Services\PageReader $pageReader): static
+    {
+        if ($this->hasChildPages()) {
+            $this->getChildPages()->each(function (Page $page) use ($pageReader) {
+                $pageWithContent = $pageReader->read($page->getId());
+                $page->setContent($pageWithContent->getContent());
+                $page->setChildPages($pageWithContent->getChildPages());
+                $page->setChildDatabases($pageWithContent->getChildDatabases());
             });
         }
 
-        return $this;
-    }
-
-    /**
-     * Fetch database items as markdown table using DatabaseTable service
-     *
-     * @param \RedberryProducts\MdNotion\Services\DatabaseTable $databaseTable
-     * @return static
-     */
-    public function fetchAsTable(\RedberryProducts\MdNotion\Services\DatabaseTable $databaseTable): static
-    {
-        $this->tableContent = $databaseTable->fetchDatabaseAsMarkdownTable($this->id);
-        
-        return $this;
-    }
-
-    /**
-     * Fetch database items as Page objects with content
-     *
-     * @param \RedberryProducts\MdNotion\Services\DatabaseTable $databaseTable
-     * @return static
-     */
-    public function fetchItems(\RedberryProducts\MdNotion\Services\DatabaseTable $databaseTable): static
-    {
-        $this->items = $databaseTable->fetchDatabaseItems($this->id);
-        
         return $this;
     }
 
@@ -89,32 +70,6 @@ class Database extends BaseObject
     }
 
     /**
-     * Get database items
-     */
-    public function getItems(): Collection
-    {
-        return $this->items ?? collect();
-    }
-
-    /**
-     * Set database items
-     */
-    public function setItems(Collection $items): static
-    {
-        $this->items = $items;
-        
-        return $this;
-    }
-
-    /**
-     * Check if database has items
-     */
-    public function hasItems(): bool
-    {
-        return $this->items && $this->items->isNotEmpty();
-    }
-
-    /**
      * Check if database has table content
      */
     public function hasTableContent(): bool
@@ -131,7 +86,6 @@ class Database extends BaseObject
             parent::toArray(),
             [
                 'tableContent' => $this->tableContent,
-                'items' => $this->items?->map(fn ($item) => $item->toArray())->toArray(),
             ]
         );
     }

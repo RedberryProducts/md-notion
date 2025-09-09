@@ -6,7 +6,9 @@ use RedberryProducts\MdNotion\Adapters\BlockAdapterFactory;
 use RedberryProducts\MdNotion\SDK\Notion;
 use RedberryProducts\MdNotion\Services\BlockRegistry;
 use RedberryProducts\MdNotion\Services\ContentManager;
+use RedberryProducts\MdNotion\Services\DatabaseReader;
 use RedberryProducts\MdNotion\Services\DatabaseTable;
+use RedberryProducts\MdNotion\Services\PageReader;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -56,6 +58,20 @@ class MdNotionServiceProvider extends PackageServiceProvider
             return new ContentManager(
                 $app->make(Notion::class),
                 $app->make(BlockRegistry::class)
+            );
+        });
+
+        $this->app->singleton(PageReader::class, function ($app) {
+            return new PageReader(
+                $app->make(Notion::class),
+                $app->make(BlockRegistry::class)
+            );
+        });
+
+        $this->app->singleton(DatabaseReader::class, function ($app) {
+            return new DatabaseReader(
+                $app->make(Notion::class),
+                $app->make(DatabaseTable::class)
             );
         });
 

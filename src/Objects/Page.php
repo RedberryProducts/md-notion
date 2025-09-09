@@ -102,44 +102,41 @@ class Page extends BaseObject
     }
 
     /**
-     * Fetch child pages using ContentManager
+     * Read child pages content using PageReader service
      *
-     * @param \RedberryProducts\MdNotion\Services\ContentManager $contentManager
+     * @param \RedberryProducts\MdNotion\Services\PageReader $pageReader
      * @return static
      */
-    public function fetchChildPages(\RedberryProducts\MdNotion\Services\ContentManager $contentManager): static
+    public function readChildPagesContent(\RedberryProducts\MdNotion\Services\PageReader $pageReader): static
     {
-        $childPages = $contentManager->fetchChildPages($this->id);
-        $this->setChildPages($childPages);
-        
+        if ($this->hasChildPages()) {
+            $this->getChildPages()->each(function (Page $page) use ($pageReader) {
+                $pageWithContent = $pageReader->read($page->getId());
+                $page->setContent($pageWithContent->getContent());
+                $page->setChildPages($pageWithContent->getChildPages());
+                $page->setChildDatabases($pageWithContent->getChildDatabases());
+            });
+        }
+
         return $this;
     }
 
     /**
-     * Fetch child databases using ContentManager
+     * Read child databases content using DatabaseReader service
      *
-     * @param \RedberryProducts\MdNotion\Services\ContentManager $contentManager
+     * @param \RedberryProducts\MdNotion\Services\DatabaseReader $databaseReader
      * @return static
      */
-    public function fetchChildDatabases(\RedberryProducts\MdNotion\Services\ContentManager $contentManager): static
+    public function readChildDatabasesContent(\RedberryProducts\MdNotion\Services\DatabaseReader $databaseReader): static
     {
-        $childDatabases = $contentManager->fetchChildDatabases($this->id);
-        $this->setChildDatabases($childDatabases);
-        
-        return $this;
-    }
+        if ($this->hasChildDatabases()) {
+            $this->getChildDatabases()->each(function (Database $database) use ($databaseReader) {
+                $databaseWithContent = $databaseReader->read($database->getId());
+                $database->setTableContent($databaseWithContent->getTableContent());
+                $database->setChildPages($databaseWithContent->getChildPages());
+            });
+        }
 
-    /**
-     * Fetch page content using ContentManager
-     *
-     * @param \RedberryProducts\MdNotion\Services\ContentManager $contentManager
-     * @return static
-     */
-    public function fetchContent(\RedberryProducts\MdNotion\Services\ContentManager $contentManager): static
-    {
-        $pageWithContent = $contentManager->fetchPageContent($this->id);
-        $this->setContent($pageWithContent->getContent());
-        
         return $this;
     }
 
