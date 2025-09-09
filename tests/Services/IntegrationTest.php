@@ -3,6 +3,7 @@
 use RedberryProducts\MdNotion\Objects\Database;
 use RedberryProducts\MdNotion\Objects\Page;
 use RedberryProducts\MdNotion\Services\PageReader;
+use RedberryProducts\MdNotion\Services\DatabaseReader;
 
 test('page object can use page reader methods', function () {
     $page = new Page(['id' => 'test-page-id']);
@@ -71,6 +72,32 @@ test('page object can recursively read all nested child pages content', function
     expect($firstChild->hasChildPages())->toBeTrue();
     expect($firstChild->getChildPages())->toHaveCount(1);
     expect($firstChild->getChildPages()->first()->getContent())->toBe('Grandchild content');
+});
+
+test('page object can read child databases content', function () {
+    $page = new Page(['id' => 'test-page-id']);
+    $databaseReader = Mockery::mock(DatabaseReader::class);
+
+    // Mock database reader methods
+    $databaseReader->shouldReceive('read')
+        ->with('db-1')
+        ->andReturn(new Database(['id' => 'db-1', 'tableContent' => '| Name | Status |\n| --- | --- |']));
+
+    $databaseReader->shouldReceive('read')
+        ->with('db-2')
+        ->andReturn(new Database(['id' => 'db-2', 'tableContent' => '| Title | Category |\n| --- | --- |']));
+
+    // Set up child databases first
+    $page->setChildDatabases(collect([
+        new Database(['id' => 'db-1']),
+        new Database(['id' => 'db-2']),
+    ]));
+
+    // Test the readChildDatabasesContent method
+    $page->readChildDatabasesContent($databaseReader);
+    expect($page->getChildDatabases())->toHaveCount(2);
+    expect($page->getChildDatabases()->first()->getTableContent())->toContain('| Name | Status |');
+    expect($page->getChildDatabases()->last()->getTableContent())->toContain('| Title | Category |');
 });
 
 test('database object can use database reader and page reader methods', function () {
