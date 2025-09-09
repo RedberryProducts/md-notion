@@ -72,6 +72,19 @@ class Database extends BaseObject
     }
 
     /**
+     * Fetch and populate this database using DatabaseReader
+     */
+    public function fetch(\RedberryProducts\MdNotion\Services\DatabaseReader $databaseReader): static
+    {
+        $fetchedDatabase = $databaseReader->read($this->getId());
+
+        // Copy all data from the fetched database to this instance
+        $this->fill($fetchedDatabase->toArray());
+
+        return $this;
+    }
+
+    /**
      * Convert the database to an array
      */
     public function toArray(): array

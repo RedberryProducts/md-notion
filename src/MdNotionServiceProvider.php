@@ -72,5 +72,15 @@ class MdNotionServiceProvider extends PackageServiceProvider
                 $app->make(Notion::class)
             );
         });
+
+        $this->app->bind(MdNotion::class, function ($app, $parameters) {
+            $pageId = $parameters['pageId'] ?? '';
+
+            return new MdNotion(
+                $pageId,
+                $app->make(PageReader::class),
+                $app->make(DatabaseReader::class)
+            );
+        });
     }
 }

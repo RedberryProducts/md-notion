@@ -155,6 +155,19 @@ class Page extends BaseObject
     }
 
     /**
+     * Fetch and populate this page using PageReader
+     */
+    public function fetch(\RedberryProducts\MdNotion\Services\PageReader $pageReader): static
+    {
+        $fetchedPage = $pageReader->read($this->getId());
+
+        // Copy all data from the fetched page to this instance
+        $this->fill($fetchedPage->toArray());
+
+        return $this;
+    }
+
+    /**
      * Convert the page to an array
      */
     public function toArray(): array
