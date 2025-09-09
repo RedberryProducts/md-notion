@@ -30,6 +30,50 @@ test('page object can use page reader methods', function () {
     expect($page->getChildPages()->first()->getContent())->toBe('Child content 1');
 });
 
+test('page object can recursively read all nested child pages content', function () {
+    $page = new Page(['id' => 'root-page']);
+    $pageReader = Mockery::mock(PageReader::class);
+    
+    // Create nested page structure
+    $childPage1 = new Page(['id' => 'child-1']);
+    $childPage2 = new Page(['id' => 'child-2']);
+    $grandChildPage = new Page(['id' => 'grandchild-1']);
+    
+    // Mock PageReader to return pages with content and nested children
+    $pageReader->shouldReceive('read')
+        ->with('child-1')
+        ->andReturn(new Page([
+            'id' => 'child-1', 
+            'content' => 'Child 1 content',
+            'childPages' => collect([$grandChildPage])
+        ]));
+        
+    $pageReader->shouldReceive('read')
+        ->with('child-2')
+        ->andReturn(new Page(['id' => 'child-2', 'content' => 'Child 2 content']));
+        
+    $pageReader->shouldReceive('read')
+        ->with('grandchild-1')
+        ->andReturn(new Page(['id' => 'grandchild-1', 'content' => 'Grandchild content']));
+    
+    // Set up the initial child pages
+    $page->setChildPages(collect([$childPage1, $childPage2]));
+    
+    // Test the readAllPagesContent method (recursive)
+    $page->readAllPagesContent($pageReader);
+    
+    // Verify the structure
+    expect($page->getChildPages())->toHaveCount(2);
+    expect($page->getChildPages()->first()->getContent())->toBe('Child 1 content');
+    expect($page->getChildPages()->last()->getContent())->toBe('Child 2 content');
+    
+    // Verify nested child was also read
+    $firstChild = $page->getChildPages()->first();
+    expect($firstChild->hasChildPages())->toBeTrue();
+    expect($firstChild->getChildPages())->toHaveCount(1);
+    expect($firstChild->getChildPages()->first()->getContent())->toBe('Grandchild content');
+});
+
 test('database object can use database reader and page reader methods', function () {
     $database = new Database(['id' => 'test-db-id']);
     $pageReader = Mockery::mock(PageReader::class);

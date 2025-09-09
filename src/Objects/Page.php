@@ -140,6 +140,30 @@ class Page extends BaseObject
     }
 
     /**
+     * Read all child pages content recursively using PageReader service
+     * 
+     * WARNING: This method makes recursive API calls and may result in many requests.
+     * It may slow down your application or hit Notion API limits.
+     *
+     * @param \RedberryProducts\MdNotion\Services\PageReader $pageReader
+     * @return static
+     */
+    public function readAllPagesContent(\RedberryProducts\MdNotion\Services\PageReader $pageReader): static
+    {
+        if ($this->hasChildPages()) {
+            // First, read the content of immediate child pages
+            $this->readChildPagesContent($pageReader);
+            
+            // Then recursively read content of nested child pages
+            $this->getChildPages()->each(function (Page $page) use ($pageReader) {
+                $page->readAllPagesContent($pageReader);
+            });
+        }
+
+        return $this;
+    }
+
+    /**
      * Convert the page to an array
      */
     public function toArray(): array
