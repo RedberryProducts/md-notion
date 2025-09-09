@@ -2,13 +2,13 @@
 
 /**
  * MdNotion Facade Example Script
- * 
+ *
  * This script demonstrates the usage of the MdNotion facade with all its methods.
  * It fetches a complete Notion page with all nested content and saves it as markdown.
- * 
+ *
  * Requirements:
  * - notion-token.php file with your Notion integration token
- * - storage/views directory with write permissions  
+ * - storage/views directory with write permissions
  * - Valid page ID with proper integration permissions
  */
 
@@ -24,7 +24,6 @@ use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
-use RedberryProducts\MdNotion\Adapters\BlockAdapterFactory;
 use RedberryProducts\MdNotion\Facades\MdNotion;
 use RedberryProducts\MdNotion\MdNotionServiceProvider;
 use RedberryProducts\MdNotion\SDK\Notion;
@@ -74,29 +73,32 @@ View::setFacadeApplication($container);
 
 // Load configuration
 $container->instance('config', [
-    'md-notion' => include __DIR__.'/config/md-notion.php'
+    'md-notion' => include __DIR__.'/config/md-notion.php',
 ]);
 
 // Set up the config accessor
 $container->singleton('config', function () use ($container) {
-    return new class($container['config']) {
+    return new class($container['config'])
+    {
         private $config;
-        
-        public function __construct($config) {
+
+        public function __construct($config)
+        {
             $this->config = $config;
         }
-        
-        public function get($key, $default = null) {
+
+        public function get($key, $default = null)
+        {
             $keys = explode('.', $key);
             $value = $this->config;
-            
+
             foreach ($keys as $k) {
-                if (!isset($value[$k])) {
+                if (! isset($value[$k])) {
                     return $default;
                 }
                 $value = $value[$k];
             }
-            
+
             return $value;
         }
     };
@@ -115,7 +117,7 @@ $container->singleton(Notion::class, function () use ($token) {
 });
 
 // Create storage directory if it doesn't exist
-if (!file_exists(__DIR__.'/storage/views')) {
+if (! file_exists(__DIR__.'/storage/views')) {
     mkdir(__DIR__.'/storage/views', 0755, true);
 }
 
@@ -136,30 +138,30 @@ try {
     file_put_contents($filename, $markdown);
 
     echo "Complete page content exported to: notion-full.md\n";
-    
+
     // Also demonstrate other API methods
     echo "\nTesting other API methods:\n";
-    
+
     // Get pages collection
     $pages = MdNotion::make($pageId)->pages();
-    echo "Child pages count: ".$pages->count()."\n";
-    
-    // Get databases collection  
+    echo 'Child pages count: '.$pages->count()."\n";
+
+    // Get databases collection
     $databases = MdNotion::make($pageId)->databases();
-    echo "Child databases count: ".$databases->count()."\n";
-    
+    echo 'Child databases count: '.$databases->count()."\n";
+
     // Get Page object with specific content
     $page = MdNotion::make($pageId)->content()->withPages()->withDatabases()->get();
-    echo "Page title: ".$page->getTitle()."\n";
-    
+    echo 'Page title: '.$page->getTitle()."\n";
+
     // Get Page as Markdown with specific content
     $contentMarkdown = MdNotion::make($pageId)->content()->withPages()->withDatabases()->read();
-    echo "Content markdown length: ".strlen($contentMarkdown)." characters\n";
-    
+    echo 'Content markdown length: '.strlen($contentMarkdown)." characters\n";
+
     // Demonstrate setPage method
     $mdNotion = MdNotion::make();
     $fullMarkdown = $mdNotion->setPage($pageId)->full();
-    echo "Using setPage method - markdown length: ".strlen($fullMarkdown)." characters\n";
+    echo 'Using setPage method - markdown length: '.strlen($fullMarkdown)." characters\n";
 
 } catch (Exception $e) {
     echo 'Error: '.$e->getMessage()."\n";

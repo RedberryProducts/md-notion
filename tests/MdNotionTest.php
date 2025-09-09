@@ -281,43 +281,43 @@ it('can create instance with empty pageId', function () {
 it('can set pageId using setPage method', function () {
     $mdNotion = MdNotion::make();
     $result = $mdNotion->setPage($this->pageId);
-    
+
     expect($result)->toBeInstanceOf(MdNotion::class);
     expect($result)->toBe($mdNotion); // Should return same instance for chaining
 });
 
 it('throws exception when calling full() without pageId', function () {
     $mdNotion = MdNotion::make();
-    
-    expect(fn() => $mdNotion->full())
+
+    expect(fn () => $mdNotion->full())
         ->toThrow(InvalidArgumentException::class, 'Page ID must be set');
 });
 
 it('throws exception when calling pages() without pageId', function () {
     $mdNotion = MdNotion::make();
-    
-    expect(fn() => $mdNotion->pages())
+
+    expect(fn () => $mdNotion->pages())
         ->toThrow(InvalidArgumentException::class, 'Page ID must be set');
 });
 
 it('throws exception when calling databases() without pageId', function () {
     $mdNotion = MdNotion::make();
-    
-    expect(fn() => $mdNotion->databases())
+
+    expect(fn () => $mdNotion->databases())
         ->toThrow(InvalidArgumentException::class, 'Page ID must be set');
 });
 
 it('throws exception when calling content().get() without pageId', function () {
     $mdNotion = MdNotion::make();
-    
-    expect(fn() => $mdNotion->content()->get())
+
+    expect(fn () => $mdNotion->content()->get())
         ->toThrow(InvalidArgumentException::class, 'Page ID must be set');
 });
 
 it('throws exception when calling content().read() without pageId', function () {
     $mdNotion = MdNotion::make();
-    
-    expect(fn() => $mdNotion->content()->read())
+
+    expect(fn () => $mdNotion->content()->read())
         ->toThrow(InvalidArgumentException::class, 'Page ID must be set');
 });
 
@@ -336,7 +336,7 @@ it('works after setting pageId with setPage method', function () {
 
     $mdNotion = MdNotion::make();
     $pages = $mdNotion->setPage($this->pageId)->pages();
-    
+
     expect($pages)->toBeInstanceOf(\Illuminate\Support\Collection::class);
 });
 

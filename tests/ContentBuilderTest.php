@@ -21,15 +21,15 @@ beforeEach(function () {
 
 it('validates pageId in get() method', function () {
     $contentBuilder = new ContentBuilder('', $this->mockPageReader, $this->mockDatabaseReader);
-    
-    expect(fn() => $contentBuilder->get())
+
+    expect(fn () => $contentBuilder->get())
         ->toThrow(InvalidArgumentException::class, 'Page ID must be set');
 });
 
 it('validates pageId in read() method', function () {
     $contentBuilder = new ContentBuilder('', $this->mockPageReader, $this->mockDatabaseReader);
-    
-    expect(fn() => $contentBuilder->read())
+
+    expect(fn () => $contentBuilder->read())
         ->toThrow(InvalidArgumentException::class, 'Page ID must be set');
 });
 
@@ -68,7 +68,7 @@ it('passes correct variables to blade template in read method', function () {
 
     $contentBuilder = new ContentBuilder($this->pageId, $this->mockPageReader, $this->mockDatabaseReader);
     $contentBuilder->withPages()->withDatabases();
-    
+
     $markdown = $contentBuilder->read();
 
     // Verify that the template has access to the variables we pass

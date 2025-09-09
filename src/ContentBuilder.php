@@ -80,7 +80,7 @@ class ContentBuilder
 
         // Use Blade template to render markdown
         $template = config('md-notion.templates.page_markdown', 'md-notion::page-md');
-        
+
         return view($template, [
             'page' => $page,
             'withDatabases' => $this->withDatabases,

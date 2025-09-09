@@ -10,7 +10,7 @@ use RedberryProducts\MdNotion\Services\PageReader;
 class MdNotion
 {
     public function __construct(
-        private string $pageId = '',
+        private string $pageId,
         private PageReader $pageReader,
         private DatabaseReader $databaseReader
     ) {}
@@ -101,7 +101,7 @@ class MdNotion
 
         // Build complete markdown recursively using Blade template
         $template = config('md-notion.templates.full_markdown', 'md-notion::full-md');
-        
+
         return view($template, [
             'page' => $page,
         ])->render();
