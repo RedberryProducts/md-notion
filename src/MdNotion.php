@@ -10,7 +10,7 @@ use RedberryProducts\MdNotion\Services\PageReader;
 class MdNotion
 {
     public function __construct(
-        private string $pageId,
+        private string $pageId = '',
         private PageReader $pageReader,
         private DatabaseReader $databaseReader
     ) {}
@@ -18,9 +18,29 @@ class MdNotion
     /**
      * Create a new MdNotion instance for the given page ID
      */
-    public static function make(string $pageId): self
+    public static function make(string $pageId = ''): self
     {
         return app(self::class, ['pageId' => $pageId]);
+    }
+
+    /**
+     * Set the page ID for this instance
+     */
+    public function setPage(string $pageId): self
+    {
+        $this->pageId = $pageId;
+
+        return $this;
+    }
+
+    /**
+     * Validate that pageId is set
+     */
+    private function validatePageId(): void
+    {
+        if (empty($this->pageId)) {
+            throw new \InvalidArgumentException('Page ID must be set. Use setPage() method or provide pageId when creating the instance.');
+        }
     }
 
     /**
@@ -28,6 +48,7 @@ class MdNotion
      */
     public function pages(): Collection
     {
+        $this->validatePageId();
         $page = $this->pageReader->read($this->pageId);
 
         return $page->getChildPages();
@@ -38,6 +59,7 @@ class MdNotion
      */
     public function databases(): Collection
     {
+        $this->validatePageId();
         $page = $this->pageReader->read($this->pageId);
 
         return $page->getChildDatabases();
@@ -60,6 +82,7 @@ class MdNotion
      */
     public function full(): string
     {
+        $this->validatePageId();
         $page = $this->pageReader->read($this->pageId);
 
         // Read all child content recursively
@@ -76,47 +99,11 @@ class MdNotion
             $page->readAllPagesContent($this->pageReader);
         }
 
-        // Build complete markdown recursively
-        return $this->buildFullMarkdown($page);
-    }
-
-    /**
-     * Build complete markdown content recursively
-     */
-    private function buildFullMarkdown(Page $page, int $level = 1): string
-    {
-        $markdown = '';
-
-        // Add page title and content
-        $markdown .= $page->renderTitle($level)."\n\n";
-        if ($page->hasContent()) {
-            $markdown .= $page->getContent()."\n\n";
-        }
-
-        // Add child databases
-        if ($page->hasChildDatabases()) {
-            foreach ($page->getChildDatabases() as $database) {
-                $markdown .= $database->renderTitle(min($level + 1, 3))."\n\n";
-                if ($database->hasTableContent()) {
-                    $markdown .= $database->getTableContent()."\n\n";
-                }
-
-                // Add content of database items (pages within the database)
-                if ($database->hasChildPages()) {
-                    foreach ($database->getChildPages() as $itemPage) {
-                        $markdown .= $this->buildFullMarkdown($itemPage, min($level + 2, 3));
-                    }
-                }
-            }
-        }
-
-        // Add child pages recursively
-        if ($page->hasChildPages()) {
-            foreach ($page->getChildPages() as $childPage) {
-                $markdown .= $this->buildFullMarkdown($childPage, min($level + 1, 3));
-            }
-        }
-
-        return $markdown;
+        // Build complete markdown recursively using Blade template
+        $template = config('md-notion.templates.full_markdown', 'md-notion::full-md');
+        
+        return view($template, [
+            'page' => $page,
+        ])->render();
     }
 }

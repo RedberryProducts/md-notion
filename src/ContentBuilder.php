@@ -39,10 +39,21 @@ class ContentBuilder
     }
 
     /**
+     * Validate that pageId is set
+     */
+    private function validatePageId(): void
+    {
+        if (empty($this->pageId)) {
+            throw new \InvalidArgumentException('Page ID must be set. Use setPage() method or provide pageId when creating the instance.');
+        }
+    }
+
+    /**
      * Get the Page object with all requested content
      */
     public function get(): Page
     {
+        $this->validatePageId();
         // Read the main page
         $page = $this->pageReader->read($this->pageId);
 
@@ -64,38 +75,16 @@ class ContentBuilder
      */
     public function read(): string
     {
+        $this->validatePageId();
         $page = $this->get();
 
-        $markdown = '';
-
-        // Add main page title and content
-        $markdown .= $page->renderTitle(1)."\n\n";
-        if ($page->hasContent()) {
-            $markdown .= $page->getContent()."\n\n";
-        }
-
-        // Add child databases content
-        if ($this->withDatabases && $page->hasChildDatabases()) {
-            $markdown .= "## Databases\n\n";
-            foreach ($page->getChildDatabases() as $database) {
-                $markdown .= $database->renderTitle(3)."\n\n";
-                if ($database->hasTableContent()) {
-                    $markdown .= $database->getTableContent()."\n\n";
-                }
-            }
-        }
-
-        // Add child pages content
-        if ($this->withPages && $page->hasChildPages()) {
-            $markdown .= "## Child Pages\n\n";
-            foreach ($page->getChildPages() as $childPage) {
-                $markdown .= $childPage->renderTitle(3)."\n\n";
-                if ($childPage->hasContent()) {
-                    $markdown .= $childPage->getContent()."\n\n";
-                }
-            }
-        }
-
-        return trim($markdown);
+        // Use Blade template to render markdown
+        $template = config('md-notion.templates.page_markdown', 'md-notion::page-md');
+        
+        return view($template, [
+            'page' => $page,
+            'withDatabases' => $this->withDatabases,
+            'withPages' => $this->withPages,
+        ])->render();
     }
 }

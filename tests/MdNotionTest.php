@@ -272,3 +272,112 @@ it('supports method chaining for content builder', function () {
     expect($result)->toBeString();
     expect($result)->toContain('# Main Page');
 });
+
+it('can create instance with empty pageId', function () {
+    $mdNotion = MdNotion::make();
+    expect($mdNotion)->toBeInstanceOf(MdNotion::class);
+});
+
+it('can set pageId using setPage method', function () {
+    $mdNotion = MdNotion::make();
+    $result = $mdNotion->setPage($this->pageId);
+    
+    expect($result)->toBeInstanceOf(MdNotion::class);
+    expect($result)->toBe($mdNotion); // Should return same instance for chaining
+});
+
+it('throws exception when calling full() without pageId', function () {
+    $mdNotion = MdNotion::make();
+    
+    expect(fn() => $mdNotion->full())
+        ->toThrow(InvalidArgumentException::class, 'Page ID must be set');
+});
+
+it('throws exception when calling pages() without pageId', function () {
+    $mdNotion = MdNotion::make();
+    
+    expect(fn() => $mdNotion->pages())
+        ->toThrow(InvalidArgumentException::class, 'Page ID must be set');
+});
+
+it('throws exception when calling databases() without pageId', function () {
+    $mdNotion = MdNotion::make();
+    
+    expect(fn() => $mdNotion->databases())
+        ->toThrow(InvalidArgumentException::class, 'Page ID must be set');
+});
+
+it('throws exception when calling content().get() without pageId', function () {
+    $mdNotion = MdNotion::make();
+    
+    expect(fn() => $mdNotion->content()->get())
+        ->toThrow(InvalidArgumentException::class, 'Page ID must be set');
+});
+
+it('throws exception when calling content().read() without pageId', function () {
+    $mdNotion = MdNotion::make();
+    
+    expect(fn() => $mdNotion->content()->read())
+        ->toThrow(InvalidArgumentException::class, 'Page ID must be set');
+});
+
+it('works after setting pageId with setPage method', function () {
+    $mainPage = Page::from([
+        'id' => $this->pageId,
+        'title' => 'Main Page',
+        'content' => 'Main content',
+    ]);
+
+    $this->mockPageReader
+        ->shouldReceive('read')
+        ->with($this->pageId)
+        ->once()
+        ->andReturn($mainPage);
+
+    $mdNotion = MdNotion::make();
+    $pages = $mdNotion->setPage($this->pageId)->pages();
+    
+    expect($pages)->toBeInstanceOf(\Illuminate\Support\Collection::class);
+});
+
+it('uses blade templates for read() method', function () {
+    $mainPage = Page::from([
+        'id' => $this->pageId,
+        'title' => 'Test Page',
+        'content' => 'Test content',
+    ]);
+
+    $this->mockPageReader
+        ->shouldReceive('read')
+        ->with($this->pageId)
+        ->once()
+        ->andReturn($mainPage);
+
+    $mdNotion = MdNotion::make($this->pageId);
+    $markdown = $mdNotion->content()->read();
+
+    // Should contain rendered Blade template output
+    expect($markdown)->toContain('# Test Page');
+    expect($markdown)->toContain('Test content');
+});
+
+it('uses blade templates for full() method', function () {
+    $mainPage = Page::from([
+        'id' => $this->pageId,
+        'title' => 'Test Page',
+        'content' => 'Test content',
+    ]);
+
+    $this->mockPageReader
+        ->shouldReceive('read')
+        ->with($this->pageId)
+        ->once()
+        ->andReturn($mainPage);
+
+    $mdNotion = MdNotion::make($this->pageId);
+    $markdown = $mdNotion->full();
+
+    // Should contain rendered Blade template output
+    expect($markdown)->toContain('# Test Page');
+    expect($markdown)->toContain('Test content');
+});
