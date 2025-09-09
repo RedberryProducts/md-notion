@@ -28,11 +28,24 @@ class DatabaseReader
         $database = Database::from($databaseData);
 
         // Query database data source only once
-        $queryResponse = $this->sdk->act()->queryDataSource($databaseId, null);
-        $queryData = $queryResponse->json();
+        if (isset($databaseData['data_sources']) && is_array($databaseData['data_sources'])) {
+            foreach ($databaseData['data_sources'] as $dataSource) {
+                $dataSourceId = $dataSource['id'] ?? null;
+                if ($dataSourceId) {
+                    // Query the data source to get its content
+                    $queryResponse = $this->sdk->act()->queryDataSource($dataSourceId, null);
+                    $queryData = $queryResponse->json();
+                    // Convert query data to markdown table
+                    $tableContent = $this->databaseTable->convertQueryToMarkdownTable($queryData);
+                    // Optionally, add data source name as a note above the table
+                    $name = $dataSource['name'] ?? '---';
+                    $newTableContent = $database->getTableContent() . "\n\n_source {$name}_\n\n" . $tableContent;
+                    $database->setTableContent($newTableContent);
+                }
+            }
+        }
 
         // Resolve database as markdown content using DatabaseTable service
-        $tableContent = $this->databaseTable->convertQueryToMarkdownTable($queryData);
         $database->setTableContent($tableContent);
 
         // Resolve database items as collection of Page objects

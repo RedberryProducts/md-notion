@@ -33,7 +33,7 @@ class ColumnListAdapter extends BaseBlockAdapter
             // Add column number as title
             $columnNumber = $index + 1;
             $columns[] = [
-                'title' => "Column {$columnNumber}",
+                'title' => "**Column {$columnNumber}**",
                 'content' => trim($columnAdapter->toMarkdown($columnBlock)),
             ];
         }

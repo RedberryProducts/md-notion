@@ -27,6 +27,7 @@ class ColumnAdapter extends BaseBlockAdapter
         // Process each child block using BlockAdapterFactory
         $contents = [];
         foreach ($contentBlocks['results'] ?? [] as $childBlock) {
+
             // Create adapter based on block type
             $type = $childBlock['type'];
 

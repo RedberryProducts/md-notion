@@ -17,6 +17,7 @@ use RedberryProducts\MdNotion\Services\PageReader;
 use RedberryProducts\MdNotion\Services\DatabaseReader;
 use RedberryProducts\MdNotion\Services\BlockRegistry;
 use RedberryProducts\MdNotion\Services\DatabaseTable;
+use RedberryProducts\MdNotion\Adapters\BlockAdapterFactory;
 
 // Set up Laravel container
 $container = new Container;
@@ -66,7 +67,8 @@ $token = include __DIR__.'/notion-token.php';
 $notion = new Notion($token, '2025-09-03');
 
 // Create services
-$blockRegistry = new BlockRegistry;
+$mdNotionConfig = include __DIR__.'/config/md-notion.php';
+$blockRegistry = new BlockRegistry(new BlockAdapterFactory($notion, $mdNotionConfig['adapters'] ?? []));
 $databaseTable = new DatabaseTable;
 $pageReader = new PageReader($notion, $blockRegistry);
 $databaseReader = new DatabaseReader($notion, $databaseTable);

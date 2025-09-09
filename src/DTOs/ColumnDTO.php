@@ -11,6 +11,6 @@ class ColumnDTO extends BlockDTO
 
     protected function fromArray(array $data): void
     {
-        $this->widthRatio = $data['width_ratio'];
+        $this->widthRatio = $data['width_ratio'] ?? 1.0;
     }
 }

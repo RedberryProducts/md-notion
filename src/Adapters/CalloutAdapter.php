@@ -22,6 +22,9 @@ class CalloutAdapter extends BaseBlockAdapter
 
         $icon = $this->processIcon($dto->icon);
 
+        // @todo: process children if any block (rare for callout, but possible)
+        // Check example in src\Adapters\ColumnAdapter.php
+
         return [
             'content' => $this->processRichText($dto->richText),
             'icon' => $icon,

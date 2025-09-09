@@ -50,6 +50,8 @@ class PageReader
             } else {
                 // Convert regular blocks to markdown
                 $markdown .= $this->processBlock($block);
+                $markdown .= "\n";
+                $markdown .= "\n";
             }
         }
 

@@ -4,17 +4,9 @@ namespace RedberryProducts\MdNotion\Services;
 
 use Illuminate\Support\Collection;
 use RedberryProducts\MdNotion\Objects\Page;
-use RedberryProducts\MdNotion\SDK\Notion;
 
 class DatabaseTable
 {
-    public function __construct(
-        private Notion $sdk
-    ) {}
-
-
-
-
 
     /**
      * Convert query response data to markdown table
@@ -32,6 +24,7 @@ class DatabaseTable
 
         // We need to get database properties from somewhere - for now, extract from results
         $properties = $this->extractPropertiesFromResults($results);
+
 
         // Build markdown table
         $markdown = $this->buildMarkdownTable($results, $properties);
@@ -85,22 +78,35 @@ class DatabaseTable
     private function getTableColumns(array $properties): array
     {
         $columns = [];
+        $titleColumn = null;
 
         // Prioritize certain property types
         $priorityTypes = ['title', 'rich_text', 'url', 'email', 'date', 'number', 'select', 'multi_select'];
         
         foreach ($properties as $key => $property) {
             if (in_array($property['type'], $priorityTypes)) {
-                $columns[] = [
+                $column = [
                     'key' => $key,
                     'title' => $property['name'] ?? $key,
                     'type' => $property['type']
                 ];
+                
+                // If this is a title column, store it separately
+                if ($property['type'] === 'title') {
+                    $titleColumn = $column;
+                } else {
+                    $columns[] = $column;
+                }
             }
         }
 
-        // Limit to first 5 columns to keep table readable
-        return array_slice($columns, 0, 5);
+        // Add title column as first item if it exists
+        if ($titleColumn) {
+            array_unshift($columns, $titleColumn);
+        }
+
+        // Limit to first 7 columns to keep table readable
+        return array_slice($columns, 0, 7);
     }
 
     /**
@@ -176,14 +182,15 @@ class DatabaseTable
         if (empty($results)) {
             return [];
         }
-
+        
         $properties = [];
         $firstResult = $results[0];
         $resultProperties = $firstResult['properties'] ?? [];
 
         foreach ($resultProperties as $key => $property) {
             // Extract property type and create a basic schema
-            $type = array_keys($property)[0] ?? 'unknown';
+            $type = $property["type"] ?? 'unknown';
+
             $properties[$key] = [
                 'name' => $key,
                 'type' => $type

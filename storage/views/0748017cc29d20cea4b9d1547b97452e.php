@@ -1,5 +1,6 @@
 <?php $__currentLoopData = $columns; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $column): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-**<?php echo e($column['title']); ?>**
+<?php echo e($column['title']); ?>
+
 
 <?php echo html_entity_decode($column['content']); ?>
 

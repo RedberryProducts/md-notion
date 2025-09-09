@@ -32,7 +32,7 @@ test('database reader converts query data to markdown', function () {
                 'object' => 'page',
                 'id' => 'item-1',
                 'properties' => [
-                    'Name' => ['title' => [['plain_text' => 'Item 1']]]
+                    'Name' => ["type" => "title", 'title' => [['plain_text' => 'Item 1']]]
                 ]
             ]
         ]
