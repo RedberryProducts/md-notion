@@ -35,6 +35,6 @@ function buildFullMarkdown($page, $level = 1) {
     
     return $markdown;
 }
-@endphp
 
-{!! buildFullMarkdown($page) !!}
+echo trim(buildFullMarkdown($page));
+@endphp

@@ -1,5 +1,17 @@
 <?php
 
+/**
+ * MdNotion Facade Example Script
+ * 
+ * This script demonstrates the usage of the MdNotion facade with all its methods.
+ * It fetches a complete Notion page with all nested content and saves it as markdown.
+ * 
+ * Requirements:
+ * - notion-token.php file with your Notion integration token
+ * - storage/views directory with write permissions  
+ * - Valid page ID with proper integration permissions
+ */
+
 require_once __DIR__.'/vendor/autoload.php';
 
 use Illuminate\Container\Container;
@@ -101,6 +113,11 @@ $token = include __DIR__.'/notion-token.php';
 $container->singleton(Notion::class, function () use ($token) {
     return new Notion($token, '2025-09-03');
 });
+
+// Create storage directory if it doesn't exist
+if (!file_exists(__DIR__.'/storage/views')) {
+    mkdir(__DIR__.'/storage/views', 0755, true);
+}
 
 // Page ID to fetch (replace with your actual page ID)
 $pageId = '263d9316605a806f9e95e1377a46ff3e'; // Example page ID

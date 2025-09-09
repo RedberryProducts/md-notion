@@ -1,10 +1,12 @@
 {!! $page->renderTitle(1) !!}
 
 @if($page->hasContent())
+
 {!! $page->getContent() !!}
 
 @endif
 @if($withDatabases && $page->hasChildDatabases())
+
 ## Databases
 
 @foreach($page->getChildDatabases() as $database)
@@ -17,6 +19,7 @@
 @endforeach
 @endif
 @if($withPages && $page->hasChildPages())
+
 ## Child Pages
 
 @foreach($page->getChildPages() as $childPage)
