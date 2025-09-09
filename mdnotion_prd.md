@@ -126,24 +126,25 @@ $markdown = $MdNotion->full();
 
 ### Step 3: Content Manager
 
--   Class `ContentManager`:
-    -   Fetches blocks from Notion.
-    -   Resolves block type to adapter via registry.
+-   Class `PageBuilder`:
+    -   Fetches blocks from Notion.✔️
+    -   Resolves block type to adapter via registry. ✔️
     -   Recursively processes children. ✔️
-    -   Returns page object with child pages, child databases and Markdown content
--   Registry pattern: `BlockRegistry::resolve($blockType)` returns adapter.
--   Add child pages reading to Page object via ContentManager
--   Add child databeses reading to Page object
--   Add DB items reading to Database object: Create DatabaseTable class which resolves sources query into Markdown table and return markdown content as well for each child page (DB item)
+    -   Returns page object with child pages, child databases and Markdown content ✔️
+-   Registry pattern: `BlockRegistry::resolve($blockType)` returns adapter. ✔️
+-   Add child pages reading to Page object via ContentManager ✔️
+-   Add child databeses reading to Page object ✔️
+-   Add DB items reading to Database object: Create DatabaseTable class which resolves sources query into Markdown table and return markdown content as well for each child page (DB item) ✔️
 
 ### Step 4: Features Implementation
 
 Wrap it all in MdNotion class:
 
 -   `pages()` – fetches block children, returns only pages.
+-   `databases()` – fetches block children, returns only databases.
 -   `content()->get()` – returns Markdown for current page.
--   `content()->withPages()` – recursively fetches child pages.
--   `content()->withDatabases()` – fetches databases.
+-   `content()->withPages()->get()` – recursively fetches child pages.
+-   `content()->withDatabases()->get()` – fetches databases.
 -   `full()` – concatenates all results.
 
 ### Step 5: Testing & QA

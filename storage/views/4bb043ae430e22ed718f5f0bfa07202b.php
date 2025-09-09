@@ -1,0 +1,2 @@
+[<?php echo e($domain); ?> <?php if(!empty($caption)): ?> - <?php echo e($caption); ?> <?php else: ?> - Bookmark <?php endif; ?>](<?php echo e($url); ?>)
+<?php /**PATH C:\Users\admin\Desktop\md-notion/resources/views/blocks/bookmark.blade.php ENDPATH**/ ?>

@@ -77,6 +77,9 @@ $markdown = $MdNotion->content()->withPages()->withDatabases()->get();
 // Get content of current and child pages as whole MD string
 $markdown = $MdNotion->full();
 
+// Read all nested pages recursively (WARNING: Many API requests!)
+$page->readAllPagesContent($pageReader); // Too many requests, may slow down your application or hit Notion API limits
+
 ```
 
 ## Testing
