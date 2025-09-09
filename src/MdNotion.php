@@ -65,6 +65,11 @@ class MdNotion
         // Read all child content recursively
         if ($page->hasChildDatabases()) {
             $page->readChildDatabasesContent($this->databaseReader);
+
+            // Read content of all database items (pages within databases)
+            foreach ($page->getChildDatabases() as $database) {
+                $database->readItemsContent($this->pageReader);
+            }
         }
 
         if ($page->hasChildPages()) {
@@ -94,6 +99,13 @@ class MdNotion
                 $markdown .= $database->renderTitle(min($level + 1, 3))."\n\n";
                 if ($database->hasTableContent()) {
                     $markdown .= $database->getTableContent()."\n\n";
+                }
+
+                // Add content of database items (pages within the database)
+                if ($database->hasChildPages()) {
+                    foreach ($database->getChildPages() as $itemPage) {
+                        $markdown .= $this->buildFullMarkdown($itemPage, min($level + 2, 3));
+                    }
                 }
             }
         }
