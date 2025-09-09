@@ -4,17 +4,11 @@ use RedberryProducts\MdNotion\Objects\Database;
 use RedberryProducts\MdNotion\Objects\Page;
 use RedberryProducts\MdNotion\Services\DatabaseReader;
 use RedberryProducts\MdNotion\Services\DatabaseTable;
-use RedberryProducts\MdNotion\Services\ContentManager;
-use RedberryProducts\MdNotion\Services\BlockRegistry;
-use RedberryProducts\MdNotion\Adapters\BlockAdapterFactory;
 use RedberryProducts\MdNotion\SDK\Notion;
 
 test('database reader can be instantiated', function () {
     $notion = new Notion('test-key', '2022-06-28');
-    $factory = new BlockAdapterFactory($notion, []);
-    $registry = new BlockRegistry($factory);
-    $contentManager = new ContentManager($notion, $registry);
-    $databaseTable = new DatabaseTable($notion, $contentManager);
+    $databaseTable = new DatabaseTable($notion);
     
     $databaseReader = new DatabaseReader($notion, $databaseTable);
     
@@ -23,10 +17,7 @@ test('database reader can be instantiated', function () {
 
 test('database reader converts query data to markdown', function () {
     $notion = new Notion('test-key', '2022-06-28');
-    $factory = new BlockAdapterFactory($notion, []);
-    $registry = new BlockRegistry($factory);
-    $contentManager = new ContentManager($notion, $registry);
-    $databaseTable = new DatabaseTable($notion, $contentManager);
+    $databaseTable = new DatabaseTable($notion);
     
     $databaseReader = new DatabaseReader($notion, $databaseTable);
     
@@ -55,10 +46,7 @@ test('database reader converts query data to markdown', function () {
 
 test('database reader handles empty database', function () {
     $notion = new Notion('test-key', '2022-06-28');
-    $factory = new BlockAdapterFactory($notion, []);
-    $registry = new BlockRegistry($factory);
-    $contentManager = new ContentManager($notion, $registry);
-    $databaseTable = new DatabaseTable($notion, $contentManager);
+    $databaseTable = new DatabaseTable($notion);
     
     $databaseReader = new DatabaseReader($notion, $databaseTable);
     

@@ -9,63 +9,12 @@ use RedberryProducts\MdNotion\SDK\Notion;
 class DatabaseTable
 {
     public function __construct(
-        private Notion $sdk,
-        private ContentManager $contentManager
+        private Notion $sdk
     ) {}
 
-    /**
-     * Fetch database items and convert to markdown table
-     *
-     * @param string $databaseId The database ID
-     * @return string The markdown table representation
-     */
-    public function fetchDatabaseAsMarkdownTable(string $databaseId): string
-    {
-        // Query database to get all items
-        $queryResponse = $this->sdk->act()->queryDataSource($databaseId, null);
-        $results = $queryResponse->json()['results'] ?? [];
 
-        if (empty($results)) {
-            return "<!-- Empty database: {$databaseId} -->\n\n";
-        }
 
-        // Get database schema to understand properties
-        $databaseResponse = $this->sdk->act()->getDatabase($databaseId);
-        $databaseData = $databaseResponse->json();
-        $properties = $databaseData['properties'] ?? [];
 
-        // Build markdown table
-        $markdown = $this->buildMarkdownTable($results, $properties);
-
-        return $markdown;
-    }
-
-    /**
-     * Fetch database items as Page objects with markdown content
-     *
-     * @param string $databaseId The database ID
-     * @return Collection<Page> Collection of pages with content
-     */
-    public function fetchDatabaseItems(string $databaseId): Collection
-    {
-        $queryResponse = $this->sdk->act()->queryDataSource($databaseId, null);
-        $results = $queryResponse->json()['results'] ?? [];
-
-        $pages = collect();
-
-        foreach ($results as $result) {
-            // Create page object from database item
-            $page = Page::from($result);
-            
-            // Fetch content for each page
-            $pageWithContent = $this->contentManager->fetchPageContent($page->getId());
-            $page->setContent($pageWithContent->getContent());
-            
-            $pages->push($page);
-        }
-
-        return $pages;
-    }
 
     /**
      * Convert query response data to markdown table

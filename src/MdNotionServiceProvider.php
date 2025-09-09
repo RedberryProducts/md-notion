@@ -5,7 +5,6 @@ namespace RedberryProducts\MdNotion;
 use RedberryProducts\MdNotion\Adapters\BlockAdapterFactory;
 use RedberryProducts\MdNotion\SDK\Notion;
 use RedberryProducts\MdNotion\Services\BlockRegistry;
-use RedberryProducts\MdNotion\Services\ContentManager;
 use RedberryProducts\MdNotion\Services\DatabaseReader;
 use RedberryProducts\MdNotion\Services\DatabaseTable;
 use RedberryProducts\MdNotion\Services\PageReader;
@@ -54,13 +53,6 @@ class MdNotionServiceProvider extends PackageServiceProvider
             );
         });
 
-        $this->app->singleton(ContentManager::class, function ($app) {
-            return new ContentManager(
-                $app->make(Notion::class),
-                $app->make(BlockRegistry::class)
-            );
-        });
-
         $this->app->singleton(PageReader::class, function ($app) {
             return new PageReader(
                 $app->make(Notion::class),
@@ -77,8 +69,7 @@ class MdNotionServiceProvider extends PackageServiceProvider
 
         $this->app->singleton(DatabaseTable::class, function ($app) {
             return new DatabaseTable(
-                $app->make(Notion::class),
-                $app->make(ContentManager::class)
+                $app->make(Notion::class)
             );
         });
     }

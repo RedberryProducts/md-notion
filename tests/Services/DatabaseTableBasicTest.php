@@ -1,21 +1,18 @@
 <?php
 
 use RedberryProducts\MdNotion\Services\DatabaseTable;
-use RedberryProducts\MdNotion\Services\ContentManager;
 use RedberryProducts\MdNotion\SDK\Notion;
 
 test('database table can be instantiated', function () {
     $notion = new Notion('test-key', '2022-06-28');
-    $contentManager = Mockery::mock(ContentManager::class);
-    $databaseTable = new DatabaseTable($notion, $contentManager);
+    $databaseTable = new DatabaseTable($notion);
     
     expect($databaseTable)->toBeInstanceOf(DatabaseTable::class);
 });
 
 test('database table extracts rich text correctly', function () {
     $notion = new Notion('test-key', '2022-06-28');
-    $contentManager = Mockery::mock(ContentManager::class);
-    $databaseTable = new DatabaseTable($notion, $contentManager);
+    $databaseTable = new DatabaseTable($notion);
     
     // Test the private extractRichText method via reflection
     $reflection = new \ReflectionClass($databaseTable);
@@ -34,8 +31,7 @@ test('database table extracts rich text correctly', function () {
 
 test('database table extracts property values correctly', function () {
     $notion = new Notion('test-key', '2022-06-28');
-    $contentManager = Mockery::mock(ContentManager::class);
-    $databaseTable = new DatabaseTable($notion, $contentManager);
+    $databaseTable = new DatabaseTable($notion);
     
     // Test the private extractPropertyValue method via reflection
     $reflection = new \ReflectionClass($databaseTable);
