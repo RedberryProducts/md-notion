@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
@@ -33,18 +33,18 @@ $container->singleton('files', fn () => new Filesystem);
 $container->singleton('blade.compiler', function ($app) {
     return new BladeCompiler(
         $app['files'],
-        __DIR__.'/storage/views'
+        __DIR__.'/../storage/views'
     );
 });
 
 // Set up view finder
 $viewFinder = new FileViewFinder(
     $container['files'],
-    [__DIR__.'/resources/views']
+    [__DIR__.'/../resources/views']
 );
 
 // Add namespace for our views
-$viewFinder->addNamespace('md-notion', __DIR__.'/resources/views');
+$viewFinder->addNamespace('md-notion', __DIR__.'/../resources/views');
 
 // Set up view factory
 $resolver = new EngineResolver;
@@ -63,11 +63,11 @@ $container->instance('view', $factory);
 View::setFacadeApplication($container);
 
 // Initialize the real Notion SDK with token
-$token = include __DIR__.'/notion-token.php';
+$token = include __DIR__.'/../notion-token.php';
 $notion = new Notion($token, '2025-09-03');
 
 // Create services
-$mdNotionConfig = include __DIR__.'/config/md-notion.php';
+$mdNotionConfig = include __DIR__.'/../config/md-notion.php';
 $blockRegistry = new BlockRegistry(new BlockAdapterFactory($notion, $mdNotionConfig['adapters'] ?? []));
 $databaseTable = new DatabaseTable;
 $pageReader = new PageReader($notion, $blockRegistry);
@@ -91,14 +91,14 @@ try {
     // Read content for child databases if any
     if ($page->hasChildDatabases()) {
         echo "Reading child databases content...\n";
-        $page->readChildDatabasesContent($databaseReader);
+        $page->readChildDatabasesContent();
         echo "Child databases content loaded.\n\n";
     }
 
     // Read content for child pages if any
     if ($page->hasChildPages()) {
         echo "Reading child pages content...\n";
-        $page->readChildPagesContent($pageReader);
+        $page->readChildPagesContent();
         echo "Child pages content loaded.\n\n";
     }
 

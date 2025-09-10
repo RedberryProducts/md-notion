@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
@@ -59,7 +59,7 @@ View::setFacadeApplication($container);
 use RedberryProducts\MdNotion\SDK\Notion;
 
 // Load table JSON
-$tableJson = file_get_contents(__DIR__.'/BlockJsonExamples/TableJson.json');
+$tableJson = file_get_contents(__DIR__.'/../BlockJsonExamples/TableJson.json');
 $tableBlock = json_decode($tableJson, true);
 
 // Create mock children response based on example data
@@ -225,7 +225,7 @@ $childrenResponse = [
 ];
 
 // Initialize the real Notion SDK with token
-$token = include __DIR__.'/notion-token.php';
+$token = include __DIR__.'/../notion-token.php';
 $notion = new Notion($token, '2025-09-03');
 
 // Create and configure the adapter

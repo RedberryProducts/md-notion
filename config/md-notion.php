@@ -14,6 +14,14 @@ return [
     'default_page_size' => env('NOTION_DEFAULT_PAGE_SIZE', 100),
 
     /**
+     * Blade templates for markdown rendering
+     */
+    'templates' => [
+        'page_markdown' => 'md-notion::page-md',
+        'full_markdown' => 'md-notion::full-md',
+    ],
+
+    /**
      * Block type to adapter class mappings.
      * Keys are Notion block types from the JSON response.
      * Values are fully qualified adapter class names.
@@ -39,7 +47,5 @@ return [
         'column' => \RedberryProducts\MdNotion\Adapters\ColumnAdapter::class,
         'table' => \RedberryProducts\MdNotion\Adapters\TableAdapter::class,
         'table_row' => \RedberryProducts\MdNotion\Adapters\TableRowAdapter::class,
-        // 'child_page' => \RedberryProducts\MdNotion\Adapters\ChildPageAdapter::class,
-        // 'child_database' => \RedberryProducts\MdNotion\Adapters\ChildDatabaseAdapter::class,
     ],
 ];

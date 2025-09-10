@@ -9,6 +9,9 @@ test('page object can use page reader methods', function () {
     $page = new Page(['id' => 'test-page-id']);
     $pageReader = Mockery::mock(PageReader::class);
 
+    // Bind the mock to the container so app() can resolve it
+    app()->instance(PageReader::class, $pageReader);
+
     // Mock page reader methods
     $pageReader->shouldReceive('read')
         ->with('child-1')
@@ -25,7 +28,7 @@ test('page object can use page reader methods', function () {
     ]));
 
     // Test the readChildPagesContent method
-    $page->readChildPagesContent($pageReader);
+    $page->readChildPagesContent();
     expect($page->getChildPages())->toHaveCount(2);
     expect($page->getChildPages()->first()->getContent())->toBe('Child content 1');
 });
@@ -33,6 +36,9 @@ test('page object can use page reader methods', function () {
 test('page object can recursively read all nested child pages content', function () {
     $page = new Page(['id' => 'root-page']);
     $pageReader = Mockery::mock(PageReader::class);
+
+    // Bind the mock to the container so app() can resolve it
+    app()->instance(PageReader::class, $pageReader);
 
     // Create nested page structure
     $childPage1 = new Page(['id' => 'child-1']);
@@ -60,7 +66,7 @@ test('page object can recursively read all nested child pages content', function
     $page->setChildPages(collect([$childPage1, $childPage2]));
 
     // Test the readAllPagesContent method (recursive)
-    $page->readAllPagesContent($pageReader);
+    $page->readAllPagesContent();
 
     // Verify the structure
     expect($page->getChildPages())->toHaveCount(2);
@@ -78,6 +84,9 @@ test('page object can read child databases content', function () {
     $page = new Page(['id' => 'test-page-id']);
     $databaseReader = Mockery::mock(DatabaseReader::class);
 
+    // Bind the mock to the container so app() can resolve it
+    app()->instance(DatabaseReader::class, $databaseReader);
+
     // Mock database reader methods
     $databaseReader->shouldReceive('read')
         ->with('db-1')
@@ -94,7 +103,7 @@ test('page object can read child databases content', function () {
     ]));
 
     // Test the readChildDatabasesContent method
-    $page->readChildDatabasesContent($databaseReader);
+    $page->readChildDatabasesContent();
     expect($page->getChildDatabases())->toHaveCount(2);
     expect($page->getChildDatabases()->first()->getTableContent())->toContain('| Name | Status |');
     expect($page->getChildDatabases()->last()->getTableContent())->toContain('| Title | Category |');
@@ -103,6 +112,9 @@ test('page object can read child databases content', function () {
 test('database object can use database reader and page reader methods', function () {
     $database = new Database(['id' => 'test-db-id']);
     $pageReader = Mockery::mock(PageReader::class);
+
+    // Bind the mock to the container so app() can resolve it
+    app()->instance(PageReader::class, $pageReader);
 
     // Mock page reader methods for database items
     $pageReader->shouldReceive('read')
@@ -120,7 +132,7 @@ test('database object can use database reader and page reader methods', function
     ]));
 
     // Test the readItemsContent method
-    $database->readItemsContent($pageReader);
+    $database->readItemsContent();
     expect($database->getChildPages())->toHaveCount(2);
     expect($database->getChildPages()->first()->getContent())->toBe('Item 1 content');
 });

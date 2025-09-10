@@ -67,7 +67,7 @@ trait HasTitle
         $title = '';
 
         // Try different title structures
-        if (isset($data['title'])) {
+        if (isset($data['title']) && ! empty($data['title'])) {
             $title = $this->processTitle($data['title']);
         } elseif (isset($data['child_page']['title'])) {
             $title = $this->processTitle($data['child_page']['title']);
@@ -76,6 +76,9 @@ trait HasTitle
         } elseif (isset($data['properties']['title']['title'])) {
             // Handle object context where title is in properties.title.title
             $title = $this->processTitle($data['properties']['title']['title']);
+        } elseif (isset($data['properties']['Name']['title'][0]['plain_text'])) {
+            // Handle object context where title is in properties.Name.title
+            $title = $this->processTitle($data['properties']['Name']['title'][0]['plain_text']);
         }
 
         // Only update title if we found one in the new data

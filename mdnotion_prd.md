@@ -30,18 +30,23 @@ use RedberryProducts\Facades\MdNotion;
 $pageId = '263d9316605a806f9e95e1377a46ff3e';
 $MdNotion = MdNotion::make($pageId);
 
-// Get pages
+// Get pages collection
 $pages = $MdNotion->pages();
 
-// Get page content as markdown string
+// Get Page object
 $markdown = $MdNotion->content()->get();
+// Get Page as Markdown
+$markdown = $MdNotion->content()->read();
 
-// Get full content as array of pages with title, id and content in MD (current + child pages)
+// Get Page with all child pages  and DBs content
 $markdown = $MdNotion->content()->withPages()->get();
 $markdown = $MdNotion->content()->withDatabases()->get();
 $markdown = $MdNotion->content()->withPages()->withDatabases()->get();
 
-// Get content of current and child pages as whole MD string
+// Get Markdown string of current page + child databases as tables + child pages
+$markdown = $MdNotion->content()->withPages()->withDatabases()->read();
+
+// Get content of current and all nested pages as whole MD string
 $markdown = $MdNotion->full();
 ```
 
@@ -140,24 +145,26 @@ $markdown = $MdNotion->full();
 
 Wrap it all in MdNotion class:
 
--   `pages()` – fetches block children, returns only pages.
--   `databases()` – fetches block children, returns only databases.
--   `content()->get()` – returns Markdown for current page.
--   `content()->withPages()->get()` – recursively fetches child pages.
--   `content()->withDatabases()->get()` – fetches databases.
--   `full()` – concatenates all results.
+-   `pages()` – fetches block children using `PageReader`, returns only child pages as collection.✔️
+-   `databases()` – fetches block children using `PageReader`, returns only child databases as collection.✔️
+-   `content()` – uses `PageReader` and fetches data for current page.✔️
+-   `content()->withPages()` – fetches all child pages content.✔️
+-   `content()->withDatabases()` – fetches all databases.✔️
+-   `->get()` - Finalizing method: returns Page object✔️
+-   `->read()` - Finalizing method: returns Page as markdown✔️
+-   `full()` – Fetches databases and pages recursively, concatenates all results.✔️
 
 ### Step 5: Testing & QA
 
 -   Use example JSON (`page-block-children-api.json`) build and to test adapters. ✔️
 -   Unit tests for each adapter to confirm correct Markdown output. ✔️
--   Integration tests for recursive fetch & full content.
+-   Integration tests for recursive fetch & full content. ✔️
 
 ### Step 6: Documentation
 
--   Write clear usage docs in `README.md`.
--   Include example blocks and expected Markdown output.
--   Provide extendability guide for adding new block adapters.
+-   Write clear usage docs in `README.md`. ✔️
+-   Include example blocks and expected Markdown output. ✔️
+-   Provide extendability guide for adding new block adapters. ✔️
 
 ---
 

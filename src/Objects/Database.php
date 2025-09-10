@@ -32,9 +32,10 @@ class Database extends BaseObject
     /**
      * Read items content using PageReader service
      */
-    public function readItemsContent(\RedberryProducts\MdNotion\Services\PageReader $pageReader): static
+    public function readItemsContent(): static
     {
         if ($this->hasChildPages()) {
+            $pageReader = app(\RedberryProducts\MdNotion\Services\PageReader::class);
             $this->setChildPages(
                 $this->getChildPages()->map(function (Page $page) use ($pageReader) {
                     return $pageReader->read($page->getId());
@@ -69,6 +70,20 @@ class Database extends BaseObject
     public function hasTableContent(): bool
     {
         return ! empty($this->tableContent);
+    }
+
+    /**
+     * Fetch and populate this database using DatabaseReader
+     */
+    public function fetch(): static
+    {
+        $databaseReader = app(\RedberryProducts\MdNotion\Services\DatabaseReader::class);
+        $fetchedDatabase = $databaseReader->read($this->getId());
+
+        // Copy all data from the fetched database to this instance
+        $this->fill($fetchedDatabase->toArray());
+
+        return $this;
     }
 
     /**
