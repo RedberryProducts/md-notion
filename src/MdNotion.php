@@ -99,11 +99,61 @@ class MdNotion
             $page->readAllPagesContent($this->pageReader);
         }
 
+        // Build structured data for template
+        $data = $this->buildFullMarkdownData($page);
+
         // Build complete markdown recursively using Blade template
         $template = config('md-notion.templates.full_markdown', 'md-notion::full-md');
 
-        return view($template, [
-            'page' => $page,
-        ])->render();
+        return view($template, $data)->render();
+    }
+
+    /**
+     * Build structured data for full markdown template
+     */
+    private function buildFullMarkdownData($page, $level = 1): array
+    {
+        $currentPage = [
+            'title' => $page->renderTitle($level),
+            'content' => $page->hasContent() ? $page->getContent() : null,
+            'hasContent' => $page->hasContent(),
+        ];
+
+        $childDatabases = [];
+        if ($page->hasChildDatabases()) {
+            foreach ($page->getChildDatabases() as $database) {
+                $databaseData = [
+                    'title' => $database->renderTitle(min($level + 1, 3)),
+                    'table_content' => $database->hasTableContent() ? $database->getTableContent() : null,
+                    'hasTableContent' => $database->hasTableContent(),
+                    'child_pages' => [],
+                ];
+
+                // Add content of database items (pages within the database)
+                if ($database->hasChildPages()) {
+                    foreach ($database->getChildPages() as $itemPage) {
+                        $databaseData['child_pages'][] = $this->buildFullMarkdownData($itemPage, min($level + 2, 3));
+                    }
+                }
+
+                $childDatabases[] = $databaseData;
+            }
+        }
+
+        $childPages = [];
+        if ($page->hasChildPages()) {
+            foreach ($page->getChildPages() as $childPage) {
+                $childPages[] = $this->buildFullMarkdownData($childPage, min($level + 1, 3));
+            }
+        }
+
+        return [
+            'current_page' => $currentPage,
+            'child_databases' => $childDatabases,
+            'child_pages' => $childPages,
+            'hasChildDatabases' => $page->hasChildDatabases(),
+            'hasChildPages' => $page->hasChildPages(),
+            'level' => $level,
+        ];
     }
 }

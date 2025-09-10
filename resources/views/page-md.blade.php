@@ -1,32 +1,32 @@
-{!! $page->renderTitle(1) !!}
+{!! $current_page['title'] !!}
 
-@if($page->hasContent())
+@if($current_page['hasContent'])
 
-{!! $page->getContent() !!}
+{!! $current_page['content'] !!}
 
 @endif
-@if($withDatabases && $page->hasChildDatabases())
+@if($hasChildDatabases)
 
 ## Databases
 
-@foreach($page->getChildDatabases() as $database)
-{!! $database->renderTitle(3) !!}
+@foreach($child_databases as $database)
+{!! $database['title'] !!}
 
-@if($database->hasTableContent())
-{!! $database->getTableContent() !!}
+@if($database['hasTableContent'])
+{!! $database['table_content'] !!}
 
 @endif
 @endforeach
 @endif
-@if($withPages && $page->hasChildPages())
+@if($hasChildPages)
 
 ## Child Pages
 
-@foreach($page->getChildPages() as $childPage)
-{!! $childPage->renderTitle(3) !!}
+@foreach($child_pages as $childPage)
+{!! $childPage['title'] !!}
 
-@if($childPage->hasContent())
-{!! $childPage->getContent() !!}
+@if($childPage['hasContent'])
+{!! $childPage['content'] !!}
 
 @endif
 @endforeach

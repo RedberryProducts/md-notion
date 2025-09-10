@@ -1,40 +1,38 @@
-{{-- Recursive function to build full markdown --}}
+{{-- Recursive function to render full markdown --}}
 @php
-function buildFullMarkdown($page, $level = 1) {
+function renderFullMarkdown($data) {
     $markdown = '';
     
-    // Add page title and content
-    $markdown .= $page->renderTitle($level) . "\n\n";
-    if ($page->hasContent()) {
-        $markdown .= $page->getContent() . "\n\n";
+    // Render current page
+    $markdown .= $data['current_page']['title'] . "\n\n";
+    if ($data['current_page']['hasContent']) {
+        $markdown .= $data['current_page']['content'] . "\n\n";
     }
     
-    // Add child databases
-    if ($page->hasChildDatabases()) {
-        foreach ($page->getChildDatabases() as $database) {
-            $markdown .= $database->renderTitle(min($level + 1, 3)) . "\n\n";
-            if ($database->hasTableContent()) {
-                $markdown .= $database->getTableContent() . "\n\n";
+    // Render child databases
+    if ($data['hasChildDatabases']) {
+        foreach ($data['child_databases'] as $database) {
+            $markdown .= $database['title'] . "\n\n";
+            if ($database['hasTableContent']) {
+                $markdown .= $database['table_content'] . "\n\n";
             }
             
-            // Add content of database items (pages within the database)
-            if ($database->hasChildPages()) {
-                foreach ($database->getChildPages() as $itemPage) {
-                    $markdown .= buildFullMarkdown($itemPage, min($level + 2, 3));
-                }
+            // Render database items (pages within database)
+            foreach ($database['child_pages'] as $itemPage) {
+                $markdown .= renderFullMarkdown($itemPage);
             }
         }
     }
     
-    // Add child pages recursively
-    if ($page->hasChildPages()) {
-        foreach ($page->getChildPages() as $childPage) {
-            $markdown .= buildFullMarkdown($childPage, min($level + 1, 3));
+    // Render child pages
+    if ($data['hasChildPages']) {
+        foreach ($data['child_pages'] as $childPage) {
+            $markdown .= renderFullMarkdown($childPage);
         }
     }
     
     return $markdown;
 }
 
-echo trim(buildFullMarkdown($page));
+echo trim(renderFullMarkdown(get_defined_vars()));
 @endphp
