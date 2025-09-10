@@ -67,7 +67,7 @@ trait HasTitle
         $title = '';
 
         // Try different title structures
-        if (isset($data['title']) && !empty($data['title'])) {
+        if (isset($data['title']) && ! empty($data['title'])) {
             $title = $this->processTitle($data['title']);
         } elseif (isset($data['child_page']['title'])) {
             $title = $this->processTitle($data['child_page']['title']);
