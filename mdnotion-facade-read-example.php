@@ -123,7 +123,7 @@ try {
     $mdNotion = MdNotion::make($pageId);
 
     echo "Fetching page content with child pages and databases...\n";
-    
+
     // Get full content and immediately save to file to free memory
     $filename = __DIR__.'/notion-read.md';
     file_put_contents($filename, $mdNotion->content()->withPages()->withDatabases()->read());

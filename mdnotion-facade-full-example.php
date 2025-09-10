@@ -123,11 +123,11 @@ try {
     $mdNotion = MdNotion::make($pageId);
 
     echo "Fetching full page content...\n";
-    
+
     // Get full content and immediately save to file to free memory
     $filename = __DIR__.'/notion-full.md';
     file_put_contents($filename, $mdNotion->full());
-    
+
     echo "Complete page content exported to: notion-full.md\n";
 
 } catch (Exception $e) {
