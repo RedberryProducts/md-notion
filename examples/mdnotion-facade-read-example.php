@@ -11,7 +11,7 @@
  * - Valid page ID with proper integration permissions
  */
 
-require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
@@ -41,18 +41,18 @@ $container->singleton('files', fn () => new Filesystem);
 $container->singleton('blade.compiler', function ($app) {
     return new BladeCompiler(
         $app['files'],
-        __DIR__.'/storage/views'
+        __DIR__.'/../storage/views'
     );
 });
 
 // Set up view finder
 $viewFinder = new FileViewFinder(
     $container['files'],
-    [__DIR__.'/resources/views']
+    [__DIR__.'/../resources/views']
 );
 
 // Add namespace for our views
-$viewFinder->addNamespace('md-notion', __DIR__.'/resources/views');
+$viewFinder->addNamespace('md-notion', __DIR__.'/../resources/views');
 
 // Set up view factory
 $resolver = new EngineResolver;
@@ -75,7 +75,7 @@ View::setFacadeApplication($container);
 
 // Load configuration
 $container->instance('config', [
-    'md-notion' => include __DIR__.'/config/md-notion.php',
+    'md-notion' => include __DIR__.'/../config/md-notion.php',
 ]);
 
 function config($key = null, $default = null)
@@ -101,7 +101,7 @@ $serviceProvider = new MdNotionServiceProvider($container);
 $serviceProvider->packageRegistered();
 
 // Initialize the real Notion SDK with token
-$token = include __DIR__.'/notion-token.php';
+$token = include __DIR__.'/../notion-token.php';
 
 // Override the Notion service with actual token
 $container->singleton(Notion::class, function () use ($token) {
@@ -109,8 +109,8 @@ $container->singleton(Notion::class, function () use ($token) {
 });
 
 // Create storage directory if it doesn't exist
-if (! file_exists(__DIR__.'/storage/views')) {
-    mkdir(__DIR__.'/storage/views', 0755, true);
+if (! file_exists(__DIR__.'/../storage/views')) {
+    mkdir(__DIR__.'/../storage/views', 0755, true);
 }
 
 // Page ID to fetch (replace with your actual page ID)

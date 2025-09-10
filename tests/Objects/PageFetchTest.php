@@ -5,6 +5,9 @@ use RedberryProducts\MdNotion\Services\PageReader;
 
 beforeEach(function () {
     $this->mockPageReader = Mockery::mock(PageReader::class);
+    
+    // Bind the mock to the container so app() can resolve it
+    app()->instance(PageReader::class, $this->mockPageReader);
 });
 
 afterEach(function () {
@@ -35,7 +38,7 @@ it('can fetch content using PageReader', function () {
         ->andReturn($fetchedPage);
 
     // Fetch content
-    $result = $originalPage->fetch($this->mockPageReader);
+    $result = $originalPage->fetch();
 
     // Should return the same instance
     expect($result)->toBe($originalPage);
@@ -62,7 +65,7 @@ it('preserves object identity after fetch', function () {
         ->andReturn($fetchedPage);
 
     $beforeFetch = $originalPage;
-    $afterFetch = $originalPage->fetch($this->mockPageReader);
+    $afterFetch = $originalPage->fetch();
 
     expect($beforeFetch)->toBe($afterFetch);
     expect($originalPage->getContent())->toBe('New content');

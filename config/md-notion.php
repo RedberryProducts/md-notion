@@ -47,7 +47,5 @@ return [
         'column' => \RedberryProducts\MdNotion\Adapters\ColumnAdapter::class,
         'table' => \RedberryProducts\MdNotion\Adapters\TableAdapter::class,
         'table_row' => \RedberryProducts\MdNotion\Adapters\TableRowAdapter::class,
-        // 'child_page' => \RedberryProducts\MdNotion\Adapters\ChildPageAdapter::class,
-        // 'child_database' => \RedberryProducts\MdNotion\Adapters\ChildDatabaseAdapter::class,
     ],
 ];

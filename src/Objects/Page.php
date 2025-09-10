@@ -104,9 +104,10 @@ class Page extends BaseObject
     /**
      * Read child pages content using PageReader service
      */
-    public function readChildPagesContent(\RedberryProducts\MdNotion\Services\PageReader $pageReader): static
+    public function readChildPagesContent(): static
     {
         if ($this->hasChildPages()) {
+            $pageReader = app(\RedberryProducts\MdNotion\Services\PageReader::class);
             $this->setChildPages(
                 $this->getChildPages()->map(function (Page $page) use ($pageReader) {
                     return $pageReader->read($page->getId());
@@ -120,9 +121,10 @@ class Page extends BaseObject
     /**
      * Read child databases content using DatabaseReader service
      */
-    public function readChildDatabasesContent(\RedberryProducts\MdNotion\Services\DatabaseReader $databaseReader): static
+    public function readChildDatabasesContent(): static
     {
         if ($this->hasChildDatabases()) {
+            $databaseReader = app(\RedberryProducts\MdNotion\Services\DatabaseReader::class);
             $this->setChildDatabases(
                 $this->getChildDatabases()->map(function (Database $database) use ($databaseReader) {
                     return $databaseReader->read($database->getId());
@@ -139,15 +141,15 @@ class Page extends BaseObject
      * WARNING: This method makes recursive API calls and may result in many requests.
      * It may slow down your application or hit Notion API limits.
      */
-    public function readAllPagesContent(\RedberryProducts\MdNotion\Services\PageReader $pageReader): static
+    public function readAllPagesContent(): static
     {
         if ($this->hasChildPages()) {
             // First, read the content of immediate child pages
-            $this->readChildPagesContent($pageReader);
+            $this->readChildPagesContent();
 
             // Then recursively read content of nested child pages
-            $this->getChildPages()->each(function (Page $page) use ($pageReader) {
-                $page->readAllPagesContent($pageReader);
+            $this->getChildPages()->each(function (Page $page) {
+                $page->readAllPagesContent();
             });
         }
 
@@ -157,8 +159,9 @@ class Page extends BaseObject
     /**
      * Fetch and populate this page using PageReader
      */
-    public function fetch(\RedberryProducts\MdNotion\Services\PageReader $pageReader): static
+    public function fetch(): static
     {
+        $pageReader = app(\RedberryProducts\MdNotion\Services\PageReader::class);
         $fetchedPage = $pageReader->read($this->getId());
 
         // Copy all data from the fetched page to this instance

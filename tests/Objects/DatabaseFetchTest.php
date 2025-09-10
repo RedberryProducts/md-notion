@@ -5,6 +5,9 @@ use RedberryProducts\MdNotion\Services\DatabaseReader;
 
 beforeEach(function () {
     $this->mockDatabaseReader = Mockery::mock(DatabaseReader::class);
+    
+    // Bind the mock to the container so app() can resolve it
+    app()->instance(DatabaseReader::class, $this->mockDatabaseReader);
 });
 
 afterEach(function () {
@@ -34,7 +37,7 @@ it('can fetch content using DatabaseReader', function () {
         ->andReturn($fetchedDatabase);
 
     // Fetch content
-    $result = $originalDatabase->fetch($this->mockDatabaseReader);
+    $result = $originalDatabase->fetch();
 
     // Should return the same instance
     expect($result)->toBe($originalDatabase);
@@ -61,7 +64,7 @@ it('preserves object identity after fetch', function () {
         ->andReturn($fetchedDatabase);
 
     $beforeFetch = $originalDatabase;
-    $afterFetch = $originalDatabase->fetch($this->mockDatabaseReader);
+    $afterFetch = $originalDatabase->fetch();
 
     expect($beforeFetch)->toBe($afterFetch);
     expect($originalDatabase->getTableContent())->toBe('Table content');
