@@ -145,14 +145,14 @@ $markdown = $MdNotion->full();
 
 Wrap it all in MdNotion class:
 
--   `pages()` – fetches block children using `PageReader`, returns only child pages as collection.
--   `databases()` – fetches block children using `PageReader`, returns only child databases as collection.
--   `content()` – uses `PageReader` and fetches data for current page.
--   `content()->withPages()` – fetches all child pages content.
--   `content()->withDatabases()` – fetches all databases.
--   `->get()` - Finalizing method: returns Page object
--   `->read()` - Finalizing method: returns Page as markdown
--   `full()` – Fetches databases and pages recursively, concatenates all results.
+-   `pages()` – fetches block children using `PageReader`, returns only child pages as collection.✔️
+-   `databases()` – fetches block children using `PageReader`, returns only child databases as collection.✔️
+-   `content()` – uses `PageReader` and fetches data for current page.✔️
+-   `content()->withPages()` – fetches all child pages content.✔️
+-   `content()->withDatabases()` – fetches all databases.✔️
+-   `->get()` - Finalizing method: returns Page object✔️
+-   `->read()` - Finalizing method: returns Page as markdown✔️
+-   `full()` – Fetches databases and pages recursively, concatenates all results.✔️
 
 ### Step 5: Testing & QA
 

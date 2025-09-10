@@ -33,4 +33,4 @@ testbench.yaml
 
 # Auth
 notion-token.php
-/storage/views/
+/storage/views/*.php
