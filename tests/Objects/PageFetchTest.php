@@ -5,7 +5,7 @@ use RedberryProducts\MdNotion\Services\PageReader;
 
 beforeEach(function () {
     $this->mockPageReader = Mockery::mock(PageReader::class);
-    
+
     // Bind the mock to the container so app() can resolve it
     app()->instance(PageReader::class, $this->mockPageReader);
 });

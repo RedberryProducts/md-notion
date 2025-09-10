@@ -5,7 +5,7 @@ use RedberryProducts\MdNotion\Services\DatabaseReader;
 
 beforeEach(function () {
     $this->mockDatabaseReader = Mockery::mock(DatabaseReader::class);
-    
+
     // Bind the mock to the container so app() can resolve it
     app()->instance(DatabaseReader::class, $this->mockDatabaseReader);
 });

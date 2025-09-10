@@ -8,7 +8,7 @@ use RedberryProducts\MdNotion\Services\PageReader;
 test('page object can use page reader methods', function () {
     $page = new Page(['id' => 'test-page-id']);
     $pageReader = Mockery::mock(PageReader::class);
-    
+
     // Bind the mock to the container so app() can resolve it
     app()->instance(PageReader::class, $pageReader);
 
@@ -36,7 +36,7 @@ test('page object can use page reader methods', function () {
 test('page object can recursively read all nested child pages content', function () {
     $page = new Page(['id' => 'root-page']);
     $pageReader = Mockery::mock(PageReader::class);
-    
+
     // Bind the mock to the container so app() can resolve it
     app()->instance(PageReader::class, $pageReader);
 
@@ -83,7 +83,7 @@ test('page object can recursively read all nested child pages content', function
 test('page object can read child databases content', function () {
     $page = new Page(['id' => 'test-page-id']);
     $databaseReader = Mockery::mock(DatabaseReader::class);
-    
+
     // Bind the mock to the container so app() can resolve it
     app()->instance(DatabaseReader::class, $databaseReader);
 
@@ -112,7 +112,7 @@ test('page object can read child databases content', function () {
 test('database object can use database reader and page reader methods', function () {
     $database = new Database(['id' => 'test-db-id']);
     $pageReader = Mockery::mock(PageReader::class);
-    
+
     // Bind the mock to the container so app() can resolve it
     app()->instance(PageReader::class, $pageReader);
 
