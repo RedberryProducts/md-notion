@@ -20,7 +20,7 @@ class MdNotion
      */
     public static function make(string $pageId = ''): self
     {
-        return app(self::class, ['pageId' => $pageId]);
+        return new self($pageId, app(PageReader::class), app(DatabaseReader::class));
     }
 
     /**

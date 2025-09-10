@@ -1,16 +1,19 @@
 <?php
 
 it('can render page-md blade template', function () {
-    $page = \RedberryProducts\MdNotion\Objects\Page::from([
+    $page = [
         'id' => 'test-id',
-        'title' => 'Test Page',
+        'title' => '# Test Page',
         'content' => 'Test content',
-    ]);
+        'hasContent' => true,
+    ];
 
     $rendered = view('md-notion::page-md', [
-        'page' => $page,
+        'current_page' => $page,
         'withDatabases' => false,
         'withPages' => false,
+        'hasChildDatabases' => false,
+        'hasChildPages' => false,
     ])->render();
 
     expect($rendered)->toContain('# Test Page');
@@ -18,14 +21,17 @@ it('can render page-md blade template', function () {
 });
 
 it('can render full-md blade template', function () {
-    $page = \RedberryProducts\MdNotion\Objects\Page::from([
+    $page = [
         'id' => 'test-id',
-        'title' => 'Test Page',
+        'title' => '# Test Page',
+        'hasContent' => true,
         'content' => 'Test content',
-    ]);
+    ];
 
     $rendered = view('md-notion::full-md', [
-        'page' => $page,
+        'current_page' => $page,
+        'hasChildDatabases' => false,
+        'hasChildPages' => false,
     ])->render();
 
     expect($rendered)->toContain('# Test Page');

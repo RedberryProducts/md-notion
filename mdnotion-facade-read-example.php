@@ -2,7 +2,6 @@
 
 /**
  * MdNotion Facade Example Script
- *
  * This script demonstrates the usage of the MdNotion facade with all its methods.
  * It fetches a complete Notion page with all nested content and saves it as markdown.
  *
@@ -69,6 +68,9 @@ $factory = new Factory(
 
 // Bind view factory to container
 $container->instance('view', $factory);
+$container->bind('Illuminate\Contracts\View\Factory', function () use ($factory) {
+    return $factory;
+});
 View::setFacadeApplication($container);
 
 // Load configuration
@@ -76,33 +78,23 @@ $container->instance('config', [
     'md-notion' => include __DIR__.'/config/md-notion.php',
 ]);
 
-// Set up the config accessor
-$container->singleton('config', function () use ($container) {
-    return new class($container['config'])
-    {
-        private $config;
+function config($key = null, $default = null)
+{
+    if (is_null($key)) {
+        return app('config');
+    }
 
-        public function __construct($config)
-        {
-            $this->config = $config;
-        }
+    return app('config')[$key] ?? $default;
+}
 
-        public function get($key, $default = null)
-        {
-            $keys = explode('.', $key);
-            $value = $this->config;
+function app($abstract = null, array $parameters = [])
+{
+    if (is_null($abstract)) {
+        return Container::getInstance();
+    }
 
-            foreach ($keys as $k) {
-                if (! isset($value[$k])) {
-                    return $default;
-                }
-                $value = $value[$k];
-            }
-
-            return $value;
-        }
-    };
-});
+    return Container::getInstance()->make($abstract, $parameters);
+}
 
 // Register the MdNotionServiceProvider services
 $serviceProvider = new MdNotionServiceProvider($container);
@@ -124,44 +116,19 @@ if (! file_exists(__DIR__.'/storage/views')) {
 // Page ID to fetch (replace with your actual page ID)
 $pageId = '263d9316605a806f9e95e1377a46ff3e'; // Example page ID
 
-echo "Fetching full page content with MdNotion facade...\n";
+echo "Fetching page content with MdNotion facade...\n";
 
 try {
-    // Use the facade to get full page content
-    $markdown = MdNotion::make($pageId)->full();
+    // Create a single instance of MdNotion
+    $mdNotion = MdNotion::make($pageId);
 
-    echo "Page fetched successfully!\n";
-    echo 'Total markdown length: '.strlen($markdown)." characters\n\n";
+    echo "Fetching page content with child pages and databases...\n";
+    
+    // Get full content and immediately save to file to free memory
+    $filename = __DIR__.'/notion-read.md';
+    file_put_contents($filename, $mdNotion->content()->withPages()->withDatabases()->read());
 
-    // Save to file
-    $filename = __DIR__.'/notion-full.md';
-    file_put_contents($filename, $markdown);
-
-    echo "Complete page content exported to: notion-full.md\n";
-
-    // Also demonstrate other API methods
-    echo "\nTesting other API methods:\n";
-
-    // Get pages collection
-    $pages = MdNotion::make($pageId)->pages();
-    echo 'Child pages count: '.$pages->count()."\n";
-
-    // Get databases collection
-    $databases = MdNotion::make($pageId)->databases();
-    echo 'Child databases count: '.$databases->count()."\n";
-
-    // Get Page object with specific content
-    $page = MdNotion::make($pageId)->content()->withPages()->withDatabases()->get();
-    echo 'Page title: '.$page->getTitle()."\n";
-
-    // Get Page as Markdown with specific content
-    $contentMarkdown = MdNotion::make($pageId)->content()->withPages()->withDatabases()->read();
-    echo 'Content markdown length: '.strlen($contentMarkdown)." characters\n";
-
-    // Demonstrate setPage method
-    $mdNotion = MdNotion::make();
-    $fullMarkdown = $mdNotion->setPage($pageId)->full();
-    echo 'Using setPage method - markdown length: '.strlen($fullMarkdown)." characters\n";
+    echo "Complete page content exported to: notion-read.md\n";
 
 } catch (Exception $e) {
     echo 'Error: '.$e->getMessage()."\n";

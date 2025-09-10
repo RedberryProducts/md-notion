@@ -7,7 +7,7 @@
 @endif
 @if($hasChildDatabases)
 
-## Databases
+## Child Databases
 
 @foreach($child_databases as $database)
 {!! $database['title'] !!}
