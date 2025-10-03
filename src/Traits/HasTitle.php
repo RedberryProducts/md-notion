@@ -1,8 +1,8 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Traits;
+namespace Redberry\MdNotion\Traits;
 
-use RedberryProducts\MdNotion\DTOs\RichTextDTO;
+use Redberry\MdNotion\DTOs\RichTextDTO;
 
 trait HasTitle
 {

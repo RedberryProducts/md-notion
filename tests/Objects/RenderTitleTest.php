@@ -1,7 +1,7 @@
 <?php
 
-use RedberryProducts\MdNotion\Objects\Database;
-use RedberryProducts\MdNotion\Objects\Page;
+use Redberry\MdNotion\Objects\Database;
+use Redberry\MdNotion\Objects\Page;
 
 test('renderTitle generates markdown heading with level 1', function () {
     $page = new Page([

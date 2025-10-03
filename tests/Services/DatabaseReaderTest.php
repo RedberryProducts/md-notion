@@ -1,9 +1,9 @@
 <?php
 
-use RedberryProducts\MdNotion\Objects\Database;
-use RedberryProducts\MdNotion\SDK\Notion;
-use RedberryProducts\MdNotion\Services\DatabaseReader;
-use RedberryProducts\MdNotion\Services\DatabaseTable;
+use Redberry\MdNotion\Objects\Database;
+use Redberry\MdNotion\SDK\Notion;
+use Redberry\MdNotion\Services\DatabaseReader;
+use Redberry\MdNotion\Services\DatabaseTable;
 
 test('database reader can be instantiated', function () {
     $notion = new Notion('test-key', '2022-06-28');

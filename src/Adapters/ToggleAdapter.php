@@ -1,8 +1,8 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Adapters;
+namespace Redberry\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\ToggleDTO;
+use Redberry\MdNotion\DTOs\ToggleDTO;
 
 class ToggleAdapter extends BaseBlockAdapter
 {
@@ -32,7 +32,7 @@ class ToggleAdapter extends BaseBlockAdapter
         foreach ($contentBlocks['results'] as $childBlock) {
             // Create adapter based on block type
             $type = $childBlock['type'];
-            $adapterClass = '\\RedberryProducts\\MdNotion\\Adapters\\'.ucfirst($type).'Adapter';
+            $adapterClass = '\\Redberry\\MdNotion\\Adapters\\'.ucfirst($type).'Adapter';
             if (class_exists($adapterClass)) {
                 $adapter = new $adapterClass;
             } else {

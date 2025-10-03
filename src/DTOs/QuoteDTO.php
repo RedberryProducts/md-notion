@@ -1,6 +1,6 @@
 <?php
 
-namespace RedberryProducts\MdNotion\DTOs;
+namespace Redberry\MdNotion\DTOs;
 
 class QuoteDTO extends BlockDTO
 {

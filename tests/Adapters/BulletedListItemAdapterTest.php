@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\BulletedListItemAdapter;
+use Redberry\MdNotion\Adapters\BulletedListItemAdapter;
 
 test('bulleted list item adapter converts block to markdown', function () {
     $block = [

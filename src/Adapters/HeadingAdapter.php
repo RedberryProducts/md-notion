@@ -1,8 +1,8 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Adapters;
+namespace Redberry\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\HeadingDTO;
+use Redberry\MdNotion\DTOs\HeadingDTO;
 
 class HeadingAdapter extends BaseBlockAdapter
 {

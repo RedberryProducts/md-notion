@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\ImageAdapter;
+use Redberry\MdNotion\Adapters\ImageAdapter;
 
 test('image adapter converts file type image block to markdown', function () {
     $block = [

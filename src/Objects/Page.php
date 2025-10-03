@@ -1,6 +1,6 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Objects;
+namespace Redberry\MdNotion\Objects;
 
 use Illuminate\Support\Collection;
 
@@ -107,7 +107,7 @@ class Page extends BaseObject
     public function readChildPagesContent(): static
     {
         if ($this->hasChildPages()) {
-            $pageReader = app(\RedberryProducts\MdNotion\Services\PageReader::class);
+            $pageReader = app(\Redberry\MdNotion\Services\PageReader::class);
             $this->setChildPages(
                 $this->getChildPages()->map(function (Page $page) use ($pageReader) {
                     return $pageReader->read($page->getId());
@@ -124,7 +124,7 @@ class Page extends BaseObject
     public function readChildDatabasesContent(): static
     {
         if ($this->hasChildDatabases()) {
-            $databaseReader = app(\RedberryProducts\MdNotion\Services\DatabaseReader::class);
+            $databaseReader = app(\Redberry\MdNotion\Services\DatabaseReader::class);
             $this->setChildDatabases(
                 $this->getChildDatabases()->map(function (Database $database) use ($databaseReader) {
                     return $databaseReader->read($database->getId());
@@ -161,7 +161,7 @@ class Page extends BaseObject
      */
     public function fetch(): static
     {
-        $pageReader = app(\RedberryProducts\MdNotion\Services\PageReader::class);
+        $pageReader = app(\Redberry\MdNotion\Services\PageReader::class);
         $fetchedPage = $pageReader->read($this->getId());
 
         // Copy all data from the fetched page to this instance

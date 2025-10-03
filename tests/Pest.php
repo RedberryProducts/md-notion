@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Tests\TestCase;
+use Redberry\MdNotion\Tests\TestCase;
 use Saloon\Http\Faking\MockClient;
 
 uses(TestCase::class)->in(__DIR__);

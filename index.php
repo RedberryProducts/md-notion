@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/vendor/autoload.php';
 
-use RedberryProducts\MdNotion\SDK\Notion;
+use Redberry\MdNotion\SDK\Notion;
 
 $token = include __DIR__.'/notion-token.php';
 $notion = new Notion($token, '2025-09-03');

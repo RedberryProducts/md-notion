@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\CalloutAdapter;
+use Redberry\MdNotion\Adapters\CalloutAdapter;
 
 test('callout adapter converts emoji block to markdown', function () {
     $block = [

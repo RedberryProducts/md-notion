@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\CodeAdapter;
+use Redberry\MdNotion\Adapters\CodeAdapter;
 
 test('code adapter converts code block to markdown', function () {
     $block = [

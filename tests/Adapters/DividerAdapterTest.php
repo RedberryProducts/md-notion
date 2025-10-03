@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\DividerAdapter;
+use Redberry\MdNotion\Adapters\DividerAdapter;
 
 test('divider adapter converts block to markdown', function () {
     $block = [

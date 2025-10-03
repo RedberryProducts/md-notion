@@ -1,8 +1,8 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Adapters;
+namespace Redberry\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\CodeDTO;
+use Redberry\MdNotion\DTOs\CodeDTO;
 
 class CodeAdapter extends BaseBlockAdapter
 {

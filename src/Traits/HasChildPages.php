@@ -1,9 +1,9 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Traits;
+namespace Redberry\MdNotion\Traits;
 
 use Illuminate\Support\Collection;
-use RedberryProducts\MdNotion\Objects\Page;
+use Redberry\MdNotion\Objects\Page;
 
 trait HasChildPages
 {

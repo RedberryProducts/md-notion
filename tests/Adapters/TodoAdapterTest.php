@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\TodoAdapter;
+use Redberry\MdNotion\Adapters\TodoAdapter;
 
 test('todo adapter converts unchecked block to markdown', function () {
     $block = [

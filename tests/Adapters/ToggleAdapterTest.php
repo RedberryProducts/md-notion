@@ -1,9 +1,9 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\ToggleAdapter;
-use RedberryProducts\MdNotion\DTOs\RichTextDTO;
-use RedberryProducts\MdNotion\DTOs\ToggleDTO;
-use RedberryProducts\MdNotion\SDK\Notion;
+use Redberry\MdNotion\Adapters\ToggleAdapter;
+use Redberry\MdNotion\DTOs\RichTextDTO;
+use Redberry\MdNotion\DTOs\ToggleDTO;
+use Redberry\MdNotion\SDK\Notion;
 
 it('converts toggle block to markdown', function () {
     // Create mock SDK response for children

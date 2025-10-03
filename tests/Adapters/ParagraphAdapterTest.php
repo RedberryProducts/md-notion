@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\ParagraphAdapter;
+use Redberry\MdNotion\Adapters\ParagraphAdapter;
 
 test('paragraph adapter converts block to markdown', function () {
     $block = [

@@ -1,8 +1,8 @@
 <?php
 
-namespace RedberryProducts\MdNotion\SDK;
+namespace Redberry\MdNotion\SDK;
 
-use RedberryProducts\MdNotion\SDK\Resource\Actions;
+use Redberry\MdNotion\SDK\Resource\Actions;
 use Saloon\Http\Auth\TokenAuthenticator;
 use Saloon\Http\Connector;
 

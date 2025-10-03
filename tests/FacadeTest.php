@@ -1,8 +1,8 @@
 <?php
 
-use RedberryProducts\MdNotion\Facades\MdNotion;
-use RedberryProducts\MdNotion\Objects\Page;
-use RedberryProducts\MdNotion\Services\PageReader;
+use Redberry\MdNotion\Facades\MdNotion;
+use Redberry\MdNotion\Objects\Page;
+use Redberry\MdNotion\Services\PageReader;
 
 beforeEach(function () {
     $this->mockPageReader = Mockery::mock(PageReader::class);
@@ -41,5 +41,5 @@ it('facade returns correct instance type', function () {
 
     $mdNotion = MdNotion::make($pageId);
 
-    expect($mdNotion)->toBeInstanceOf(\RedberryProducts\MdNotion\MdNotion::class);
+    expect($mdNotion)->toBeInstanceOf(\Redberry\MdNotion\MdNotion::class);
 });

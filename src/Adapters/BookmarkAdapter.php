@@ -1,8 +1,8 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Adapters;
+namespace Redberry\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\BookmarkDTO;
+use Redberry\MdNotion\DTOs\BookmarkDTO;
 
 class BookmarkAdapter extends BaseBlockAdapter
 {

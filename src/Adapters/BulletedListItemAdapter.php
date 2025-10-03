@@ -1,8 +1,8 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Adapters;
+namespace Redberry\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\BulletedListItemDTO;
+use Redberry\MdNotion\DTOs\BulletedListItemDTO;
 
 class BulletedListItemAdapter extends BaseBlockAdapter
 {

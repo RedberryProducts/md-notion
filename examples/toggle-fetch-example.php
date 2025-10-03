@@ -12,7 +12,7 @@ use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
-use RedberryProducts\MdNotion\Adapters\ToggleAdapter;
+use Redberry\MdNotion\Adapters\ToggleAdapter;
 
 // Set up Laravel container
 $container = new Container;
@@ -56,7 +56,7 @@ $factory = new Factory(
 // Bind view factory to container
 $container->instance('view', $factory);
 View::setFacadeApplication($container);
-use RedberryProducts\MdNotion\SDK\Notion;
+use Redberry\MdNotion\SDK\Notion;
 
 // Load toggle JSON
 $toggleJson = file_get_contents(__DIR__.'/../BlockJsonExamples/ToggleJson.json');

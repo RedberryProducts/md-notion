@@ -1,7 +1,7 @@
 <?php
 
-use RedberryProducts\MdNotion\Objects\Database;
-use RedberryProducts\MdNotion\Objects\Page;
+use Redberry\MdNotion\Objects\Database;
+use Redberry\MdNotion\Objects\Page;
 
 test('page object can handle icon data', function () {
     $pageData = [

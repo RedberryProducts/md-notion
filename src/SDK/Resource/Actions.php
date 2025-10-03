@@ -1,14 +1,14 @@
 <?php
 
-namespace RedberryProducts\MdNotion\SDK\Resource;
+namespace Redberry\MdNotion\SDK\Resource;
 
-use RedberryProducts\MdNotion\SDK\Requests\Actions\AddCommentToPage;
-use RedberryProducts\MdNotion\SDK\Requests\Actions\BlockChildren;
-use RedberryProducts\MdNotion\SDK\Requests\Actions\Database;
-use RedberryProducts\MdNotion\SDK\Requests\Actions\ListComments;
-use RedberryProducts\MdNotion\SDK\Requests\Actions\Page;
-use RedberryProducts\MdNotion\SDK\Requests\Actions\QueryDataSource;
-use RedberryProducts\MdNotion\SDK\Resource;
+use Redberry\MdNotion\SDK\Requests\Actions\AddCommentToPage;
+use Redberry\MdNotion\SDK\Requests\Actions\BlockChildren;
+use Redberry\MdNotion\SDK\Requests\Actions\Database;
+use Redberry\MdNotion\SDK\Requests\Actions\ListComments;
+use Redberry\MdNotion\SDK\Requests\Actions\Page;
+use Redberry\MdNotion\SDK\Requests\Actions\QueryDataSource;
+use Redberry\MdNotion\SDK\Resource;
 use Saloon\Http\Response;
 
 class Actions extends Resource

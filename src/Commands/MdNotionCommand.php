@@ -1,6 +1,6 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Commands;
+namespace Redberry\MdNotion\Commands;
 
 use Illuminate\Console\Command;
 

@@ -1,7 +1,7 @@
 <?php
 
-use RedberryProducts\MdNotion\SDK\Notion;
-use RedberryProducts\MdNotion\Services\DatabaseTable;
+use Redberry\MdNotion\SDK\Notion;
+use Redberry\MdNotion\Services\DatabaseTable;
 
 test('database table can be instantiated', function () {
     $notion = new Notion('test-key', '2022-06-28');

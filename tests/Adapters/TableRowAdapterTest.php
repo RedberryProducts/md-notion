@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\TableRowAdapter;
+use Redberry\MdNotion\Adapters\TableRowAdapter;
 
 test('table row adapter converts basic row to markdown', function () {
     $block = [

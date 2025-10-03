@@ -1,9 +1,9 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Adapters;
+namespace Redberry\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\RichTextDTO;
-use RedberryProducts\MdNotion\DTOs\TableRowDTO;
+use Redberry\MdNotion\DTOs\RichTextDTO;
+use Redberry\MdNotion\DTOs\TableRowDTO;
 
 class TableRowAdapter extends BaseBlockAdapter
 {

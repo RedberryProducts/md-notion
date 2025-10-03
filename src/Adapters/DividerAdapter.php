@@ -1,8 +1,8 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Adapters;
+namespace Redberry\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\DividerDTO;
+use Redberry\MdNotion\DTOs\DividerDTO;
 
 class DividerAdapter extends BaseBlockAdapter
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Adapters;
+namespace Redberry\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\QuoteDTO;
+use Redberry\MdNotion\DTOs\QuoteDTO;
 
 class QuoteAdapter extends BaseBlockAdapter
 {
