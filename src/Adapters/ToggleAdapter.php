@@ -33,7 +33,7 @@ class ToggleAdapter extends BaseBlockAdapter
             // Create adapter based on block type
             $type = $childBlock['type'];
             $className = str_replace('_', '', ucwords($type, '_'));
-            $adapterClass = '\\Redberry\\MdNotion\\Adapters\\' . $className . 'Adapter';
+            $adapterClass = '\\Redberry\\MdNotion\\Adapters\\'.$className.'Adapter';
             if (class_exists($adapterClass)) {
                 $adapter = new $adapterClass;
             } else {
