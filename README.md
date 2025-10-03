@@ -41,14 +41,7 @@ Don't forget to star the repo ⭐
 You can install the package via composer:
 
 ```bash
-composer require redberryproducts/md-notion
-```
-
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="md-notion-migrations"
-php artisan migrate
+composer require redberry/md-notion
 ```
 
 You can publish the config file with:
