@@ -34,4 +34,11 @@ class TestCase extends Orchestra
          }
          */
     }
+
+    protected function defineEnvironment($app)
+    {
+        // Configure the application environment for testing
+        $app['config']->set('app.debug', true);
+        $app['config']->set('app.env', 'testing');
+    }
 }
