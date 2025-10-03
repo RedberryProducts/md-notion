@@ -1,10 +1,10 @@
 <?php
 
-use RedberryProducts\MdNotion\MdNotion;
-use RedberryProducts\MdNotion\Objects\Database;
-use RedberryProducts\MdNotion\Objects\Page;
-use RedberryProducts\MdNotion\Services\DatabaseReader;
-use RedberryProducts\MdNotion\Services\PageReader;
+use Redberry\MdNotion\MdNotion;
+use Redberry\MdNotion\Objects\Database;
+use Redberry\MdNotion\Objects\Page;
+use Redberry\MdNotion\Services\DatabaseReader;
+use Redberry\MdNotion\Services\PageReader;
 
 beforeEach(function () {
     // Mock the PageReader

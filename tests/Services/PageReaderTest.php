@@ -1,9 +1,9 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\BlockAdapterFactory;
-use RedberryProducts\MdNotion\SDK\Notion;
-use RedberryProducts\MdNotion\Services\BlockRegistry;
-use RedberryProducts\MdNotion\Services\PageReader;
+use Redberry\MdNotion\Adapters\BlockAdapterFactory;
+use Redberry\MdNotion\SDK\Notion;
+use Redberry\MdNotion\Services\BlockRegistry;
+use Redberry\MdNotion\Services\PageReader;
 
 test('page reader can be instantiated', function () {
     $notion = new Notion('test-key', '2022-06-28');
@@ -18,7 +18,7 @@ test('page reader can be instantiated', function () {
 test('page reader processes blocks correctly', function () {
     $notion = new Notion('test-key', '2022-06-28');
     $adapterMap = [
-        'paragraph' => \RedberryProducts\MdNotion\Adapters\ParagraphAdapter::class,
+        'paragraph' => \Redberry\MdNotion\Adapters\ParagraphAdapter::class,
     ];
     $factory = new BlockAdapterFactory($notion, $adapterMap);
     $registry = new BlockRegistry($factory);

@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\BookmarkAdapter;
+use Redberry\MdNotion\Adapters\BookmarkAdapter;
 
 test('bookmark adapter converts block to markdown', function () {
     $block = [

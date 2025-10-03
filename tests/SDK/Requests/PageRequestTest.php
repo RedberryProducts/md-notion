@@ -1,7 +1,7 @@
 <?php
 
-use RedberryProducts\MdNotion\SDK\Notion;
-use RedberryProducts\MdNotion\SDK\Requests\Actions\Page;
+use Redberry\MdNotion\SDK\Notion;
+use Redberry\MdNotion\SDK\Requests\Actions\Page;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 

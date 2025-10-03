@@ -1,9 +1,9 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Services;
+namespace Redberry\MdNotion\Services;
 
-use RedberryProducts\MdNotion\Adapters\BlockAdapterFactory;
-use RedberryProducts\MdNotion\Adapters\BlockAdapterInterface;
+use Redberry\MdNotion\Adapters\BlockAdapterFactory;
+use Redberry\MdNotion\Adapters\BlockAdapterInterface;
 
 class BlockRegistry
 {

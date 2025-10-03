@@ -23,9 +23,9 @@ use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
-use RedberryProducts\MdNotion\Facades\MdNotion;
-use RedberryProducts\MdNotion\MdNotionServiceProvider;
-use RedberryProducts\MdNotion\SDK\Notion;
+use Redberry\MdNotion\Facades\MdNotion;
+use Redberry\MdNotion\MdNotionServiceProvider;
+use Redberry\MdNotion\SDK\Notion;
 
 // Set up Laravel container
 $container = new Container;

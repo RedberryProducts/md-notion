@@ -25,7 +25,7 @@ The mission of MdNotion is to provide Laravel developers with an easy, reliable,
 ## Usage goal
 
 ```php
-use RedberryProducts\Facades\MdNotion;
+use Redberry\Facades\MdNotion;
 
 $pageId = '263d9316605a806f9e95e1377a46ff3e';
 $MdNotion = MdNotion::make($pageId);

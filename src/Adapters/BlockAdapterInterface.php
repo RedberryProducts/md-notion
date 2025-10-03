@@ -1,6 +1,6 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Adapters;
+namespace Redberry\MdNotion\Adapters;
 
 interface BlockAdapterInterface
 {

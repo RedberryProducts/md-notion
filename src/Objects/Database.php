@@ -1,6 +1,6 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Objects;
+namespace Redberry\MdNotion\Objects;
 
 class Database extends BaseObject
 {
@@ -35,7 +35,7 @@ class Database extends BaseObject
     public function readItemsContent(): static
     {
         if ($this->hasChildPages()) {
-            $pageReader = app(\RedberryProducts\MdNotion\Services\PageReader::class);
+            $pageReader = app(\Redberry\MdNotion\Services\PageReader::class);
             $this->setChildPages(
                 $this->getChildPages()->map(function (Page $page) use ($pageReader) {
                     return $pageReader->read($page->getId());
@@ -77,7 +77,7 @@ class Database extends BaseObject
      */
     public function fetch(): static
     {
-        $databaseReader = app(\RedberryProducts\MdNotion\Services\DatabaseReader::class);
+        $databaseReader = app(\Redberry\MdNotion\Services\DatabaseReader::class);
         $fetchedDatabase = $databaseReader->read($this->getId());
 
         // Copy all data from the fetched database to this instance

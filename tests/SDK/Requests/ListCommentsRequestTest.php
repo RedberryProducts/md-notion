@@ -1,7 +1,7 @@
 <?php
 
-use RedberryProducts\MdNotion\SDK\Notion;
-use RedberryProducts\MdNotion\SDK\Requests\Actions\ListComments;
+use Redberry\MdNotion\SDK\Notion;
+use Redberry\MdNotion\SDK\Requests\Actions\ListComments;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 

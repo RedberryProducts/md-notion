@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\NumberedListItemAdapter;
+use Redberry\MdNotion\Adapters\NumberedListItemAdapter;
 
 test('numbered list item adapter converts basic block to markdown', function () {
     $block = [

@@ -1,16 +1,16 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Facades;
+namespace Redberry\MdNotion\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \RedberryProducts\MdNotion\MdNotion
+ * @see \Redberry\MdNotion\MdNotion
  */
 class MdNotion extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \RedberryProducts\MdNotion\MdNotion::class;
+        return \Redberry\MdNotion\MdNotion::class;
     }
 }

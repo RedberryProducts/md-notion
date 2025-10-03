@@ -1,10 +1,10 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Services;
+namespace Redberry\MdNotion\Services;
 
-use RedberryProducts\MdNotion\Objects\Database;
-use RedberryProducts\MdNotion\Objects\Page;
-use RedberryProducts\MdNotion\SDK\Notion;
+use Redberry\MdNotion\Objects\Database;
+use Redberry\MdNotion\Objects\Page;
+use Redberry\MdNotion\SDK\Notion;
 
 class PageReader
 {

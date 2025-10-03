@@ -1,8 +1,8 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\ColumnListAdapter;
-use RedberryProducts\MdNotion\DTOs\ColumnListDTO;
-use RedberryProducts\MdNotion\SDK\Notion;
+use Redberry\MdNotion\Adapters\ColumnListAdapter;
+use Redberry\MdNotion\DTOs\ColumnListDTO;
+use Redberry\MdNotion\SDK\Notion;
 
 it('converts column list block to markdown', function () {
     // Create mock SDK response for columns

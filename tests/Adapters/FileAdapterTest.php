@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\FileAdapter;
+use Redberry\MdNotion\Adapters\FileAdapter;
 
 test('file adapter converts basic file block to markdown', function () {
     $block = [

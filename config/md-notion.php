@@ -1,6 +1,6 @@
 <?php
 
-// config for RedberryProducts/MdNotion
+// config for Redberry/MdNotion
 return [
 
     /**
@@ -27,25 +27,25 @@ return [
      * Values are fully qualified adapter class names.
      */
     'adapters' => [
-        'paragraph' => \RedberryProducts\MdNotion\Adapters\ParagraphAdapter::class,
-        'heading_1' => \RedberryProducts\MdNotion\Adapters\HeadingAdapter::class,
-        'heading_2' => \RedberryProducts\MdNotion\Adapters\HeadingAdapter::class,
-        'heading_3' => \RedberryProducts\MdNotion\Adapters\HeadingAdapter::class,
-        'bulleted_list_item' => \RedberryProducts\MdNotion\Adapters\BulletedListItemAdapter::class,
-        'numbered_list_item' => \RedberryProducts\MdNotion\Adapters\NumberedListItemAdapter::class,
-        'to_do' => \RedberryProducts\MdNotion\Adapters\ToDoAdapter::class,
-        'toggle' => \RedberryProducts\MdNotion\Adapters\ToggleAdapter::class,
-        'code' => \RedberryProducts\MdNotion\Adapters\CodeAdapter::class,
-        'quote' => \RedberryProducts\MdNotion\Adapters\QuoteAdapter::class,
-        'callout' => \RedberryProducts\MdNotion\Adapters\CalloutAdapter::class,
-        'divider' => \RedberryProducts\MdNotion\Adapters\DividerAdapter::class,
-        'bookmark' => \RedberryProducts\MdNotion\Adapters\BookmarkAdapter::class,
-        'image' => \RedberryProducts\MdNotion\Adapters\ImageAdapter::class,
-        'file' => \RedberryProducts\MdNotion\Adapters\FileAdapter::class,
-        'video' => \RedberryProducts\MdNotion\Adapters\VideoAdapter::class,
-        'column_list' => \RedberryProducts\MdNotion\Adapters\ColumnListAdapter::class,
-        'column' => \RedberryProducts\MdNotion\Adapters\ColumnAdapter::class,
-        'table' => \RedberryProducts\MdNotion\Adapters\TableAdapter::class,
-        'table_row' => \RedberryProducts\MdNotion\Adapters\TableRowAdapter::class,
+        'paragraph' => \Redberry\MdNotion\Adapters\ParagraphAdapter::class,
+        'heading_1' => \Redberry\MdNotion\Adapters\HeadingAdapter::class,
+        'heading_2' => \Redberry\MdNotion\Adapters\HeadingAdapter::class,
+        'heading_3' => \Redberry\MdNotion\Adapters\HeadingAdapter::class,
+        'bulleted_list_item' => \Redberry\MdNotion\Adapters\BulletedListItemAdapter::class,
+        'numbered_list_item' => \Redberry\MdNotion\Adapters\NumberedListItemAdapter::class,
+        'to_do' => \Redberry\MdNotion\Adapters\ToDoAdapter::class,
+        'toggle' => \Redberry\MdNotion\Adapters\ToggleAdapter::class,
+        'code' => \Redberry\MdNotion\Adapters\CodeAdapter::class,
+        'quote' => \Redberry\MdNotion\Adapters\QuoteAdapter::class,
+        'callout' => \Redberry\MdNotion\Adapters\CalloutAdapter::class,
+        'divider' => \Redberry\MdNotion\Adapters\DividerAdapter::class,
+        'bookmark' => \Redberry\MdNotion\Adapters\BookmarkAdapter::class,
+        'image' => \Redberry\MdNotion\Adapters\ImageAdapter::class,
+        'file' => \Redberry\MdNotion\Adapters\FileAdapter::class,
+        'video' => \Redberry\MdNotion\Adapters\VideoAdapter::class,
+        'column_list' => \Redberry\MdNotion\Adapters\ColumnListAdapter::class,
+        'column' => \Redberry\MdNotion\Adapters\ColumnAdapter::class,
+        'table' => \Redberry\MdNotion\Adapters\TableAdapter::class,
+        'table_row' => \Redberry\MdNotion\Adapters\TableRowAdapter::class,
     ],
 ];

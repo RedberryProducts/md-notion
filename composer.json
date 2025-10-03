@@ -2,7 +2,7 @@
     "name": "redberry/md-notion",
     "description": "Read your notion pages as Markdown in Laravel applications.",
     "keywords": [
-        "RedberryProducts",
+        "Redberry",
         "laravel",
         "md-notion"
     ],
@@ -31,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "RedberryProducts\\MdNotion\\": "src/"
+            "Redberry\\MdNotion\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "RedberryProducts\\MdNotion\\Tests\\": "tests/",
+            "Redberry\\MdNotion\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -57,10 +57,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "RedberryProducts\\MdNotion\\MdNotionServiceProvider"
+                "Redberry\\MdNotion\\MdNotionServiceProvider"
             ],
             "aliases": {
-                "MdNotion": "RedberryProducts\\MdNotion\\Facades\\MdNotion"
+                "MdNotion": "Redberry\\MdNotion\\Facades\\MdNotion"
             }
         }
     },

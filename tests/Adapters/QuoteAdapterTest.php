@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\QuoteAdapter;
+use Redberry\MdNotion\Adapters\QuoteAdapter;
 
 test('quote adapter converts basic block to markdown', function () {
     $block = [

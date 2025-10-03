@@ -1,6 +1,6 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Traits;
+namespace Redberry\MdNotion\Traits;
 
 trait HasIcon
 {

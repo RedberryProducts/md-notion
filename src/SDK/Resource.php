@@ -1,6 +1,6 @@
 <?php
 
-namespace RedberryProducts\MdNotion\SDK;
+namespace Redberry\MdNotion\SDK;
 
 use Saloon\Http\Connector;
 

@@ -1,8 +1,8 @@
 <?php
 
 use Mockery;
-use RedberryProducts\MdNotion\Adapters\TableAdapter;
-use RedberryProducts\MdNotion\SDK\Notion;
+use Redberry\MdNotion\Adapters\TableAdapter;
+use Redberry\MdNotion\SDK\Notion;
 
 test('table adapter converts basic table to markdown', function () {
     $block = [

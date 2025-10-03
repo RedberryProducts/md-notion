@@ -12,12 +12,12 @@ use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
-use RedberryProducts\MdNotion\Adapters\BlockAdapterFactory;
-use RedberryProducts\MdNotion\SDK\Notion;
-use RedberryProducts\MdNotion\Services\BlockRegistry;
-use RedberryProducts\MdNotion\Services\DatabaseReader;
-use RedberryProducts\MdNotion\Services\DatabaseTable;
-use RedberryProducts\MdNotion\Services\PageReader;
+use Redberry\MdNotion\Adapters\BlockAdapterFactory;
+use Redberry\MdNotion\SDK\Notion;
+use Redberry\MdNotion\Services\BlockRegistry;
+use Redberry\MdNotion\Services\DatabaseReader;
+use Redberry\MdNotion\Services\DatabaseTable;
+use Redberry\MdNotion\Services\PageReader;
 
 // Set up Laravel container
 $container = new Container;

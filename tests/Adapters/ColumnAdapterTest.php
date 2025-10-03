@@ -1,8 +1,8 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\ColumnAdapter;
-use RedberryProducts\MdNotion\DTOs\ColumnDTO;
-use RedberryProducts\MdNotion\SDK\Notion;
+use Redberry\MdNotion\Adapters\ColumnAdapter;
+use Redberry\MdNotion\DTOs\ColumnDTO;
+use Redberry\MdNotion\SDK\Notion;
 
 it('converts column block to markdown', function () {
     // Create mock SDK response for children

@@ -1,8 +1,8 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Adapters;
+namespace Redberry\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\ImageDTO;
+use Redberry\MdNotion\DTOs\ImageDTO;
 
 class ImageAdapter extends BaseBlockAdapter
 {

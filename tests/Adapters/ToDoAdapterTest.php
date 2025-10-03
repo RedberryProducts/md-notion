@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\TodoAdapter;
+use Redberry\MdNotion\Adapters\ToDoAdapter;
 
 test('todo adapter converts unchecked block to markdown', function () {
     $block = [
@@ -33,7 +33,7 @@ test('todo adapter converts unchecked block to markdown', function () {
         ],
     ];
 
-    $adapter = new TodoAdapter;
+    $adapter = new ToDoAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('- [ ] To do 1');
@@ -70,7 +70,7 @@ test('todo adapter converts checked block to markdown', function () {
         ],
     ];
 
-    $adapter = new TodoAdapter;
+    $adapter = new ToDoAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('- [x] Completed task');
@@ -124,7 +124,7 @@ test('todo adapter handles formatted text', function () {
         ],
     ];
 
-    $adapter = new TodoAdapter;
+    $adapter = new ToDoAdapter;
     $markdown = $adapter->toMarkdown($block);
 
     expect($markdown)->toBe('- [x] **Formatted** _todo item_');

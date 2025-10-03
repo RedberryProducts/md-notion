@@ -1,6 +1,6 @@
 <?php
 
-namespace RedberryProducts\MdNotion\SDK\Requests\Actions;
+namespace Redberry\MdNotion\SDK\Requests\Actions;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;

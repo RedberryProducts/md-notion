@@ -1,9 +1,9 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Adapters;
+namespace Redberry\MdNotion\Adapters;
 
 use Illuminate\Support\Facades\View;
-use RedberryProducts\MdNotion\SDK\Notion;
+use Redberry\MdNotion\SDK\Notion;
 
 abstract class BaseBlockAdapter implements BlockAdapterInterface
 {
@@ -101,7 +101,7 @@ abstract class BaseBlockAdapter implements BlockAdapterInterface
     /**
      * Process rich text blocks from Notion
      *
-     * @param  \RedberryProducts\MdNotion\DTOs\RichTextDTO[]  $richText  Array of rich text DTOs
+     * @param  \Redberry\MdNotion\DTOs\RichTextDTO[]  $richText  Array of rich text DTOs
      */
     protected function processRichText(array $richText): string
     {

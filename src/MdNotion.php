@@ -1,11 +1,11 @@
 <?php
 
-namespace RedberryProducts\MdNotion;
+namespace Redberry\MdNotion;
 
 use Illuminate\Support\Collection;
-use RedberryProducts\MdNotion\Objects\Page;
-use RedberryProducts\MdNotion\Services\DatabaseReader;
-use RedberryProducts\MdNotion\Services\PageReader;
+use Redberry\MdNotion\Objects\Page;
+use Redberry\MdNotion\Services\DatabaseReader;
+use Redberry\MdNotion\Services\PageReader;
 
 class MdNotion
 {

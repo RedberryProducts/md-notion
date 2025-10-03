@@ -1,10 +1,10 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Tests;
+namespace Redberry\MdNotion\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use RedberryProducts\MdNotion\MdNotionServiceProvider;
+use Redberry\MdNotion\MdNotionServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,7 +13,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'RedberryProducts\\MdNotion\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Redberry\\MdNotion\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 

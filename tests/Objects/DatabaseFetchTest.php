@@ -1,7 +1,7 @@
 <?php
 
-use RedberryProducts\MdNotion\Objects\Database;
-use RedberryProducts\MdNotion\Services\DatabaseReader;
+use Redberry\MdNotion\Objects\Database;
+use Redberry\MdNotion\Services\DatabaseReader;
 
 beforeEach(function () {
     $this->mockDatabaseReader = Mockery::mock(DatabaseReader::class);

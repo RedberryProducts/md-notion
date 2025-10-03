@@ -1,6 +1,6 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Services;
+namespace Redberry\MdNotion\Services;
 
 class DatabaseTable
 {

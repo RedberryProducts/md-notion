@@ -1,9 +1,9 @@
 <?php
 
-use RedberryProducts\MdNotion\Objects\Database;
-use RedberryProducts\MdNotion\Objects\Page;
-use RedberryProducts\MdNotion\Services\DatabaseReader;
-use RedberryProducts\MdNotion\Services\PageReader;
+use Redberry\MdNotion\Objects\Database;
+use Redberry\MdNotion\Objects\Page;
+use Redberry\MdNotion\Services\DatabaseReader;
+use Redberry\MdNotion\Services\PageReader;
 
 test('page object can use page reader methods', function () {
     $page = new Page(['id' => 'test-page-id']);

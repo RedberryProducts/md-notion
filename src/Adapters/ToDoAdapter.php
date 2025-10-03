@@ -1,10 +1,10 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Adapters;
+namespace Redberry\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\TodoDTO;
+use Redberry\MdNotion\DTOs\TodoDTO;
 
-class TodoAdapter extends BaseBlockAdapter
+class ToDoAdapter extends BaseBlockAdapter
 {
     public function getType(): string
     {

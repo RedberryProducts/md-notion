@@ -1,12 +1,12 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Objects;
+namespace Redberry\MdNotion\Objects;
 
-use RedberryProducts\MdNotion\Traits\HasChildPages;
-use RedberryProducts\MdNotion\Traits\HasIcon;
-use RedberryProducts\MdNotion\Traits\HasMeta;
-use RedberryProducts\MdNotion\Traits\HasParent;
-use RedberryProducts\MdNotion\Traits\HasTitle;
+use Redberry\MdNotion\Traits\HasChildPages;
+use Redberry\MdNotion\Traits\HasIcon;
+use Redberry\MdNotion\Traits\HasMeta;
+use Redberry\MdNotion\Traits\HasParent;
+use Redberry\MdNotion\Traits\HasTitle;
 
 abstract class BaseObject
 {

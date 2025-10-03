@@ -1,8 +1,8 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Adapters;
+namespace Redberry\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\NumberedListItemDTO;
+use Redberry\MdNotion\DTOs\NumberedListItemDTO;
 
 class NumberedListItemAdapter extends BaseBlockAdapter
 {

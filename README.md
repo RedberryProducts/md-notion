@@ -10,7 +10,7 @@ Read your notion pages as Markdown in Laravel applications
 Example:
 
 ```php
-use RedberryProducts\MdNotion\Facades\MdNotion;
+use Redberry\MdNotion\Facades\MdNotion;
 
 $pageId = '263d9316605a806f9e95e1377a46ff3e';
 
@@ -77,8 +77,8 @@ return [
      * Customize these to use your own adapters.
      */
     'adapters' => [
-        'paragraph' => \RedberryProducts\MdNotion\Adapters\ParagraphAdapter::class,
-        'heading_1' => \RedberryProducts\MdNotion\Adapters\HeadingAdapter::class,
+        'paragraph' => \Redberry\MdNotion\Adapters\ParagraphAdapter::class,
+        'heading_1' => \Redberry\MdNotion\Adapters\HeadingAdapter::class,
         // ... many more block adapters
     ],
 ];
@@ -123,7 +123,7 @@ To get your Notion API key:
 Get the content of a single page as markdown:
 
 ```php
-use RedberryProducts\MdNotion\Facades\MdNotion;
+use Redberry\MdNotion\Facades\MdNotion;
 
 $pageId = '263d9316605a806f9e95e1377a46ff3e';
 $content = MdNotion::make($pageId)->content()->read();
@@ -230,7 +230,7 @@ The `MdNotion` package provides rich object models for working with Notion pages
 #### Basic Properties and Methods
 
 ```php
-use RedberryProducts\MdNotion\Objects\Page;
+use Redberry\MdNotion\Objects\Page;
 
 // Create from data
 $page = Page::from([
@@ -279,7 +279,7 @@ $updatedPage = $originalPage->fetch();
 #### Basic Properties and Methods
 
 ```php
-use RedberryProducts\MdNotion\Objects\Database;
+use Redberry\MdNotion\Objects\Database;
 
 // Create from data
 $database = Database::from([
@@ -507,7 +507,7 @@ You will need adapter class extending `src\Adapters\BaseBlockAdapter.php` and cu
 
 namespace App\Adapters;
 
-use RedberryProducts\MdNotion\Adapters\BaseBlockAdapter;
+use Redberry\MdNotion\Adapters\BaseBlockAdapter;
 
 class CustomCodeAdapter extends BaseBlockAdapter
 {
@@ -550,8 +550,8 @@ return [
     'adapters' => [
         'callout' => \App\Adapters\CustomCalloutAdapter::class,
         // Keep existing adapters...
-        'paragraph' => \RedberryProducts\MdNotion\Adapters\ParagraphAdapter::class,
-        'heading_1' => \RedberryProducts\MdNotion\Adapters\HeadingAdapter::class,
+        'paragraph' => \Redberry\MdNotion\Adapters\ParagraphAdapter::class,
+        'heading_1' => \Redberry\MdNotion\Adapters\HeadingAdapter::class,
         // ... other adapters
     ],
 ];

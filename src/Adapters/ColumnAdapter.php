@@ -1,8 +1,8 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Adapters;
+namespace Redberry\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\ColumnDTO;
+use Redberry\MdNotion\DTOs\ColumnDTO;
 
 class ColumnAdapter extends BaseBlockAdapter
 {
@@ -33,12 +33,12 @@ class ColumnAdapter extends BaseBlockAdapter
 
             // Convert snake_case to PascalCase for class name
             $className = str_replace('_', '', ucwords($type, '_'));
-            $adapterClass = '\\RedberryProducts\\MdNotion\\Adapters\\'.$className.'Adapter';
+            $adapterClass = '\\Redberry\\MdNotion\\Adapters\\'.$className.'Adapter';
 
             if (class_exists($adapterClass)) {
                 $adapter = new $adapterClass;
             } else {
-                $adapter = new \RedberryProducts\MdNotion\Adapters\ParagraphAdapter; // Fallback to paragraph
+                $adapter = new \Redberry\MdNotion\Adapters\ParagraphAdapter; // Fallback to paragraph
             }
             $adapter->setSdk($this->sdk);
             $contents[] = trim($adapter->toMarkdown($childBlock));

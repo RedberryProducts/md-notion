@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\HeadingAdapter;
+use Redberry\MdNotion\Adapters\HeadingAdapter;
 
 test('heading_1 adapter converts basic block to markdown', function () {
     $block = [

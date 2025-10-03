@@ -1,6 +1,6 @@
 <?php
 
-use RedberryProducts\MdNotion\Adapters\VideoAdapter;
+use Redberry\MdNotion\Adapters\VideoAdapter;
 
 test('video adapter converts external video block to markdown', function () {
     $block = [

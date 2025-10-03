@@ -1,8 +1,8 @@
 <?php
 
-namespace RedberryProducts\MdNotion\Adapters;
+namespace Redberry\MdNotion\Adapters;
 
-use RedberryProducts\MdNotion\DTOs\FileDTO;
+use Redberry\MdNotion\DTOs\FileDTO;
 
 class FileAdapter extends BaseBlockAdapter
 {
