@@ -33,7 +33,7 @@ return [
         'heading_3' => \Redberry\MdNotion\Adapters\HeadingAdapter::class,
         'bulleted_list_item' => \Redberry\MdNotion\Adapters\BulletedListItemAdapter::class,
         'numbered_list_item' => \Redberry\MdNotion\Adapters\NumberedListItemAdapter::class,
-        'to_do' => \Redberry\MdNotion\Adapters\TodoAdapter::class,
+        'to_do' => \Redberry\MdNotion\Adapters\ToDoAdapter::class,
         'toggle' => \Redberry\MdNotion\Adapters\ToggleAdapter::class,
         'code' => \Redberry\MdNotion\Adapters\CodeAdapter::class,
         'quote' => \Redberry\MdNotion\Adapters\QuoteAdapter::class,
