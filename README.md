@@ -430,11 +430,9 @@ $samePageReference = $page->fetch();
 
 ```php
 // Page with child databases
-$page->addChildDatabase($database);
 $childDbs = $page->getChildDatabases();
 
 // Database with child pages
-$database->addChildPage($page);
 $childPages = $database->getChildPages();
 
 // Read all child page content
@@ -498,8 +496,9 @@ When customizing templates, you have access to these variables:
 -   Each level includes `hasChildDatabases`, `hasChildPages`, `level` for depth tracking
 
 You can check current blade templates here:
-`read()` Method: **resources\views\page-md.blade.php**
-`full()` Method: **resources\views\full-md.blade.php**
+
+-   `read()` Method: **resources\views\page-md.blade.php**
+-   `full()` Method: **resources\views\full-md.blade.php**
 
 ### Custom Block Adapters
 

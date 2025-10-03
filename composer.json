@@ -1,5 +1,5 @@
 {
-    "name": "redberryproducts/md-notion",
+    "name": "redberry/md-notion",
     "description": "Read your notion pages as Markdown in Laravel applications.",
     "keywords": [
         "RedberryProducts",
