@@ -1,5 +1,9 @@
 {!! $current_page['title'] !!}
 
+@if($current_page['hasPropertiesTable'])
+
+{!! $current_page['properties_table'] !!}
+@endif
 @if($current_page['hasContent'])
 
 {!! $current_page['content'] !!}
@@ -25,6 +29,10 @@
 @foreach($child_pages as $childPage)
 {!! $childPage['title'] !!}
 
+@if($childPage['hasPropertiesTable'])
+
+{!! $childPage['properties_table'] !!}
+@endif
 @if($childPage['hasContent'])
 {!! $childPage['content'] !!}
 
