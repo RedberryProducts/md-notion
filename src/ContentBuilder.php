@@ -81,6 +81,8 @@ class ContentBuilder
         // Build structured data for template
         $currentPage = [
             'title' => $page->renderTitle(1),
+            'properties_table' => $page->hasProperties() ? $page->renderPropertiesTable() : null,
+            'hasPropertiesTable' => $page->hasProperties(),
             'content' => $page->hasContent() ? $page->getContent() : null,
             'hasContent' => $page->hasContent(),
         ];
@@ -101,6 +103,8 @@ class ContentBuilder
             foreach ($page->getChildPages() as $childPage) {
                 $childPages[] = [
                     'title' => $childPage->renderTitle(3),
+                    'properties_table' => $childPage->hasProperties() ? $childPage->renderPropertiesTable() : null,
+                    'hasPropertiesTable' => $childPage->hasProperties(),
                     'content' => $childPage->hasContent() ? $childPage->getContent() : null,
                     'hasContent' => $childPage->hasContent(),
                 ];

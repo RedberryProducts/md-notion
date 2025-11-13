@@ -1,6 +1,10 @@
 
 {!! $current_page['title'] !!}
 
+@if($current_page['hasPropertiesTable'])
+
+{!! $current_page['properties_table'] !!}
+@endif
 @if($current_page['hasContent'])
 
 {!! $current_page['content'] !!}

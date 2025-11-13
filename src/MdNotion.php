@@ -115,6 +115,8 @@ class MdNotion
     {
         $currentPage = [
             'title' => $page->renderTitle($level),
+            'properties_table' => $page->hasProperties() ? $page->renderPropertiesTable() : null,
+            'hasPropertiesTable' => $page->hasProperties(),
             'content' => $page->hasContent() ? $page->getContent() : null,
             'hasContent' => $page->hasContent(),
         ];

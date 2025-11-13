@@ -4,6 +4,8 @@ it('can render page-md blade template', function () {
     $page = [
         'id' => 'test-id',
         'title' => '# Test Page',
+        'properties_table' => '',
+        'hasPropertiesTable' => false,
         'content' => 'Test content',
         'hasContent' => true,
     ];
@@ -14,6 +16,8 @@ it('can render page-md blade template', function () {
         'withPages' => false,
         'hasChildDatabases' => false,
         'hasChildPages' => false,
+        'child_databases' => [],
+        'child_pages' => [],
     ])->render();
 
     expect($rendered)->toContain('# Test Page');
@@ -24,6 +28,8 @@ it('can render full-md blade template', function () {
     $page = [
         'id' => 'test-id',
         'title' => '# Test Page',
+        'properties_table' => '',
+        'hasPropertiesTable' => false,
         'hasContent' => true,
         'content' => 'Test content',
     ];
@@ -32,6 +38,8 @@ it('can render full-md blade template', function () {
         'current_page' => $page,
         'hasChildDatabases' => false,
         'hasChildPages' => false,
+        'child_databases' => [],
+        'child_pages' => [],
     ])->render();
 
     expect($rendered)->toContain('# Test Page');

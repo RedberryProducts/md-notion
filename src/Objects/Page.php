@@ -171,6 +171,22 @@ class Page extends BaseObject
     }
 
     /**
+     * Render properties as markdown table
+     *
+     * @return string The properties table markdown
+     */
+    public function renderPropertiesTable(): string
+    {
+        if (! $this->hasProperties()) {
+            return '';
+        }
+
+        $propertiesTable = app(\Redberry\MdNotion\Services\PropertiesTable::class);
+
+        return $propertiesTable->convertPropertiesToMarkdownTable($this->properties);
+    }
+
+    /**
      * Convert the page to an array
      */
     public function toArray(): array
