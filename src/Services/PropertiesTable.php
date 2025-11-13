@@ -23,12 +23,12 @@ class PropertiesTable
         // Build table rows
         foreach ($properties as $name => $property) {
             $value = $this->extractPropertyValue($property);
-            
+
             // Skip properties with no value
             if ($value === '') {
                 continue;
             }
-            
+
             $markdown .= "| {$name} | {$value} |\n";
         }
 
@@ -54,10 +54,12 @@ class PropertiesTable
 
             case 'url':
                 $url = $property['url'] ?? '';
+
                 return $url ? "[{$url}]({$url})" : '';
 
             case 'email':
                 $email = $property['email'] ?? '';
+
                 return $email ? "[{$email}](mailto:{$email})" : '';
 
             case 'phone_number':
@@ -77,6 +79,7 @@ class PropertiesTable
 
             case 'multi_select':
                 $options = $property['multi_select'] ?? [];
+
                 return implode(', ', array_column($options, 'name'));
 
             case 'status':
@@ -187,7 +190,7 @@ class PropertiesTable
         $links = [];
         foreach ($files as $file) {
             $name = $file['name'] ?? 'File';
-            
+
             // Handle both external and uploaded files
             if (isset($file['external']['url'])) {
                 $url = $file['external']['url'];

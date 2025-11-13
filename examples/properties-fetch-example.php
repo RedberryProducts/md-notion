@@ -119,7 +119,7 @@ try {
     echo "---\n";
 
 } catch (\Exception $e) {
-    echo "Error: ".$e->getMessage()."\n";
+    echo 'Error: '.$e->getMessage()."\n";
     echo "Stack trace:\n";
     echo $e->getTraceAsString()."\n";
 }
