@@ -72,7 +72,7 @@ class PropertiesTable
                 return $property['number'] !== null ? (string) $property['number'] : '';
 
             case 'checkbox':
-                return $property['checkbox'] ? '✓' : '✗';
+                return ($property['checkbox'] ?? false) ? '✓' : '✗';
 
             case 'select':
                 return $property['select']['name'] ?? '';
@@ -267,7 +267,7 @@ class PropertiesTable
             case 'number':
                 return (string) ($formula['number'] ?? '');
             case 'boolean':
-                return $formula['boolean'] ? 'Yes' : 'No';
+                return ($formula['boolean'] ?? false) ? 'Yes' : 'No';
             case 'date':
                 return $this->formatDate($formula['date'] ?? null);
             default:
