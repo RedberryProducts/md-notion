@@ -29,7 +29,11 @@ class PropertiesTable
                 continue;
             }
 
-            $markdown .= "| {$name} | {$value} |\n";
+            // Escape special characters in property name and value
+            $escapedName = $this->escapeTableCellCharacters($name);
+            $escapedValue = $this->escapeTableCellCharacters($value);
+
+            $markdown .= "| {$escapedName} | {$escapedValue} |\n";
         }
 
         return $markdown."\n";
@@ -288,5 +292,22 @@ class PropertiesTable
         }
 
         return $user['name'] ?? 'Unknown';
+    }
+
+    /**
+     * Escape special characters in markdown table cells
+     *
+     * @param  string  $text  Text to escape
+     * @return string Escaped text
+     */
+    private function escapeTableCellCharacters(string $text): string
+    {
+        // Escape pipe characters to prevent table structure corruption
+        $text = str_replace('|', '\|', $text);
+
+        // Replace newline characters with spaces to maintain table structure
+        $text = str_replace(["\r\n", "\r", "\n"], ' ', $text);
+
+        return $text;
     }
 }
