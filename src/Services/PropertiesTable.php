@@ -29,7 +29,11 @@ class PropertiesTable
                 continue;
             }
 
-            $markdown .= "| {$name} | {$value} |\n";
+            // Escape pipe characters in property name and value
+            $escapedName = $this->escapePipeCharacters($name);
+            $escapedValue = $this->escapePipeCharacters($value);
+
+            $markdown .= "| {$escapedName} | {$escapedValue} |\n";
         }
 
         return $markdown."\n";
@@ -288,5 +292,16 @@ class PropertiesTable
         }
 
         return $user['name'] ?? 'Unknown';
+    }
+
+    /**
+     * Escape pipe characters in markdown table cells
+     *
+     * @param  string  $text  Text to escape
+     * @return string Escaped text
+     */
+    private function escapePipeCharacters(string $text): string
+    {
+        return str_replace('|', '\|', $text);
     }
 }

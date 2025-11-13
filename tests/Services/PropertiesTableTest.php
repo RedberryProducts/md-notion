@@ -489,3 +489,167 @@ test('renders rich_text property correctly', function () {
 
     expect($result)->toContain('| Description | This is a description |');
 });
+
+test('escapes pipe characters in property names', function () {
+    $properties = [
+        'Name | Title' => [
+            'id' => 'title',
+            'type' => 'title',
+            'title' => [
+                ['plain_text' => 'Test Page'],
+            ],
+        ],
+    ];
+
+    $result = $this->propertiesTable->convertPropertiesToMarkdownTable($properties);
+
+    expect($result)->toContain('| Name \| Title | Test Page |');
+});
+
+test('escapes pipe characters in property values', function () {
+    $properties = [
+        'Description' => [
+            'id' => 'rich',
+            'type' => 'rich_text',
+            'rich_text' => [
+                ['plain_text' => 'Value with | pipe'],
+            ],
+        ],
+    ];
+
+    $result = $this->propertiesTable->convertPropertiesToMarkdownTable($properties);
+
+    expect($result)->toContain('| Description | Value with \| pipe |');
+});
+
+test('escapes multiple pipe characters in property names and values', function () {
+    $properties = [
+        'A | B | C' => [
+            'id' => 'title',
+            'type' => 'title',
+            'title' => [
+                ['plain_text' => 'X | Y | Z'],
+            ],
+        ],
+    ];
+
+    $result = $this->propertiesTable->convertPropertiesToMarkdownTable($properties);
+
+    expect($result)->toContain('| A \| B \| C | X \| Y \| Z |');
+});
+
+test('escapes pipe characters in select property values', function () {
+    $properties = [
+        'Type' => [
+            'id' => 'select',
+            'type' => 'select',
+            'select' => [
+                'id' => 'LOQu',
+                'name' => 'option-1 | option-2',
+                'color' => 'pink',
+            ],
+        ],
+    ];
+
+    $result = $this->propertiesTable->convertPropertiesToMarkdownTable($properties);
+
+    expect($result)->toContain('| Type | option-1 \| option-2 |');
+});
+
+test('escapes pipe characters in multi_select property values', function () {
+    $properties = [
+        'Tags' => [
+            'id' => 'multi_select',
+            'type' => 'multi_select',
+            'multi_select' => [
+                [
+                    'id' => 'tag1',
+                    'name' => 'tag | 1',
+                    'color' => 'blue',
+                ],
+                [
+                    'id' => 'tag2',
+                    'name' => 'tag | 2',
+                    'color' => 'green',
+                ],
+            ],
+        ],
+    ];
+
+    $result = $this->propertiesTable->convertPropertiesToMarkdownTable($properties);
+
+    expect($result)->toContain('| Tags | tag \| 1, tag \| 2 |');
+});
+
+test('escapes pipe characters in people names', function () {
+    $properties = [
+        'Person' => [
+            'id' => 'people',
+            'type' => 'people',
+            'people' => [
+                ['name' => 'John | Doe'],
+                ['name' => 'Jane | Smith'],
+            ],
+        ],
+    ];
+
+    $result = $this->propertiesTable->convertPropertiesToMarkdownTable($properties);
+
+    expect($result)->toContain('| Person | John \| Doe, Jane \| Smith |');
+});
+
+test('escapes pipe characters in file names', function () {
+    $properties = [
+        'Files' => [
+            'id' => 'files',
+            'type' => 'files',
+            'files' => [
+                [
+                    'name' => 'file | name.pdf',
+                    'type' => 'external',
+                    'external' => [
+                        'url' => 'https://example.com/file.pdf',
+                    ],
+                ],
+            ],
+        ],
+    ];
+
+    $result = $this->propertiesTable->convertPropertiesToMarkdownTable($properties);
+
+    expect($result)->toContain('| Files | [file \| name.pdf](https://example.com/file.pdf) |');
+});
+
+test('escapes pipe characters in user names', function () {
+    $properties = [
+        'Created By' => [
+            'id' => 'created_by',
+            'type' => 'created_by',
+            'created_by' => [
+                'id' => 'user-id',
+                'name' => 'John | Doe',
+            ],
+        ],
+    ];
+
+    $result = $this->propertiesTable->convertPropertiesToMarkdownTable($properties);
+
+    expect($result)->toContain('| Created By | John \| Doe |');
+});
+
+test('escapes pipe characters in formula string values', function () {
+    $properties = [
+        'Calculated' => [
+            'id' => 'formula',
+            'type' => 'formula',
+            'formula' => [
+                'type' => 'string',
+                'string' => 'Result | Text',
+            ],
+        ],
+    ];
+
+    $result = $this->propertiesTable->convertPropertiesToMarkdownTable($properties);
+
+    expect($result)->toContain('| Calculated | Result \| Text |');
+});
