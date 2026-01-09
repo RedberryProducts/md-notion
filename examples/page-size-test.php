@@ -24,7 +24,6 @@ use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
-use Redberry\MdNotion\Facades\MdNotion;
 use Redberry\MdNotion\MdNotionServiceProvider;
 use Redberry\MdNotion\SDK\Notion;
 use Redberry\MdNotion\Services\DatabaseReader;
@@ -137,7 +136,7 @@ $databaseId = '24cd937adaa8811c8dd5c2a5ed7eb453';
 
 echo "=== Manual Test: Database Page Size Configuration ===\n\n";
 echo "Database ID: {$databaseId}\n";
-echo "Config default_page_size: ".config('md-notion.default_page_size')."\n\n";
+echo 'Config default_page_size: '.config('md-notion.default_page_size')."\n\n";
 
 try {
     // First, let's make a direct SDK call to see what we get with explicit page_size
@@ -150,7 +149,7 @@ try {
     $databaseResponse = $notion->act()->getDatabase($databaseId);
     $databaseData = $databaseResponse->json();
 
-    echo "Database has ".count($databaseData['data_sources'] ?? [])." data source(s)\n";
+    echo 'Database has '.count($databaseData['data_sources'] ?? [])." data source(s)\n";
 
     if (! empty($databaseData['data_sources'])) {
         $dataSourceId = $databaseData['data_sources'][0]['id'];
@@ -204,7 +203,7 @@ try {
     }
 
     echo "\n=== DatabaseReader Test ===\n";
-    echo "Fetching database content using DatabaseReader (config page_size: ".config('md-notion.default_page_size').")...\n";
+    echo 'Fetching database content using DatabaseReader (config page_size: '.config('md-notion.default_page_size').")...\n";
 
     /** @var DatabaseReader $databaseReader */
     $databaseReader = app(DatabaseReader::class);
@@ -215,19 +214,19 @@ try {
     $itemCount = $database->getChildPages()->count();
 
     echo "\n=== Results ===\n";
-    echo "Database Title: ".$database->getTitle()."\n";
+    echo 'Database Title: '.$database->getTitle()."\n";
     echo "Total Items Fetched: {$itemCount}\n";
 
     // The test passes if page_size parameter is working (verified above)
     echo "\n✅ TEST PASSED: The page_size config parameter is working correctly.\n";
-    echo "   - Config value: ".config('md-notion.default_page_size')."\n";
+    echo '   - Config value: '.config('md-notion.default_page_size')."\n";
     echo "   - Items fetched: {$itemCount}\n";
     echo "   - Auto-pagination handles fetching until limit is reached.\n";
 
     // Optional: Show first few items
     echo "\n=== First 5 Items ===\n";
     $database->getChildPages()->take(5)->each(function ($page, $index) {
-        echo ($index + 1).". ".$page->getTitle()."\n";
+        echo ($index + 1).'. '.$page->getTitle()."\n";
     });
 
 } catch (Exception $e) {
