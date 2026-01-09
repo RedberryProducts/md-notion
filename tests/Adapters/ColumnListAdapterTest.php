@@ -57,31 +57,22 @@ it('converts column list block to markdown', function () {
         ],
     ];
 
-    // Create mock responses
-    $mockColumnListResponse = Mockery::mock(\Saloon\Http\Response::class);
-    $mockColumnListResponse->shouldReceive('json')
-        ->andReturn($mockColumnResponse);
-
-    $mockColumnChildrenResp = Mockery::mock(\Saloon\Http\Response::class);
-    $mockColumnChildrenResp->shouldReceive('json')
-        ->andReturn($mockColumnChildrenResponse);
-
-    // Create mock SDK
+    // Create mock SDK (getBlockChildren now returns array directly)
     $mockSdk = Mockery::mock(Notion::class);
     $mockSdk->shouldReceive('act->getBlockChildren')
         ->once()
         ->with('263d9316-605a-8057-b12e-f880bc565fcb', null)
-        ->andReturn($mockColumnListResponse);
+        ->andReturn($mockColumnResponse);
 
     $mockSdk->shouldReceive('act->getBlockChildren')
         ->with('column-1', null)
         ->once()
-        ->andReturn($mockColumnChildrenResp);
+        ->andReturn($mockColumnChildrenResponse);
 
     $mockSdk->shouldReceive('act->getBlockChildren')
         ->with('column-2', null)
         ->once()
-        ->andReturn($mockColumnChildrenResp);
+        ->andReturn($mockColumnChildrenResponse);
 
     // Create the adapter
     $adapter = new ColumnListAdapter;

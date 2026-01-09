@@ -26,18 +26,25 @@ class Actions extends Resource
     /**
      * Get block children with automatic pagination
      *
-     * If pageSize <= 100, returns a single Response.
-     * If pageSize > 100, automatically paginates and returns an array with all results up to pageSize.
+     * Always returns a consistent array structure, regardless of page size.
+     * Automatically paginates when pageSize > 100.
      *
      * @param  string  $id  Block ID
      * @param  int|null  $pageSize  Total number of items desired (null = API default 100)
-     * @return array{results: array, has_more: bool, next_cursor: string|null}|Response
+     * @return array{results: array, has_more: bool, next_cursor: string|null}
      */
-    public function getBlockChildren(string $id, ?int $pageSize = null): array|Response
+    public function getBlockChildren(string $id, ?int $pageSize = null): array
     {
-        // If pageSize is within single request limit, just return the response
+        // If pageSize is within single request limit, make single request and normalize to array
         if ($pageSize === null || $pageSize <= self::MAX_PAGE_SIZE) {
-            return $this->connector->send(new BlockChildren($id, $pageSize));
+            $response = $this->connector->send(new BlockChildren($id, $pageSize));
+            $data = $response->json();
+
+            return [
+                'results' => $data['results'] ?? [],
+                'has_more' => $data['has_more'] ?? false,
+                'next_cursor' => $data['next_cursor'] ?? null,
+            ];
         }
 
         // Otherwise, paginate until we reach the desired count
@@ -65,19 +72,26 @@ class Actions extends Resource
     /**
      * Query a data source with automatic pagination
      *
-     * If pageSize <= 100, returns a single Response.
-     * If pageSize > 100, automatically paginates and returns an array with all results up to pageSize.
+     * Always returns a consistent array structure, regardless of page size.
+     * Automatically paginates when pageSize > 100.
      *
      * @param  string  $dataSourceId  Data source ID
      * @param  array|null  $filter  Optional filter
      * @param  int|null  $pageSize  Total number of items desired (null = API default 100)
-     * @return array{results: array, has_more: bool, next_cursor: string|null}|Response
+     * @return array{results: array, has_more: bool, next_cursor: string|null}
      */
-    public function queryDataSource(string $dataSourceId, ?array $filter = null, ?int $pageSize = null): array|Response
+    public function queryDataSource(string $dataSourceId, ?array $filter = null, ?int $pageSize = null): array
     {
-        // If pageSize is within single request limit, just return the response
+        // If pageSize is within single request limit, make single request and normalize to array
         if ($pageSize === null || $pageSize <= self::MAX_PAGE_SIZE) {
-            return $this->connector->send(new QueryDataSource($dataSourceId, $filter, $pageSize));
+            $response = $this->connector->send(new QueryDataSource($dataSourceId, $filter, $pageSize));
+            $data = $response->json();
+
+            return [
+                'results' => $data['results'] ?? [],
+                'has_more' => $data['has_more'] ?? false,
+                'next_cursor' => $data['next_cursor'] ?? null,
+            ];
         }
 
         // Otherwise, paginate until we reach the desired count
@@ -99,6 +113,7 @@ class Actions extends Resource
         $allResults = [];
         $cursor = null;
         $hasMore = false;
+        $hadExtraResults = false;
 
         do {
             $response = $fetcher($cursor);
@@ -112,6 +127,8 @@ class Actions extends Resource
 
             // Stop if we've reached our desired limit
             if (count($allResults) >= $limit) {
+                // Track if we fetched more items than requested (they will be trimmed)
+                $hadExtraResults = count($allResults) > $limit;
                 // Trim to exact limit
                 $allResults = array_slice($allResults, 0, $limit);
                 break;
@@ -120,7 +137,7 @@ class Actions extends Resource
 
         return [
             'results' => $allResults,
-            'has_more' => $hasMore && count($allResults) >= $limit,
+            'has_more' => $hasMore || $hadExtraResults,
             'next_cursor' => $cursor,
         ];
     }

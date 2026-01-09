@@ -21,7 +21,7 @@ class TableAdapter extends BaseBlockAdapter
         $dto = TableDTO::from($block);
 
         // Get table rows from SDK
-        $rowBlocks = $this->getSdk()->act()->getBlockChildren($block['id'], null)->json();
+        $rowBlocks = $this->getSdk()->act()->getBlockChildren($block['id'], null);
 
         // Process each row
         $rowAdapter = new TableRowAdapter;

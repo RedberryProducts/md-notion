@@ -24,8 +24,7 @@ class ToggleAdapter extends BaseBlockAdapter
         $title = trim($this->processRichText($dto->richText));
 
         // Get toggle contents from SDK
-        $response = $this->getSdk()->act()->getBlockChildren($block['id'], null);
-        $contentBlocks = $response->json();
+        $contentBlocks = $this->getSdk()->act()->getBlockChildren($block['id'], null);
 
         // Process each child block using corresponding adapters
         $contents = [];

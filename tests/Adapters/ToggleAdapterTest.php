@@ -6,18 +6,13 @@ use Redberry\MdNotion\DTOs\ToggleDTO;
 use Redberry\MdNotion\SDK\Notion;
 
 it('converts toggle block to markdown', function () {
-    // Create mock SDK response for children
+    // Create mock SDK response for children (getBlockChildren now returns array directly)
     $mockResponse = json_decode(file_get_contents(dirname(__DIR__, 2).'/BlockJsonExamples/ToggleResponseExample.json'), true);
-
-    // Create mock response object
-    $mockResponseObj = Mockery::mock(\Saloon\Http\Response::class);
-    $mockResponseObj->shouldReceive('json')
-        ->andReturn($mockResponse);
 
     $mockSdk = Mockery::mock(Notion::class);
     $mockSdk->shouldReceive('act->getBlockChildren')
         ->once()
-        ->andReturn($mockResponseObj);
+        ->andReturn($mockResponse);
 
     // Create the adapter
     $adapter = new ToggleAdapter;

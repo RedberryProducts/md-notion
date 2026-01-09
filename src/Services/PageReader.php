@@ -30,13 +30,7 @@ class PageReader
         // Get all block children with pagination
         $resolvedPageSize = $pageSize ?? config('md-notion.default_page_size');
         $blocksData = $this->sdk->act()->getBlockChildren($pageId, $resolvedPageSize);
-
-        // Handle both Response and array returns from getBlockChildren
-        if ($blocksData instanceof \Saloon\Http\Response) {
-            $blocks = $blocksData->json()['results'] ?? [];
-        } else {
-            $blocks = $blocksData['results'] ?? [];
-        }
+        $blocks = $blocksData['results'] ?? [];
 
         // Process blocks to extract different types of content
         $markdown = '';
