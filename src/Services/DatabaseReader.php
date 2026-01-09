@@ -18,14 +18,18 @@ class DatabaseReader
      * Read database content and build complete Database object
      *
      * @param  string  $databaseId  The Notion database ID
+     * @param  int|null  $pageSize  Optional page size for data source query (uses config default if null)
      * @return Database The database object with all content and items
      */
-    public function read(string $databaseId): Database
+    public function read(string $databaseId, ?int $pageSize = null): Database
     {
         // Get database details and build initial Database object
         $databaseResponse = $this->sdk->act()->getDatabase($databaseId);
         $databaseData = $databaseResponse->json();
         $database = Database::from($databaseData);
+
+        // Resolve page size from argument or config default
+        $resolvedPageSize = $pageSize ?? config('md-notion.default_page_size');
 
         // Query database data source only once
         if (isset($databaseData['data_sources']) && is_array($databaseData['data_sources'])) {
@@ -33,7 +37,7 @@ class DatabaseReader
                 $dataSourceId = $dataSource['id'] ?? null;
                 if ($dataSourceId) {
                     // Query the data source to get its content
-                    $queryResponse = $this->sdk->act()->queryDataSource($dataSourceId, null);
+                    $queryResponse = $this->sdk->act()->queryDataSource($dataSourceId, null, $resolvedPageSize);
                     $queryData = $queryResponse->json();
                     // Convert query data to markdown table
                     $tableContent = $this->databaseTable->convertQueryToMarkdownTable($queryData);

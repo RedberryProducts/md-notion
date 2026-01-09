@@ -18,7 +18,7 @@ class Actions extends Resource
         return $this->connector->send(new Page($id));
     }
 
-    public function getBlockChildren(string $id, ?string $pageSize): Response
+    public function getBlockChildren(string $id, ?int $pageSize = null): Response
     {
         return $this->connector->send(new BlockChildren($id, $pageSize));
     }
@@ -38,8 +38,8 @@ class Actions extends Resource
         return $this->connector->send(new ListComments($blockId));
     }
 
-    public function queryDataSource(string $dataSourceId, ?array $filter = null): Response
+    public function queryDataSource(string $dataSourceId, ?array $filter = null, ?int $pageSize = null): Response
     {
-        return $this->connector->send(new QueryDataSource($dataSourceId, $filter));
+        return $this->connector->send(new QueryDataSource($dataSourceId, $filter, $pageSize));
     }
 }

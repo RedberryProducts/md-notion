@@ -20,7 +20,16 @@ class QueryDataSource extends Request
     public function __construct(
         protected string $dataSourceId,
         protected ?array $filter = null,
+        protected ?int $pageSize = null,
     ) {}
+
+    protected function defaultBody(): array
+    {
+        return array_filter([
+            'filter' => $this->filter,
+            'page_size' => $this->pageSize,
+        ]);
+    }
 
     // Potentially it can have a filter object in the body
     // @todo create separate request with filter, use this to fetch all items

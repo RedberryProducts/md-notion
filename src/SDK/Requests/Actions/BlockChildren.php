@@ -19,7 +19,7 @@ class BlockChildren extends Request
 
     public function __construct(
         protected string $id,
-        protected ?string $pageSize = null,
+        protected ?int $pageSize = null,
     ) {}
 
     public function defaultQuery(): array
