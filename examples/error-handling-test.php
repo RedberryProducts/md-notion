@@ -24,14 +24,14 @@ try {
     echo "❌ Expected exception was not thrown\n";
 } catch (NotionApiException $e) {
     echo "✅ NotionApiException caught!\n";
-    echo "   Status:  ".$e->getResponse()->status()."\n";
-    echo "   Code:    ".$e->getNotionCode()."\n";
-    echo "   Message: ".$e->getNotionMessage()."\n";
-    echo "   isUnauthorized(): ".($e->isUnauthorized() ? 'true' : 'false')."\n";
-    echo "   isRetryable(): ".($e->isRetryable() ? 'true' : 'false')."\n";
+    echo '   Status:  '.$e->getResponse()->status()."\n";
+    echo '   Code:    '.$e->getNotionCode()."\n";
+    echo '   Message: '.$e->getNotionMessage()."\n";
+    echo '   isUnauthorized(): '.($e->isUnauthorized() ? 'true' : 'false')."\n";
+    echo '   isRetryable(): '.($e->isRetryable() ? 'true' : 'false')."\n";
 } catch (Exception $e) {
-    echo "❌ Unexpected exception: ".get_class($e)."\n";
-    echo "   Message: ".$e->getMessage()."\n";
+    echo '❌ Unexpected exception: '.get_class($e)."\n";
+    echo '   Message: '.$e->getMessage()."\n";
 }
 
 echo "\n";
@@ -52,14 +52,14 @@ if (file_exists($tokenFile)) {
         echo "❌ Expected exception was not thrown\n";
     } catch (NotionApiException $e) {
         echo "✅ NotionApiException caught!\n";
-        echo "   Status:  ".$e->getResponse()->status()."\n";
-        echo "   Code:    ".$e->getNotionCode()."\n";
-        echo "   Message: ".$e->getNotionMessage()."\n";
-        echo "   isNotFound(): ".($e->isNotFound() ? 'true' : 'false')."\n";
-        echo "   isRetryable(): ".($e->isRetryable() ? 'true' : 'false')."\n";
+        echo '   Status:  '.$e->getResponse()->status()."\n";
+        echo '   Code:    '.$e->getNotionCode()."\n";
+        echo '   Message: '.$e->getNotionMessage()."\n";
+        echo '   isNotFound(): '.($e->isNotFound() ? 'true' : 'false')."\n";
+        echo '   isRetryable(): '.($e->isRetryable() ? 'true' : 'false')."\n";
     } catch (Exception $e) {
-        echo "❌ Unexpected exception: ".get_class($e)."\n";
-        echo "   Message: ".$e->getMessage()."\n";
+        echo '❌ Unexpected exception: '.get_class($e)."\n";
+        echo '   Message: '.$e->getMessage()."\n";
     }
 } else {
     echo "⏭️  Skipped (no notion-token.php found)\n";
@@ -79,14 +79,14 @@ if (file_exists($tokenFile)) {
         // Use a known valid page ID from your workspace
         $response = $notion->act()->getPage('24cd937adaa8811c8dd5c2a5ed7eb453');
         echo "✅ Request successful!\n";
-        echo "   Status: ".$response->status()."\n";
-        echo "   Page ID: ".$response->json()['id']."\n";
+        echo '   Status: '.$response->status()."\n";
+        echo '   Page ID: '.$response->json()['id']."\n";
     } catch (NotionApiException $e) {
-        echo "❌ NotionApiException: ".$e->getMessage()."\n";
+        echo '❌ NotionApiException: '.$e->getMessage()."\n";
         echo "   You may need to update the page ID to one accessible by your integration.\n";
     } catch (Exception $e) {
-        echo "❌ Unexpected exception: ".get_class($e)."\n";
-        echo "   Message: ".$e->getMessage()."\n";
+        echo '❌ Unexpected exception: '.get_class($e)."\n";
+        echo '   Message: '.$e->getMessage()."\n";
     }
 } else {
     echo "⏭️  Skipped (no notion-token.php found)\n";
