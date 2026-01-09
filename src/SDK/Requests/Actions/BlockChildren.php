@@ -28,6 +28,6 @@ class BlockChildren extends Request
         return array_filter([
             'page_size' => $this->pageSize,
             'start_cursor' => $this->startCursor,
-        ]);
+        ], fn ($value) => $value !== null);
     }
 }
