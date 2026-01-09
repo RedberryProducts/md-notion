@@ -30,11 +30,15 @@ class Actions extends Resource
      * Automatically paginates when pageSize > 100.
      *
      * @param  string  $id  Block ID
-     * @param  int|null  $pageSize  Total number of items desired (null = API default 100)
+     * @param  int|null  $pageSize  Total number of items desired (null = API default 100, must be positive)
      * @return array{results: array, has_more: bool, next_cursor: string|null}
+     *
+     * @throws \InvalidArgumentException If pageSize is not null and not a positive integer
      */
     public function getBlockChildren(string $id, ?int $pageSize = null): array
     {
+        $this->validatePageSize($pageSize);
+
         // If pageSize is within single request limit, make single request and normalize to array
         if ($pageSize === null || $pageSize <= self::MAX_PAGE_SIZE) {
             $response = $this->connector->send(new BlockChildren($id, $pageSize));
@@ -77,11 +81,15 @@ class Actions extends Resource
      *
      * @param  string  $dataSourceId  Data source ID
      * @param  array|null  $filter  Optional filter
-     * @param  int|null  $pageSize  Total number of items desired (null = API default 100)
+     * @param  int|null  $pageSize  Total number of items desired (null = API default 100, must be positive)
      * @return array{results: array, has_more: bool, next_cursor: string|null}
+     *
+     * @throws \InvalidArgumentException If pageSize is not null and not a positive integer
      */
     public function queryDataSource(string $dataSourceId, ?array $filter = null, ?int $pageSize = null): array
     {
+        $this->validatePageSize($pageSize);
+
         // If pageSize is within single request limit, make single request and normalize to array
         if ($pageSize === null || $pageSize <= self::MAX_PAGE_SIZE) {
             $response = $this->connector->send(new QueryDataSource($dataSourceId, $filter, $pageSize));
@@ -107,6 +115,10 @@ class Actions extends Resource
      * @param  callable  $fetcher  Function that takes a cursor and returns a Response
      * @param  int  $limit  Maximum number of items to fetch
      * @return array{results: array, has_more: bool, next_cursor: string|null}
+     *
+     * Note: When results are trimmed to meet the limit, next_cursor is set to null
+     * because the cursor from the last API response would skip items between the
+     * trimmed limit and where that response ended.
      */
     private function fetchPaginatedResults(callable $fetcher, int $limit): array
     {
@@ -138,7 +150,23 @@ class Actions extends Resource
         return [
             'results' => $allResults,
             'has_more' => $hasMore || $hadExtraResults,
-            'next_cursor' => $cursor,
+            // Return null cursor when results were trimmed, as the API cursor would
+            // skip items between our trimmed limit and where the last response ended
+            'next_cursor' => $hadExtraResults ? null : $cursor,
         ];
+    }
+
+    /**
+     * Validate that pageSize is either null or a positive integer
+     *
+     * @param  int|null  $pageSize  The page size to validate
+     *
+     * @throws \InvalidArgumentException If pageSize is not null and not a positive integer
+     */
+    private function validatePageSize(?int $pageSize): void
+    {
+        if ($pageSize !== null && $pageSize <= 0) {
+            throw new \InvalidArgumentException('pageSize must be a positive integer, got: '.$pageSize);
+        }
     }
 }

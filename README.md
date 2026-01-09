@@ -29,6 +29,8 @@ Don't forget to star the repo ⭐
 -   [Configuration](#configuration)
 -   [Features](#features)
 -   [Usage](#usage)
+-   [Page Size & Pagination](#page-size--pagination)
+-   [Error Handling](#error-handling)
 -   [Page and Database Objects API](#page-and-database-objects-api)
 -   [Customization](#customization)
 -   [Testing](#testing)
@@ -114,7 +116,9 @@ To get your Notion API key:
 🎨 **Customizable Templates** - Use Blade templates for markdown output  
 🧩 **Custom Adapters** - Extend block adapters for specialized content  
 ⚡ **Laravel Integration** - Seamless service provider and facade support  
-🛠️ **Configurable** - Easy configuration via Laravel config files
+🛠️ **Configurable** - Easy configuration via Laravel config files  
+📊 **Pagination Support** - Automatic pagination for large pages (100+ blocks)  
+🚨 **Error Handling** - Typed exceptions for Notion API errors
 
 ## Usage
 
@@ -219,6 +223,185 @@ $page = MdNotion::make($pageId)
 
 // Returns: Page object with loaded child content
 // Access: $page->getTitle(), $page->getContent(), $page->getChildPages(), etc.
+```
+
+## Page Size & Pagination
+
+The Notion API limits responses to 100 blocks per request. This package handles pagination automatically, allowing you to fetch more blocks seamlessly.
+
+### Configuration
+
+Set the default page size in your `.env` file:
+
+```env
+NOTION_DEFAULT_PAGE_SIZE=100
+```
+
+Or in the config file:
+
+```php
+// config/md-notion.php
+return [
+    'default_page_size' => env('NOTION_DEFAULT_PAGE_SIZE', 100),
+    // ...
+];
+```
+
+### Custom Page Size
+
+You can override the default page size per request:
+
+```php
+use Redberry\MdNotion\Facades\MdNotion;
+
+// Fetch up to 50 blocks
+$content = MdNotion::make($pageId)->content()->read(50);
+
+// Fetch up to 200 blocks (automatically paginated)
+$content = MdNotion::make($pageId)->content()->read(200);
+
+// Use default from config
+$content = MdNotion::make($pageId)->content()->read();
+```
+
+### How Pagination Works
+
+-   **Page size ≤ 100**: Single API request
+-   **Page size > 100**: Automatic pagination with multiple requests
+
+The returned data always has a consistent structure:
+
+```php
+[
+    'results' => [...],      // Array of blocks
+    'has_more' => bool,      // Whether more items exist
+    'next_cursor' => ?string // Cursor for manual continuation (null if results were trimmed)
+]
+```
+
+> **Note**: When results are trimmed to meet your requested limit, `next_cursor` is set to `null` to prevent accidentally skipping items. The `has_more` flag will still indicate if more items exist.
+
+### Validation
+
+Page size must be a positive integer. Invalid values will throw an exception:
+
+```php
+// These will throw InvalidArgumentException:
+MdNotion::make($pageId)->content()->read(0);   // Zero not allowed
+MdNotion::make($pageId)->content()->read(-5);  // Negative not allowed
+```
+
+## Error Handling
+
+The package provides a dedicated `NotionApiException` for handling Notion API errors with detailed information.
+
+### Basic Error Handling
+
+```php
+use Redberry\MdNotion\Facades\MdNotion;
+use Redberry\MdNotion\SDK\Exceptions\NotionApiException;
+
+try {
+    $content = MdNotion::make($pageId)->content()->read();
+} catch (NotionApiException $e) {
+    // Get error details
+    echo $e->getMessage();           // "Notion API Error [404] object_not_found: Could not find page..."
+    echo $e->getNotionCode();        // "object_not_found"
+    echo $e->getNotionMessage();     // "Could not find page with ID: ..."
+    
+    // Access the original response
+    $response = $e->getResponse();
+    $statusCode = $response->status(); // 404
+}
+```
+
+### Error Type Checking
+
+The exception provides convenient methods to check error types:
+
+```php
+try {
+    $content = MdNotion::make($pageId)->content()->read();
+} catch (NotionApiException $e) {
+    if ($e->isNotFound()) {
+        // Page doesn't exist or not shared with integration
+    }
+    
+    if ($e->isUnauthorized()) {
+        // Invalid API key
+    }
+    
+    if ($e->isForbidden()) {
+        // Integration doesn't have access to this resource
+    }
+    
+    if ($e->isRateLimited()) {
+        // Too many requests, implement backoff
+    }
+    
+    if ($e->isValidationError()) {
+        // Invalid request parameters
+    }
+    
+    if ($e->isServerError()) {
+        // Notion server error (5xx)
+    }
+    
+    if ($e->isRetryable()) {
+        // Safe to retry (rate limits, server errors, conflicts)
+    }
+}
+```
+
+### Notion Error Codes
+
+The `getNotionCode()` method returns one of these values:
+
+| Code | HTTP Status | Description |
+|------|-------------|-------------|
+| `invalid_json` | 400 | Request body is not valid JSON |
+| `invalid_request_url` | 400 | Invalid request URL |
+| `invalid_request` | 400 | Invalid request parameters |
+| `validation_error` | 400 | Request validation failed |
+| `missing_version` | 400 | Missing Notion-Version header |
+| `unauthorized` | 401 | Invalid API key |
+| `restricted_resource` | 403 | No access to resource |
+| `object_not_found` | 404 | Resource not found |
+| `conflict_error` | 409 | Transaction conflict |
+| `rate_limited` | 429 | Too many requests |
+| `internal_server_error` | 500 | Notion server error |
+| `bad_gateway` | 502 | Bad gateway |
+| `service_unavailable` | 503 | Service temporarily unavailable |
+| `gateway_timeout` | 504 | Gateway timeout |
+
+### Retry Strategy Example
+
+```php
+use Redberry\MdNotion\SDK\Exceptions\NotionApiException;
+
+function fetchWithRetry(string $pageId, int $maxRetries = 3): string
+{
+    $attempts = 0;
+    
+    while ($attempts < $maxRetries) {
+        try {
+            return MdNotion::make($pageId)->content()->read();
+        } catch (NotionApiException $e) {
+            if (!$e->isRetryable()) {
+                throw $e; // Don't retry non-retryable errors
+            }
+            
+            $attempts++;
+            if ($attempts >= $maxRetries) {
+                throw $e;
+            }
+            
+            // Exponential backoff
+            $delay = $e->isRateLimited() ? 1000 : 500;
+            usleep($delay * $attempts * 1000);
+        }
+    }
+}
 ```
 
 ## Page and Database Objects API

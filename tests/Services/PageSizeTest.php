@@ -288,6 +288,76 @@ test('query data source request excludes page_size when null', function () {
 });
 
 // ============================================================================
+// Page Size Validation Tests
+// ============================================================================
+
+test('getBlockChildren throws exception for zero page size', function () {
+    $notion = new Notion('test-token', '2025-09-03');
+
+    expect(fn () => $notion->act()->getBlockChildren('block-id', 0))
+        ->toThrow(\InvalidArgumentException::class, 'pageSize must be a positive integer, got: 0');
+});
+
+test('getBlockChildren throws exception for negative page size', function () {
+    $notion = new Notion('test-token', '2025-09-03');
+
+    expect(fn () => $notion->act()->getBlockChildren('block-id', -5))
+        ->toThrow(\InvalidArgumentException::class, 'pageSize must be a positive integer, got: -5');
+});
+
+test('queryDataSource throws exception for zero page size', function () {
+    $notion = new Notion('test-token', '2025-09-03');
+
+    expect(fn () => $notion->act()->queryDataSource('datasource-id', null, 0))
+        ->toThrow(\InvalidArgumentException::class, 'pageSize must be a positive integer, got: 0');
+});
+
+test('queryDataSource throws exception for negative page size', function () {
+    $notion = new Notion('test-token', '2025-09-03');
+
+    expect(fn () => $notion->act()->queryDataSource('datasource-id', null, -10))
+        ->toThrow(\InvalidArgumentException::class, 'pageSize must be a positive integer, got: -10');
+});
+
+test('getBlockChildren accepts null page size', function () {
+    $notion = new Notion('test-token', '2025-09-03');
+
+    $mockClient = new \Saloon\Http\Faking\MockClient([
+        new \Saloon\Http\Faking\MockResponse([
+            'results' => [],
+            'has_more' => false,
+            'next_cursor' => null,
+        ]),
+    ]);
+
+    $notion->withMockClient($mockClient);
+
+    $result = $notion->act()->getBlockChildren('block-id', null);
+
+    expect($result)->toBeArray();
+    expect($result['results'])->toBe([]);
+});
+
+test('getBlockChildren accepts positive page size of 1', function () {
+    $notion = new Notion('test-token', '2025-09-03');
+
+    $mockClient = new \Saloon\Http\Faking\MockClient([
+        new \Saloon\Http\Faking\MockResponse([
+            'results' => [['id' => 'block-1']],
+            'has_more' => false,
+            'next_cursor' => null,
+        ]),
+    ]);
+
+    $notion->withMockClient($mockClient);
+
+    $result = $notion->act()->getBlockChildren('block-id', 1);
+
+    expect($result)->toBeArray();
+    expect($result['results'])->toHaveCount(1);
+});
+
+// ============================================================================
 // Pagination Tests for fetchPaginatedResults
 // ============================================================================
 
@@ -360,6 +430,8 @@ test('getBlockChildren paginates and merges results when pageSize is 150', funct
     expect($result['results'][149]['id'])->toBe('block-150');
     // has_more should be true because we trimmed 10 extra results
     expect($result['has_more'])->toBeTrue();
+    // cursor should be null when results were trimmed
+    expect($result['next_cursor'])->toBeNull();
 });
 
 test('getBlockChildren returns exactly 100 items without pagination when pageSize is 100', function () {
@@ -466,8 +538,8 @@ test('getBlockChildren stops pagination when limit is reached even with more ava
     expect($result['results'])->toHaveCount(120);
     // has_more should be true because API still has more AND we trimmed results
     expect($result['has_more'])->toBeTrue();
-    // cursor should still be available for continuation
-    expect($result['next_cursor'])->toBe('cursor-def');
+    // cursor should be null when results were trimmed, to prevent skipping items
+    expect($result['next_cursor'])->toBeNull();
 });
 
 test('getBlockChildren has_more is true when results were trimmed even if API has_more is false', function () {
@@ -497,6 +569,8 @@ test('getBlockChildren has_more is true when results were trimmed even if API ha
     expect($result['results'])->toHaveCount(130);
     // has_more should be true because we trimmed 20 results, even though API said no more
     expect($result['has_more'])->toBeTrue();
+    // cursor should be null when results were trimmed
+    expect($result['next_cursor'])->toBeNull();
 });
 
 test('queryDataSource paginates and merges results correctly', function () {
