@@ -36,9 +36,14 @@ class DatabaseReader
             foreach ($databaseData['data_sources'] as $dataSource) {
                 $dataSourceId = $dataSource['id'] ?? null;
                 if ($dataSourceId) {
-                    // Query the data source to get its content
-                    $queryResponse = $this->sdk->act()->queryDataSource($dataSourceId, null, $resolvedPageSize);
-                    $queryData = $queryResponse->json();
+                    // Query the data source to get all content with pagination
+                    $queryData = $this->sdk->act()->queryDataSource($dataSourceId, null, $resolvedPageSize);
+                    
+                    // Handle both Response and array returns from queryDataSource
+                    if ($queryData instanceof \Saloon\Http\Response) {
+                        $queryData = $queryData->json();
+                    }
+                    
                     // Convert query data to markdown table
                     $tableContent = $this->databaseTable->convertQueryToMarkdownTable($queryData);
                     // Optionally, add data source name as a note above the table
@@ -50,7 +55,7 @@ class DatabaseReader
         }
 
         // Resolve database as markdown content using DatabaseTable service
-        $database->setTableContent($tableContent);
+        $database->setTableContent($tableContent ?? '');
 
         // Resolve database items as collection of Page objects
         $items = collect();

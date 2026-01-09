@@ -13,14 +13,38 @@ use Saloon\Http\Response;
 
 class Actions extends Resource
 {
+    /**
+     * Maximum items per API request (Notion API limit)
+     */
+    private const MAX_PAGE_SIZE = 100;
+
     public function getPage(string $id): Response
     {
         return $this->connector->send(new Page($id));
     }
 
-    public function getBlockChildren(string $id, ?int $pageSize = null): Response
+    /**
+     * Get block children with automatic pagination
+     *
+     * If pageSize <= 100, returns a single Response.
+     * If pageSize > 100, automatically paginates and returns an array with all results up to pageSize.
+     *
+     * @param  string  $id  Block ID
+     * @param  int|null  $pageSize  Total number of items desired (null = API default 100)
+     * @return array{results: array, has_more: bool, next_cursor: string|null}|Response
+     */
+    public function getBlockChildren(string $id, ?int $pageSize = null): array|Response
     {
-        return $this->connector->send(new BlockChildren($id, $pageSize));
+        // If pageSize is within single request limit, just return the response
+        if ($pageSize === null || $pageSize <= self::MAX_PAGE_SIZE) {
+            return $this->connector->send(new BlockChildren($id, $pageSize));
+        }
+
+        // Otherwise, paginate until we reach the desired count
+        return $this->fetchPaginatedResults(
+            fn (?string $cursor) => $this->connector->send(new BlockChildren($id, self::MAX_PAGE_SIZE, $cursor)),
+            $pageSize
+        );
     }
 
     public function getDatabase(string $databaseId): Response
@@ -38,8 +62,66 @@ class Actions extends Resource
         return $this->connector->send(new ListComments($blockId));
     }
 
-    public function queryDataSource(string $dataSourceId, ?array $filter = null, ?int $pageSize = null): Response
+    /**
+     * Query a data source with automatic pagination
+     *
+     * If pageSize <= 100, returns a single Response.
+     * If pageSize > 100, automatically paginates and returns an array with all results up to pageSize.
+     *
+     * @param  string  $dataSourceId  Data source ID
+     * @param  array|null  $filter  Optional filter
+     * @param  int|null  $pageSize  Total number of items desired (null = API default 100)
+     * @return array{results: array, has_more: bool, next_cursor: string|null}|Response
+     */
+    public function queryDataSource(string $dataSourceId, ?array $filter = null, ?int $pageSize = null): array|Response
     {
-        return $this->connector->send(new QueryDataSource($dataSourceId, $filter, $pageSize));
+        // If pageSize is within single request limit, just return the response
+        if ($pageSize === null || $pageSize <= self::MAX_PAGE_SIZE) {
+            return $this->connector->send(new QueryDataSource($dataSourceId, $filter, $pageSize));
+        }
+
+        // Otherwise, paginate until we reach the desired count
+        return $this->fetchPaginatedResults(
+            fn (?string $cursor) => $this->connector->send(new QueryDataSource($dataSourceId, $filter, self::MAX_PAGE_SIZE, $cursor)),
+            $pageSize
+        );
+    }
+
+    /**
+     * Fetch paginated results up to the desired limit
+     *
+     * @param  callable  $fetcher  Function that takes a cursor and returns a Response
+     * @param  int  $limit  Maximum number of items to fetch
+     * @return array{results: array, has_more: bool, next_cursor: string|null}
+     */
+    private function fetchPaginatedResults(callable $fetcher, int $limit): array
+    {
+        $allResults = [];
+        $cursor = null;
+        $hasMore = false;
+
+        do {
+            $response = $fetcher($cursor);
+            $data = $response->json();
+
+            $results = $data['results'] ?? [];
+            $allResults = array_merge($allResults, $results);
+
+            $hasMore = $data['has_more'] ?? false;
+            $cursor = $data['next_cursor'] ?? null;
+
+            // Stop if we've reached our desired limit
+            if (count($allResults) >= $limit) {
+                // Trim to exact limit
+                $allResults = array_slice($allResults, 0, $limit);
+                break;
+            }
+        } while ($hasMore && $cursor);
+
+        return [
+            'results' => $allResults,
+            'has_more' => $hasMore && count($allResults) >= $limit,
+            'next_cursor' => $cursor,
+        ];
     }
 }

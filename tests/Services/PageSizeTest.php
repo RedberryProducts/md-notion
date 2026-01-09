@@ -51,7 +51,10 @@ test('page reader uses config default page size when no argument is provided', f
     $actions->shouldReceive('getBlockChildren')
         ->with('test-page-id', 100)
         ->once()
-        ->andReturn($blocksResponse);
+        ->andReturn([
+            'results' => [],
+            'has_more' => false,
+        ]);
 
     $factory = new BlockAdapterFactory($notion, []);
     $registry = new BlockRegistry($factory);
@@ -96,7 +99,10 @@ test('page reader uses provided page size when argument is passed', function () 
     $actions->shouldReceive('getBlockChildren')
         ->with('test-page-id', 50)
         ->once()
-        ->andReturn($blocksResponse);
+        ->andReturn([
+            'results' => [],
+            'has_more' => false,
+        ]);
 
     $factory = new BlockAdapterFactory($notion, []);
     $registry = new BlockRegistry($factory);
@@ -139,7 +145,10 @@ test('page reader respects different config default page sizes', function () {
     $actions->shouldReceive('getBlockChildren')
         ->with('test-page-id', 25)
         ->once()
-        ->andReturn($blocksResponse);
+        ->andReturn([
+            'results' => [],
+            'has_more' => false,
+        ]);
 
     $factory = new BlockAdapterFactory($notion, []);
     $registry = new BlockRegistry($factory);
@@ -182,7 +191,10 @@ test('database reader uses config default page size when no argument is provided
     $actions->shouldReceive('queryDataSource')
         ->with('data-source-1', null, 100)
         ->once()
-        ->andReturn($queryResponse);
+        ->andReturn([
+            'results' => [],
+            'has_more' => false,
+        ]);
 
     $databaseTable = new DatabaseTable($notion);
     $databaseReader = new DatabaseReader($notion, $databaseTable);
@@ -224,7 +236,10 @@ test('database reader uses provided page size when argument is passed', function
     $actions->shouldReceive('queryDataSource')
         ->with('data-source-1', null, 30)
         ->once()
-        ->andReturn($queryResponse);
+        ->andReturn([
+            'results' => [],
+            'has_more' => false,
+        ]);
 
     $databaseTable = new DatabaseTable($notion);
     $databaseReader = new DatabaseReader($notion, $databaseTable);
@@ -269,7 +284,10 @@ test('database reader respects different config default page sizes', function ()
     $actions->shouldReceive('queryDataSource')
         ->with('data-source-1', null, 75)
         ->once()
-        ->andReturn($queryResponse);
+        ->andReturn([
+            'results' => [],
+            'has_more' => false,
+        ]);
 
     $databaseTable = new DatabaseTable($notion);
     $databaseReader = new DatabaseReader($notion, $databaseTable);
