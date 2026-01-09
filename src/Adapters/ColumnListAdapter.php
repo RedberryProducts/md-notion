@@ -21,8 +21,7 @@ class ColumnListAdapter extends BaseBlockAdapter
         $dto = ColumnListDTO::from($block);
 
         // Get columns from SDK
-        $response = $this->getSdk()->act()->getBlockChildren($block['id'], null);
-        $columnBlocks = $response->json();
+        $columnBlocks = $this->getSdk()->act()->getBlockChildren($block['id'], null);
 
         // Process each column using ColumnAdapter
         $columns = [];

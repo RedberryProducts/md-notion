@@ -28,15 +28,16 @@ test('it can query a data source', function () {
 
     $response = $this->notion->act()->queryDataSource($dataSourceId);
 
-    expect($response->ok())->toBeTrue();
+    // queryDataSource now returns an array with consistent structure
+    expect($response)->toBeArray();
+    expect($response)->toHaveKey('results');
+    expect($response)->toHaveKey('has_more');
+    expect($response)->toHaveKey('next_cursor');
 
     $this->mockClient->assertSent(function ($request) use ($dataSourceId) {
         return $request instanceof QueryDataSource
             && $request->resolveEndpoint() === "/v1/data_sources/{$dataSourceId}/query";
     });
 
-    $data = $response->json();
-    expect($data)->toBeArray();
-    expect($data)->toHaveKey('results');
-    expect($data['results'])->toHaveCount(2);
+    expect($response['results'])->toHaveCount(2);
 });

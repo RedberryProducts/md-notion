@@ -17,18 +17,20 @@ class PageReader
      * Read page content and build complete Page object
      *
      * @param  string  $pageId  The Notion page ID
+     * @param  int|null  $pageSize  Optional page size for block children (uses config default if null)
      * @return Page The page object with all content and children
      */
-    public function read(string $pageId): Page
+    public function read(string $pageId, ?int $pageSize = null): Page
     {
         // Get page details and build initial Page object
         $pageResponse = $this->sdk->act()->getPage($pageId);
         $pageData = $pageResponse->json();
         $page = Page::from($pageData);
 
-        // Get block children only once
-        $blocksResponse = $this->sdk->act()->getBlockChildren($pageId, null);
-        $blocks = $blocksResponse->json()['results'] ?? [];
+        // Get all block children with pagination
+        $resolvedPageSize = $pageSize ?? config('md-notion.default_page_size');
+        $blocksData = $this->sdk->act()->getBlockChildren($pageId, $resolvedPageSize);
+        $blocks = $blocksData['results'] ?? [];
 
         // Process blocks to extract different types of content
         $markdown = '';

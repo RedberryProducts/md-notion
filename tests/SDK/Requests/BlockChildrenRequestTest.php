@@ -24,7 +24,7 @@ test('it correctly builds the request', function () {
 
 test('it can set page size query parameter', function () {
     $blockId = '263d9316-605a-8057-b12e-f880bc565fcb';
-    $pageSize = '25';
+    $pageSize = 25;
     $request = new BlockChildren($blockId, $pageSize);
 
     expect($request->query()->all())->toBe(['page_size' => $pageSize]);

@@ -5,17 +5,13 @@ use Redberry\MdNotion\DTOs\ColumnDTO;
 use Redberry\MdNotion\SDK\Notion;
 
 it('converts column block to markdown', function () {
-    // Create mock SDK response for children
+    // Create mock SDK response for children (getBlockChildren now returns array directly)
     $mockResponse = json_decode(file_get_contents(dirname(__DIR__, 2).'/BlockJsonExamples/ColumnChildrenJson.json'), true);
-
-    $mockResponseObj = Mockery::mock(\Saloon\Http\Response::class);
-    $mockResponseObj->shouldReceive('json')
-        ->andReturn($mockResponse);
 
     $mockSdk = Mockery::mock(Notion::class);
     $mockSdk->shouldReceive('act->getBlockChildren')
         ->once()
-        ->andReturn($mockResponseObj);
+        ->andReturn($mockResponse);
 
     // Create the adapter
     $adapter = new ColumnAdapter;

@@ -1,6 +1,5 @@
 <?php
 
-use Mockery;
 use Redberry\MdNotion\Adapters\TableAdapter;
 use Redberry\MdNotion\SDK\Notion;
 
@@ -84,16 +83,12 @@ test('table adapter converts basic table to markdown', function () {
         ],
     ];
 
-    // Create mock response object
-    $mockResponseObj = Mockery::mock(\Saloon\Http\Response::class);
-    $mockResponseObj->shouldReceive('json')
-        ->andReturn($rowsResponse);
-
+    // getBlockChildren now returns array directly
     $sdk = Mockery::mock(Notion::class);
     $sdk->shouldReceive('act->getBlockChildren')
         ->with('table-123', null)
         ->once()
-        ->andReturn($mockResponseObj);
+        ->andReturn($rowsResponse);
 
     $adapter = new TableAdapter;
     $adapter->setSdk($sdk);
@@ -144,16 +139,12 @@ test('table adapter handles table without headers', function () {
         ],
     ];
 
-    // Create mock response object
-    $mockResponseObj = Mockery::mock(\Saloon\Http\Response::class);
-    $mockResponseObj->shouldReceive('json')
-        ->andReturn($rowsResponse);
-
+    // getBlockChildren now returns array directly
     $sdk = Mockery::mock(Notion::class);
     $sdk->shouldReceive('act->getBlockChildren')
         ->with('table-123', null)
         ->once()
-        ->andReturn($mockResponseObj);
+        ->andReturn($rowsResponse);
 
     $adapter = new TableAdapter;
     $adapter->setSdk($sdk);

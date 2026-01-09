@@ -19,11 +19,15 @@ class BlockChildren extends Request
 
     public function __construct(
         protected string $id,
-        protected ?string $pageSize = null,
+        protected ?int $pageSize = null,
+        protected ?string $startCursor = null,
     ) {}
 
     public function defaultQuery(): array
     {
-        return array_filter(['page_size' => $this->pageSize]);
+        return array_filter([
+            'page_size' => $this->pageSize,
+            'start_cursor' => $this->startCursor,
+        ], fn ($value) => $value !== null);
     }
 }
