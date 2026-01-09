@@ -34,6 +34,6 @@ class QueryDataSource extends Request implements HasBody
             'filter' => $this->filter,
             'page_size' => $this->pageSize,
             'start_cursor' => $this->startCursor,
-        ]);
+        ], fn ($value) => $value !== null);
     }
 }
