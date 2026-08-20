@@ -38,6 +38,9 @@ Don't forget to star the repo ⭐
 -   [Credits](#credits)
 -   [License](#license)
 
+---
+This package is built and maintained by [Redberry](https://redberry.international/), one of the few Official Premier Laravel Partner agencies worldwide. With 250+ Laravel projects shipped across 20+ countries, a 200-person team, and over a decade in the Laravel ecosystem, Redberry has helped startups, SMEs, and publicly traded enterprises in regulated industries build SaaS platforms, custom web applications, APIs, and more. [Learn about our Laravel development services](https://redberry.international/laravel-development/).
+
 ## Installation
 
 You can install the package via composer:
